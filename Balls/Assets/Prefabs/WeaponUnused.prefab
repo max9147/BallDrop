@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8109426344984430457}
   - component: {fileID: 8940424964800640785}
   - component: {fileID: 3788263432372507233}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 925890105536184882}
   - component: {fileID: 4466668085393973185}
   - component: {fileID: 613802707477602431}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,8 +245,7 @@ GameObject:
   - component: {fileID: 5218417046279771595}
   - component: {fileID: 94559019645828254}
   - component: {fileID: 9000159642472814808}
-  - component: {fileID: 6736348054496810939}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponUnused
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,15 +334,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6736348054496810939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7902181363755456044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91c77f858bef45e4f911af38fd30f55d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

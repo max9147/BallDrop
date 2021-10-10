@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class BuyWeapons : MonoBehaviour
 {
-    public GameObject moneySystem;
-    public GameObject weaponSystem;
+    private Touch touch;
+    private Vector3 touchPos;
+    private RaycastHit2D touchHit;
 
-    public void BuyWeapon()
+    public Camera cam;
+    public GameObject moneySystem;
+
+    private void Update()
     {
-        if (weaponSystem.GetComponent<WeaponSystem>().GetWeaponAvailability())
+        if (Input.touchCount > 0)
         {
-            moneySystem.GetComponent<MoneySystem>().SpendMoney(weaponSystem.GetComponent<WeaponSystem>().GetWeaponCost());
-            weaponSystem.GetComponent<WeaponSystem>().SpawnWeapon(gameObject);
+            touch = Input.GetTouch(0);
+            touchPos = cam.ScreenToWorldPoint(touch.position);
+            touchHit = Physics2D.Raycast(touchPos, Vector2.zero);
+            if (touchHit && touchHit.collider.gameObject.layer == LayerMask.NameToLayer("WeaponSpot"))
+            {
+                BuyWeapon(touchHit.collider.gameObject);
+            }
+        }
+    }
+
+    public void BuyWeapon(GameObject weaponSpot)
+    {
+        if (GetComponent<WeaponSystem>().GetWeaponAvailability())
+        {
+            moneySystem.GetComponent<MoneySystem>().SpendMoney(GetComponent<WeaponSystem>().GetWeaponCost());
+            GetComponent<WeaponSystem>().SpawnWeapon(weaponSpot);
         }
     }
 }

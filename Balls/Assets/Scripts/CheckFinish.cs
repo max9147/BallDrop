@@ -13,9 +13,6 @@ public class CheckFinish : MonoBehaviour
             case "RewardLow":
                 moneySystem.GetComponent<BallScoring>().ScoreBall(1f);
                 break;
-            case "RewardMedium":
-                moneySystem.GetComponent<BallScoring>().ScoreBall(1.2f);
-                break;
             case "RewardHigh":
                 moneySystem.GetComponent<BallScoring>().ScoreBall(1.5f);
                 break;
