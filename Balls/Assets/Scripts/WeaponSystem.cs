@@ -6,17 +6,62 @@ using TMPro;
 public class WeaponSystem : MonoBehaviour
 {
     private bool weaponAvailable;
-    private int weaponCost;
+    private float weaponCost;
+    private GameObject weaponPochinko;
+    private GameObject weaponFunnel;
 
+    public GameObject levelSystem;
     public GameObject moneySystem;
-    public GameObject weaponLaser;
     public GameObject weapons;
+    public GameObject[] weaponTypes;
     public GameObject[] weaponsUnused;
 
     private void Start()
     {
-        weaponCost = 5;
+        weaponCost = 5f;
         RefreshWeaponCost();
+    }
+
+    public void AssignWeapon(int id)
+    {
+        switch (levelSystem.GetComponent<LevelSystem>().GetCurrentLevel())
+        {
+            case 0:
+                weaponPochinko = weaponTypes[id];
+                break;
+            case 1:
+                weaponFunnel = weaponTypes[id];
+                break;
+            default:
+                break;
+        }
+    }
+
+    public bool CheckWeapon(int id)
+    {        
+        switch (id)
+        {
+            case 0:
+                if (weaponPochinko)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            case 1:
+                if (weaponFunnel)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            default:
+                return false;
+        }
     }
 
     public void CheckWeaponAvaliable()
@@ -45,7 +90,7 @@ public class WeaponSystem : MonoBehaviour
         }
     }
 
-    public int GetWeaponCost()
+    public float GetWeaponCost()
     {
         return weaponCost;
     }
@@ -69,9 +114,19 @@ public class WeaponSystem : MonoBehaviour
 
     public void SpawnWeapon(GameObject spot)
     {
-        Instantiate(weaponLaser, spot.transform.position, Quaternion.identity, weapons.transform);
+        switch (spot.tag)
+        {
+            case "LevelPochinko":
+                Instantiate(weaponPochinko, spot.transform.position, Quaternion.identity, weapons.transform);
+                break;
+            case "LevelFunnel":                
+                Instantiate(weaponFunnel, spot.transform.position, Quaternion.identity, weapons.transform);
+                break;
+            default:
+                break;
+        }
         Destroy(spot);
-        weaponCost *= 2;
+        weaponCost *= 2f;
         RefreshWeaponCost();
     }
 }

@@ -4,31 +4,52 @@ using UnityEngine;
 
 public class BallSystem : MonoBehaviour
 {
-    private float spawnPosition;
     private GameObject spawnedBall;
 
     public Color[] ballColors;
     public GameObject ballPrefab;
+    public GameObject weaponSystem;
+    public GameObject[] levels;
 
     private void Start()
-    {
-        SpawnFirstBall();
+    {        
+        for (int i = 0; i < levels.Length; i++)
+        {
+            if (weaponSystem.GetComponent<WeaponSystem>().CheckWeapon(i))
+            {
+                SpawnBall(i);
+            }
+        }
     }
 
-    private void SpawnFirstBall()
+    public void SpawnBall(int id)
     {
-        spawnPosition = Random.Range(-1f, 1f);
-        spawnedBall = Instantiate(ballPrefab, new Vector3(spawnPosition, 7, 0), Quaternion.identity);
-        spawnedBall.GetComponent<SpriteRenderer>().color = ballColors[Random.Range(0, ballColors.Length)];
-        StartCoroutine(SpawnBall());
+        switch (id)
+        {
+            case 0:
+                spawnedBall = Instantiate(ballPrefab, new Vector3(Random.Range(-1f, 1f) + levels[1].transform.position.x, 7f, 0f), Quaternion.identity);
+                spawnedBall.GetComponent<SpriteRenderer>().color = ballColors[Random.Range(0, ballColors.Length)];
+                StartCoroutine(WaitTimeFunnel());
+                break;
+            case 1:
+                spawnedBall = Instantiate(ballPrefab, new Vector3(Random.Range(-1f, 1f) + levels[0].transform.position.x, 7f, 0f), Quaternion.identity);
+                spawnedBall.GetComponent<SpriteRenderer>().color = ballColors[Random.Range(0, ballColors.Length)];
+                StartCoroutine(WaitTimePochinko());
+                break;
+            default:
+                break;
+        }
     }
 
-    private IEnumerator SpawnBall()
+    private IEnumerator WaitTimeFunnel()
     {
         yield return new WaitForSeconds(10f);
-        spawnPosition = Random.Range(-1f, 1f);
-        spawnedBall = Instantiate(ballPrefab, new Vector3(spawnPosition, 7, 0), Quaternion.identity);
-        spawnedBall.GetComponent<SpriteRenderer>().color = ballColors[Random.Range(0, ballColors.Length)];
-        StartCoroutine(SpawnBall());
+        SpawnBall(0);
+    }
+
+    private IEnumerator WaitTimePochinko()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(1);
     }
 }

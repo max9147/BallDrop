@@ -6,6 +6,10 @@ TagManager:
   tags:
   - RewardLow
   - RewardHigh
+  - WeaponLaser
+  - WeaponGas
+  - LevelPochinko
+  - LevelFunnel
   layers:
   - Default
   - TransparentFX
@@ -40,6 +44,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2014818811
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 12903071
     locked: 0

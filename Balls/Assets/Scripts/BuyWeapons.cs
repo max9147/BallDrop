@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BuyWeapons : MonoBehaviour
 {
+    private RaycastHit2D touchHit;
     private Touch touch;
     private Vector3 touchPos;
-    private RaycastHit2D touchHit;
 
     public Camera cam;
     public GameObject moneySystem;
+    public GameObject UISystem;
 
     private void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && !UISystem.GetComponent<WeaponSelection>().GetWeaponSelectionScreenStatus())
         {
-            touch = Input.GetTouch(0);
+            touch = Input.GetTouch(0);            
             touchPos = cam.ScreenToWorldPoint(touch.position);
             touchHit = Physics2D.Raycast(touchPos, Vector2.zero);
             if (touchHit && touchHit.collider.gameObject.layer == LayerMask.NameToLayer("WeaponSpot"))

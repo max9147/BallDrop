@@ -12,7 +12,7 @@ public class MoneySystem : MonoBehaviour
 
     private void Start()
     {
-        money = 15;
+        money =15000f;
         RefreshMoneyCounters();
     }
 

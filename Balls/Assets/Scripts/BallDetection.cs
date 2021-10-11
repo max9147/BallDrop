@@ -6,11 +6,31 @@ public class BallDetection : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        transform.parent.GetComponent<Laser>().AddBallInRadius(collision.gameObject);
+        switch (tag)
+        {
+            case "WeaponGas":
+                transform.parent.GetComponent<Gas>().AddBallInRadius(collision.gameObject);
+                break;
+            case "WeaponLaser":
+                transform.parent.GetComponent<Laser>().AddBallInRadius(collision.gameObject);
+                break;
+            default:
+                break;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        transform.parent.GetComponent<Laser>().RemoveBallFromRadius(collision.gameObject);
+        switch (tag)
+        {
+            case "WeaponGas":
+                transform.parent.GetComponent<Gas>().RemoveBallFromRadius(collision.gameObject);
+                break;
+            case "WeaponLaser":
+                transform.parent.GetComponent<Laser>().RemoveBallFromRadius(collision.gameObject);
+                break;
+            default:
+                break;
+        }
     }
 }

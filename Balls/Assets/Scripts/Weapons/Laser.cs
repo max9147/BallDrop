@@ -6,11 +6,11 @@ public class Laser : MonoBehaviour
 {
     private float checkRadius;
     private GameObject target;
-    public List<GameObject> ballsInRadius = new List<GameObject>();
+    private List<GameObject> ballsInRadius = new List<GameObject>();
 
     private void Start()
     {
-        checkRadius = 1;
+        checkRadius = 1f;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
         ResetLaser();
     }
@@ -31,8 +31,8 @@ public class Laser : MonoBehaviour
         if (target)
         {
             target.transform.localScale -= new Vector3(0.001f, 0.001f, 0.001f);
-            transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(1, new Vector3(target.transform.position.x, target.transform.position.y, -1));
-            transform.Find("Laser").GetComponent<LineRenderer>().endWidth = target.transform.localScale.x / 5;
+            transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(1, new Vector3(target.transform.position.x, target.transform.position.y, -1f));
+            transform.Find("Laser").GetComponent<LineRenderer>().endWidth = target.transform.localScale.x / 5f;
             if (target.transform.localScale.x < 0.05f || !ballsInRadius.Contains(target))
             {
                 target = null;
@@ -53,7 +53,7 @@ public class Laser : MonoBehaviour
 
     public void ResetLaser()
     {
-        transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.position.x, transform.position.y, -1));
-        transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(1, new Vector3(transform.position.x, transform.position.y, -1));
+        transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.position.x, transform.position.y, -1f));
+        transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(1, new Vector3(transform.position.x, transform.position.y, -1f));
     }
 }

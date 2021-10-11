@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BallScoring : MonoBehaviour
 {
-    private int ballCost;
+    private float ballCost;
 
     private void Start()
     {
-        ballCost = 1;
+        ballCost = 1f;
     }
 
     public void ScoreBall(float multiplier)

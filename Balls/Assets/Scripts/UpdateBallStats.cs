@@ -5,7 +5,7 @@ using TMPro;
 
 public class UpdateBallStats : MonoBehaviour
 {
-    private float lifeTime = 0;
+    private float lifeTime = 0f;
     private Color startColor;
 
     public GameObject moneySystem;
@@ -16,31 +16,35 @@ public class UpdateBallStats : MonoBehaviour
         startColor = GetComponent<SpriteRenderer>().color;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        lifeTime += Time.deltaTime;        
-        if (lifeTime <= 20f)
-        {
-            GetComponent<SpriteRenderer>().color = Color.Lerp(startColor, Color.white, lifeTime / 20);
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.black, (lifeTime - 20) / 10);
-            transform.Find("Canvas").localPosition = new Vector3(Random.Range(-0.02f, 0.02f), Random.Range(-0.02f, 0.02f), 0);
-        }
-        if (lifeTime >= 30f)
-        {
-            moneySystem.GetComponent<BallScoring>().ScoreBall(0.2f);
-            Destroy(gameObject);
-        }
         transform.Find("Canvas").transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, -transform.localEulerAngles.z);
-        if (transform.localScale.x == 1)
+        if (transform.localScale.x == 1f)
         {
             transform.Find("Canvas").Find("HP").GetComponent<TextMeshProUGUI>().text = "100";
         }
         else
         {
-            transform.Find("Canvas").Find("HP").GetComponent<TextMeshProUGUI>().text = (transform.localScale.x * 100).ToString("F1");
+            transform.Find("Canvas").Find("HP").GetComponent<TextMeshProUGUI>().text = (transform.localScale.x * 100f).ToString("F1");
         }
     }
+
+    private void FixedUpdate()
+    {
+        lifeTime += Time.deltaTime;        
+        if (lifeTime <= 20f)
+        {
+            GetComponent<SpriteRenderer>().color = Color.Lerp(startColor, Color.white, lifeTime / 20f);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.black, (lifeTime - 20f) / 10f);
+            transform.Find("Canvas").localPosition = new Vector3(Random.Range(-0.02f, 0.02f), Random.Range(-0.02f, 0.02f), 0f);
+        }
+        if (lifeTime >= 30f)
+        {
+            moneySystem.GetComponent<BallScoring>().ScoreBall(0.2f);
+            Destroy(gameObject);
+        }        
+    }    
 }
