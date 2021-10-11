@@ -24,30 +24,28 @@ public class BallSystem : MonoBehaviour
 
     public void SpawnBall(int id)
     {
+        spawnedBall = Instantiate(ballPrefab, new Vector3(Random.Range(-1f, 1f) + levels[id].transform.position.x, 7f, 0f), Quaternion.identity);
+        spawnedBall.GetComponent<SpriteRenderer>().color = ballColors[Random.Range(0, ballColors.Length)];
         switch (id)
         {
-            case 0:
-                spawnedBall = Instantiate(ballPrefab, new Vector3(Random.Range(-1f, 1f) + levels[1].transform.position.x, 7f, 0f), Quaternion.identity);
-                spawnedBall.GetComponent<SpriteRenderer>().color = ballColors[Random.Range(0, ballColors.Length)];
-                StartCoroutine(WaitTimeFunnel());
+            case 0:                
+                StartCoroutine(WaitTimePochinko());
                 break;
             case 1:
-                spawnedBall = Instantiate(ballPrefab, new Vector3(Random.Range(-1f, 1f) + levels[0].transform.position.x, 7f, 0f), Quaternion.identity);
-                spawnedBall.GetComponent<SpriteRenderer>().color = ballColors[Random.Range(0, ballColors.Length)];
-                StartCoroutine(WaitTimePochinko());
+                StartCoroutine(WaitTimeFunnel());
                 break;
             default:
                 break;
         }
     }
 
-    private IEnumerator WaitTimeFunnel()
+    private IEnumerator WaitTimePochinko()
     {
         yield return new WaitForSeconds(10f);
         SpawnBall(0);
     }
 
-    private IEnumerator WaitTimePochinko()
+    private IEnumerator WaitTimeFunnel()
     {
         yield return new WaitForSeconds(10f);
         SpawnBall(1);

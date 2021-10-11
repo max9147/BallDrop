@@ -10,6 +10,7 @@ public class WeaponSystem : MonoBehaviour
     private GameObject weaponPochinko;
     private GameObject weaponFunnel;
 
+    public GameObject ballSystem;
     public GameObject levelSystem;
     public GameObject moneySystem;
     public GameObject weapons;
@@ -24,6 +25,7 @@ public class WeaponSystem : MonoBehaviour
 
     public void AssignWeapon(int id)
     {
+        ballSystem.GetComponent<BallSystem>().SpawnBall(levelSystem.GetComponent<LevelSystem>().GetCurrentLevel());
         switch (levelSystem.GetComponent<LevelSystem>().GetCurrentLevel())
         {
             case 0:

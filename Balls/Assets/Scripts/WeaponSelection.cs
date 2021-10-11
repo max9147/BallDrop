@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class WeaponSelection : MonoBehaviour
 {
     public Button[] weaponSelectionButtons;
-    public GameObject ballSystem;
     public GameObject weaponSelectionScreen;
     public GameObject weaponSystem;
 
@@ -29,8 +28,7 @@ public class WeaponSelection : MonoBehaviour
 
     public void SelectWeapon(int id)
     {
-        weaponSystem.GetComponent<WeaponSystem>().AssignWeapon(id);
-        ballSystem.GetComponent<BallSystem>().SpawnBall(id);
+        weaponSystem.GetComponent<WeaponSystem>().AssignWeapon(id);        
         weaponSelectionButtons[id].interactable = false;
         weaponSelectionScreen.SetActive(false);
     }
