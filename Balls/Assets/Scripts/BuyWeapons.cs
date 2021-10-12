@@ -17,13 +17,16 @@ public class BuyWeapons : MonoBehaviour
     {
         if (Input.touchCount > 0 && !UISystem.GetComponent<WeaponSelection>().GetWeaponSelectionScreenStatus())
         {
-            touch = Input.GetTouch(0);            
-            touchPos = cam.ScreenToWorldPoint(touch.position);
-            touchHit = Physics2D.Raycast(touchPos, Vector2.zero);
-            if (touchHit && touchHit.collider.gameObject.layer == LayerMask.NameToLayer("WeaponSpot"))
+            touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
             {
-                BuyWeapon(touchHit.collider.gameObject);
-            }
+                touchPos = cam.ScreenToWorldPoint(touch.position);
+                touchHit = Physics2D.Raycast(touchPos, Vector2.zero);
+                if (touchHit && touchHit.collider.gameObject.layer == LayerMask.NameToLayer("WeaponSpot"))
+                {
+                    BuyWeapon(touchHit.collider.gameObject);
+                }
+            }            
         }
     }
 

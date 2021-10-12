@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class Gun : MonoBehaviour
 {
+    private bool isReloading = false;
     private float checkRadius;
+    private GameObject currentBullet;
     private GameObject target;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
+    public GameObject bullet;
+
     private void Start()
     {
-        checkRadius = 1f;
+        checkRadius = 2f;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
-        ResetLaser();
     }
 
     private void FixedUpdate()
@@ -30,19 +33,35 @@ public class Laser : MonoBehaviour
         }
         if (target)
         {
-            target.transform.localScale -= new Vector3(0.001f, 0.001f, 0.001f);
-            transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(1, new Vector3(target.transform.position.x, target.transform.position.y, -1f));
-            transform.Find("Laser").GetComponent<LineRenderer>().endWidth = target.transform.localScale.x / 5f;
+            if (currentBullet)
+            {
+                currentBullet.transform.position = Vector3.MoveTowards(currentBullet.transform.position, target.transform.position, 0.5f);
+                if (currentBullet.transform.position == target.transform.position)
+                {
+                    Destroy(currentBullet);
+                }
+            }
             if (target.transform.localScale.x <= 0.05f || !ballsInRadius.Contains(target))
             {
                 target = null;
-                ResetLaser();
             }
+            else if (!isReloading)
+            {
+                Shoot(target);
+            }            
         }
-        else
+        else if (currentBullet)
         {
-            ResetLaser();
+            Destroy(currentBullet);
         }
+    }
+
+    private void Shoot(GameObject target)
+    {
+        target.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
+        currentBullet = Instantiate(bullet, transform.position, Quaternion.identity, transform);
+        isReloading = true;
+        StartCoroutine("Reload");
     }
 
     public void AddBallInRadius(GameObject ball)
@@ -55,9 +74,9 @@ public class Laser : MonoBehaviour
         ballsInRadius.Remove(ball);
     }
 
-    public void ResetLaser()
+    private IEnumerator Reload()
     {
-        transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.position.x, transform.position.y, -1f));
-        transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(1, new Vector3(transform.position.x, transform.position.y, -1f));
+        yield return new WaitForSeconds(4f);
+        isReloading = false;
     }
 }

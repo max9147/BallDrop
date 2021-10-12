@@ -45,6 +45,10 @@ public class UpdateBallStats : MonoBehaviour
         {
             moneySystem.GetComponent<BallScoring>().ScoreBall(0.2f);
             Destroy(gameObject);
-        }        
+        }
+        if (transform.localScale.x < 0.05f)
+        {
+            transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        }
     }    
 }

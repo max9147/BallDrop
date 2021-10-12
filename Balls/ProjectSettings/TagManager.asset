@@ -10,6 +10,12 @@ TagManager:
   - WeaponGas
   - LevelPochinko
   - LevelFunnel
+  - LevelGaps
+  - LevelSqueeze
+  - LevelMills
+  - CounterClockwise
+  - Clockwise
+  - WeaponGun
   layers:
   - Default
   - TransparentFX

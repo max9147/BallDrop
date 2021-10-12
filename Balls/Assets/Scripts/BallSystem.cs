@@ -34,6 +34,15 @@ public class BallSystem : MonoBehaviour
             case 1:
                 StartCoroutine(WaitTimeFunnel());
                 break;
+            case 2:
+                StartCoroutine(WaitTimeGaps());
+                break;
+            case 3:
+                StartCoroutine(WaitTimeSqueeze());
+                break;
+            case 4:
+                StartCoroutine(WaitTimeMills());
+                break;
             default:
                 break;
         }
@@ -49,5 +58,23 @@ public class BallSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         SpawnBall(1);
+    }
+
+    private IEnumerator WaitTimeGaps()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(2);
+    }
+
+    private IEnumerator WaitTimeSqueeze()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(3);
+    }
+
+    private IEnumerator WaitTimeMills()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(4);
     }
 }

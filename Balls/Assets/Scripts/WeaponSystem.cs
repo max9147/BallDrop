@@ -9,11 +9,13 @@ public class WeaponSystem : MonoBehaviour
     private float weaponCost;
     private GameObject weaponPochinko;
     private GameObject weaponFunnel;
+    private GameObject weaponGaps;
+    private GameObject weaponSqueeze;
+    private GameObject weaponMills;
 
     public GameObject ballSystem;
     public GameObject levelSystem;
     public GameObject moneySystem;
-    public GameObject weapons;
     public GameObject[] weaponTypes;
     public GameObject[] weaponsUnused;
 
@@ -34,6 +36,15 @@ public class WeaponSystem : MonoBehaviour
             case 1:
                 weaponFunnel = weaponTypes[id];
                 break;
+            case 2:
+                weaponGaps = weaponTypes[id];
+                break;
+            case 3:
+                weaponSqueeze = weaponTypes[id];
+                break;
+            case 4:
+                weaponMills = weaponTypes[id];
+                break;
             default:
                 break;
         }
@@ -44,23 +55,15 @@ public class WeaponSystem : MonoBehaviour
         switch (id)
         {
             case 0:
-                if (weaponPochinko)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return weaponPochinko;
             case 1:
-                if (weaponFunnel)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return weaponFunnel;
+            case 2:
+                return weaponGaps;
+            case 3:
+                return weaponSqueeze;
+            case 4:
+                return weaponMills;
             default:
                 return false;
         }
@@ -119,16 +122,25 @@ public class WeaponSystem : MonoBehaviour
         switch (spot.tag)
         {
             case "LevelPochinko":
-                Instantiate(weaponPochinko, spot.transform.position, Quaternion.identity, weapons.transform);
+                Instantiate(weaponPochinko, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelFunnel":                
-                Instantiate(weaponFunnel, spot.transform.position, Quaternion.identity, weapons.transform);
+                Instantiate(weaponFunnel, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelGaps":
+                Instantiate(weaponGaps, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelSqueeze":
+                Instantiate(weaponSqueeze, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelMills":
+                Instantiate(weaponMills, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             default:
                 break;
         }
         Destroy(spot);
-        weaponCost *= 2f;
+        weaponCost = Mathf.Ceil(weaponCost * 1.5f);
         RefreshWeaponCost();
     }
 }

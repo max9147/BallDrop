@@ -6,20 +6,22 @@ public class LevelSystem : MonoBehaviour
 {
     private int currentLevel;
 
+    public Camera cam;
+    public GameObject selectionOutline;
     public GameObject UISystem;
+    public GameObject[] levelButtons;
+    public GameObject[] levels;
 
     private void Start()
     {
         ChangeLevel(0);
     }
 
-    public Camera cam;
-    public GameObject[] levels;
-
     public void ChangeLevel(int id)
     {
         currentLevel = id;
         cam.transform.position = new Vector3(levels[id].transform.position.x, levels[id].transform.position.y, -10f);
+        selectionOutline.transform.position = levelButtons[id].transform.position;
         UISystem.GetComponent<WeaponSelection>().CheckWeaponSelection(id);
     }
 

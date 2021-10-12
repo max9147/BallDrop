@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2568266333289705303}
   - component: {fileID: 1807840541877559254}
   - component: {fileID: 1095316601236791453}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BallCheck
   m_TagString: WeaponGas
   m_Icon: {fileID: 0}

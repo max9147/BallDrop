@@ -202,9 +202,9 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 079798b7e251e374b94fa40f024ea97a, type: 2}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!212 &4674753713625642298
 SpriteRenderer:
@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2eb9b156340ed34f9002f56c8574e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moneySystem: {fileID: 0}
 --- !u!1 &9206184557250179180
 GameObject:
   m_ObjectHideFlags: 0
