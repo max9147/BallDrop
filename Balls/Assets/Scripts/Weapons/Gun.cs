@@ -33,14 +33,6 @@ public class Gun : MonoBehaviour
         }
         if (target)
         {
-            if (currentBullet)
-            {
-                currentBullet.transform.position = Vector3.MoveTowards(currentBullet.transform.position, target.transform.position, 0.5f);
-                if (currentBullet.transform.position == target.transform.position)
-                {
-                    Destroy(currentBullet);
-                }
-            }
             if (target.transform.localScale.x <= 0.05f || !ballsInRadius.Contains(target))
             {
                 target = null;
@@ -50,16 +42,12 @@ public class Gun : MonoBehaviour
                 Shoot(target);
             }            
         }
-        else if (currentBullet)
-        {
-            Destroy(currentBullet);
-        }
     }
 
     private void Shoot(GameObject target)
     {
-        target.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
         currentBullet = Instantiate(bullet, transform.position, Quaternion.identity, transform);
+        currentBullet.GetComponent<GunBullet>().TakeAim(target);
         isReloading = true;
         StartCoroutine("Reload");
     }
@@ -74,9 +62,17 @@ public class Gun : MonoBehaviour
         ballsInRadius.Remove(ball);
     }
 
+    public void DealDamage()
+    {
+        if (target)
+        {
+            target.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
+        }
+    }
+
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(5f);
         isReloading = false;
     }
 }

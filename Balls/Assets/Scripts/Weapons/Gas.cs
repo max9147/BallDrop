@@ -23,7 +23,7 @@ public class Gas : MonoBehaviour
             {
                 if (item.transform.localScale.x > 0.05f)
                 {
-                    item.transform.localScale -= new Vector3(0.001f, 0.001f, 0.001f);
+                    item.transform.localScale -= new Vector3(0.0005f, 0.0005f, 0.0005f);
                 }
             }
         }
