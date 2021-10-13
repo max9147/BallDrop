@@ -17,6 +17,10 @@ public class GunBullet : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void TakeAim(GameObject target)

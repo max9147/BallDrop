@@ -14,6 +14,8 @@ public class WeaponSystem : MonoBehaviour
     private GameObject weaponSqueeze;
     private GameObject weaponMills;
     private GameObject weaponVerticals;
+    private GameObject weaponMovement;
+    private GameObject weaponTraps;
 
     public GameObject ballSystem;
     public GameObject levelSystem;
@@ -52,6 +54,12 @@ public class WeaponSystem : MonoBehaviour
             case 5:
                 weaponVerticals = weaponTypes[id];
                 break;
+            case 6:
+                weaponMovement = weaponTypes[id];
+                break;
+            case 7:
+                weaponTraps = weaponTypes[id];
+                break;
             default:
                 break;
         }
@@ -73,6 +81,10 @@ public class WeaponSystem : MonoBehaviour
                 return weaponMills;
             case 5:
                 return weaponVerticals;
+            case 6:
+                return weaponMovement;
+            case 7:
+                return weaponTraps;
             default:
                 return false;
         }
@@ -120,6 +132,10 @@ public class WeaponSystem : MonoBehaviour
                 return weaponMills;
             case 5:
                 return weaponVerticals;
+            case 6:
+                return weaponMovement;
+            case 7:
+                return weaponTraps;
             default:
                 return null;
         }
@@ -168,6 +184,12 @@ public class WeaponSystem : MonoBehaviour
                 break;
             case "LevelVerticals":
                 Instantiate(weaponVerticals, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelMovement":
+                Instantiate(weaponMovement, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelTraps":
+                Instantiate(weaponTraps, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             default:
                 break;

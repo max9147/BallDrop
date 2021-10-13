@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class BuyWeapons : MonoBehaviour
 {
+    private GameObject touchedObject;
     private RaycastHit2D touchHit;
     private Touch touch;
     private Vector3 touchPos;
@@ -22,11 +23,17 @@ public class BuyWeapons : MonoBehaviour
             {
                 touchPos = cam.ScreenToWorldPoint(touch.position);
                 touchHit = Physics2D.Raycast(touchPos, Vector2.zero);
-                if (touchHit && touchHit.collider.gameObject.layer == LayerMask.NameToLayer("WeaponSpot"))
+                touchedObject = touchHit.collider.gameObject;
+            }
+            if (touch.phase == TouchPhase.Ended)
+            {
+                touchPos = cam.ScreenToWorldPoint(touch.position);
+                touchHit = Physics2D.Raycast(touchPos, Vector2.zero);
+                if (touchHit && touchHit.collider.gameObject.layer == LayerMask.NameToLayer("WeaponSpot") && touchHit.collider.gameObject == touchedObject)
                 {
                     BuyWeapon(touchHit.collider.gameObject);
                 }
-            }            
+            }
         }
     }
 

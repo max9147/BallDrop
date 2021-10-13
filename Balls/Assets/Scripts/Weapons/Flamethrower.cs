@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class Flamethrower : MonoBehaviour
 {
     private float checkRadius;
     private GameObject target;
@@ -12,7 +12,6 @@ public class Laser : MonoBehaviour
     {
         checkRadius = 1f;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
-        ResetLaser();
     }
 
     private void FixedUpdate()
@@ -30,19 +29,16 @@ public class Laser : MonoBehaviour
         }
         if (target)
         {
-            target.transform.localScale -= new Vector3(0.001f, 0.001f, 0.001f);
-            transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(0, transform.position);
-            transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(1, new Vector3(target.transform.position.x, target.transform.position.y, -1f));
-            transform.Find("Laser").GetComponent<LineRenderer>().endWidth = target.transform.localScale.x / 5f;
+            transform.Find("Flame").GetComponent<Flames>().StartFiring(target);
             if (target.transform.localScale.x <= 0.05f || !ballsInRadius.Contains(target))
             {
                 target = null;
-                ResetLaser();
+                transform.Find("Flame").GetComponent<Flames>().StopFiring();
             }
         }
-        else
+        else if (transform.Find("Flame").GetComponent<Flames>().GetStatus())
         {
-            ResetLaser();
+            transform.Find("Flame").GetComponent<Flames>().StopFiring();
         }
     }
 
@@ -54,11 +50,5 @@ public class Laser : MonoBehaviour
     public void RemoveBallFromRadius(GameObject ball)
     {
         ballsInRadius.Remove(ball);
-    }
-
-    public void ResetLaser()
-    {
-        transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.position.x, transform.position.y, -1f));
-        transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(1, new Vector3(transform.position.x, transform.position.y, -1f));
     }
 }

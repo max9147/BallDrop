@@ -17,6 +17,9 @@ TagManager:
   - Clockwise
   - WeaponGun
   - LevelVerticals
+  - WeaponFlamethrower
+  - LevelMovement
+  - LevelTraps
   layers:
   - Default
   - TransparentFX

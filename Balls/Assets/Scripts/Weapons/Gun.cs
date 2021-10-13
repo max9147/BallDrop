@@ -66,13 +66,13 @@ public class Gun : MonoBehaviour
     {
         if (target)
         {
-            target.transform.localScale -= new Vector3(0.1f, 0.1f, 0.1f);
+            target.transform.localScale -= new Vector3(0.08f, 0.08f, 0.08f);
         }
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         isReloading = false;
     }
 }
