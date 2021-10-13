@@ -14,10 +14,12 @@ public class WeaponSelection : MonoBehaviour
         if (weaponSystem.GetComponent<WeaponSystem>().CheckWeapon(id))
         {
             weaponSelectionScreen.SetActive(false);
+            GetComponent<ButtonGraphics>().ChangeButtonWeapon(weaponSystem.GetComponent<WeaponSystem>().GetLevelWeapon(id).GetComponent<SpriteRenderer>().sprite);
         }
         else
         {
             weaponSelectionScreen.SetActive(true);
+            GetComponent<ButtonGraphics>().ResetButtonWeapon();
         }
     }
 

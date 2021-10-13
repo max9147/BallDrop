@@ -6,9 +6,11 @@ using UnityEngine;
 public class MoneySystem : MonoBehaviour
 {
     private float money;
+    private float moneyBuffer;
 
     public GameObject weaponSystem;
     public TextMeshProUGUI mainMoneyCounter;
+    public TextMeshProUGUI mpsCounter;
 
     private void Start()
     {
@@ -16,14 +18,35 @@ public class MoneySystem : MonoBehaviour
         RefreshMoneyCounters();
     }
 
+    private void FixedUpdate()
+    {
+        if (moneyBuffer > 10000)
+        {
+            mpsCounter.text = "$" + (moneyBuffer / 10f).ToString("F0") + " / sec";
+        }
+        else
+        {
+            mpsCounter.text = "$" + (moneyBuffer / 10f).ToString("F2") + " / sec";
+        }
+    }
+
     private void RefreshMoneyCounters()
     {
-        mainMoneyCounter.text = "Money: " + money;
+        if (money > 1000)
+        {
+            mainMoneyCounter.text = "$" + money.ToString("F0");
+        }
+        else
+        {
+            mainMoneyCounter.text = "$" + money.ToString("F2");
+        }
     }
 
     public void AddMoney(float amount)
     {
         money += amount;
+        moneyBuffer += amount;
+        StartCoroutine(RemoveFromBuffer(amount));
         RefreshMoneyCounters();
         CheckAllAvailabilities();
     }
@@ -43,5 +66,11 @@ public class MoneySystem : MonoBehaviour
         money -= amount;
         RefreshMoneyCounters();
         CheckAllAvailabilities();
+    }
+
+    private IEnumerator RemoveFromBuffer(float amount)
+    {
+        yield return new WaitForSeconds(10f);
+        moneyBuffer -= amount;
     }
 }

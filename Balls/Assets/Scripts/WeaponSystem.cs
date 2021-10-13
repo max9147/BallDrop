@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class WeaponSystem : MonoBehaviour
 {
@@ -12,12 +13,14 @@ public class WeaponSystem : MonoBehaviour
     private GameObject weaponGaps;
     private GameObject weaponSqueeze;
     private GameObject weaponMills;
+    private GameObject weaponVerticals;
 
     public GameObject ballSystem;
     public GameObject levelSystem;
     public GameObject moneySystem;
+    public GameObject UISystem;
     public GameObject[] weaponTypes;
-    public GameObject[] weaponsUnused;
+    public GameObject[] weaponsUnused;    
 
     private void Start()
     {
@@ -27,6 +30,7 @@ public class WeaponSystem : MonoBehaviour
 
     public void AssignWeapon(int id)
     {
+        UISystem.GetComponent<ButtonGraphics>().ChangeButtonWeapon(id);
         ballSystem.GetComponent<BallSystem>().SpawnBall(levelSystem.GetComponent<LevelSystem>().GetCurrentLevel());
         switch (levelSystem.GetComponent<LevelSystem>().GetCurrentLevel())
         {
@@ -44,6 +48,9 @@ public class WeaponSystem : MonoBehaviour
                 break;
             case 4:
                 weaponMills = weaponTypes[id];
+                break;
+            case 5:
+                weaponVerticals = weaponTypes[id];
                 break;
             default:
                 break;
@@ -64,6 +71,8 @@ public class WeaponSystem : MonoBehaviour
                 return weaponSqueeze;
             case 4:
                 return weaponMills;
+            case 5:
+                return weaponVerticals;
             default:
                 return false;
         }
@@ -92,6 +101,27 @@ public class WeaponSystem : MonoBehaviour
                     item.transform.Find("Canvas").Find("Cost").GetComponent<TextMeshProUGUI>().color = Color.red;
                 }
             }
+        }
+    }
+
+    public GameObject GetLevelWeapon(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                return weaponPochinko;
+            case 1:
+                return weaponFunnel;
+            case 2:
+                return weaponGaps;
+            case 3:
+                return weaponSqueeze;
+            case 4:
+                return weaponMills;
+            case 5:
+                return weaponVerticals;
+            default:
+                return null;
         }
     }
 
@@ -135,6 +165,9 @@ public class WeaponSystem : MonoBehaviour
                 break;
             case "LevelMills":
                 Instantiate(weaponMills, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelVerticals":
+                Instantiate(weaponVerticals, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             default:
                 break;

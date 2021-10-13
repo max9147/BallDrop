@@ -7,6 +7,7 @@ public class Gas : MonoBehaviour
     private bool isActive = false;
     private bool isDamaging = false;
     private float checkRadius;
+    private float inactiveTime = 0f;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     private void Start()
@@ -27,33 +28,35 @@ public class Gas : MonoBehaviour
                 }
             }
         }
+        if (isActive)
+        {
+            inactiveTime = 0;
+            if (!transform.Find("GasCloud").GetComponent<ParticleSystem>().isPlaying)
+            {
+                transform.Find("GasCloud").GetComponent<ParticleSystem>().Play();
+                isDamaging = true;
+            }
+        }
+        else if (transform.Find("GasCloud").GetComponent<ParticleSystem>().isPlaying)
+        {
+            inactiveTime += Time.deltaTime;
+            if (inactiveTime >= 1f)
+            {
+                inactiveTime = 0;
+                transform.Find("GasCloud").GetComponent<ParticleSystem>().Stop();
+                isDamaging = false;
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isActive = true;
-        isDamaging = true;
-        transform.Find("GasCloud").GetComponent<ParticleSystem>().Play();
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         isActive = false;
-        StartCoroutine("WaitTimeGas");
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        isActive = true;
-    }
-
-    private void StopGas()
-    {
-        if (!isActive)
-        {
-            isDamaging = false;
-            transform.Find("GasCloud").GetComponent<ParticleSystem>().Stop();
-        }
     }
 
     public void AddBallInRadius(GameObject ball)
@@ -64,11 +67,5 @@ public class Gas : MonoBehaviour
     public void RemoveBallFromRadius(GameObject ball)
     {
         ballsInRadius.Remove(ball);
-    }
-
-    private IEnumerator WaitTimeGas()
-    {
-        yield return new WaitForSeconds(0.5f);
-        StopGas();
     }
 }
