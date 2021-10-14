@@ -16,6 +16,16 @@ public class WeaponSystem : MonoBehaviour
     private GameObject weaponVerticals;
     private GameObject weaponMovement;
     private GameObject weaponTraps;
+    private GameObject weaponMixer;
+    private GameObject weaponElevator;
+    private GameObject weaponBoulders;
+    private GameObject weaponShrink;
+    private GameObject weaponPlatforms;
+    private GameObject weaponDiamonds;
+    private GameObject weaponSpinners;
+    private GameObject weaponChoise;
+    private GameObject weaponZigzag;
+    private GameObject weaponFinal;
 
     public GameObject ballSystem;
     public GameObject levelSystem;
@@ -60,6 +70,36 @@ public class WeaponSystem : MonoBehaviour
             case 7:
                 weaponTraps = weaponTypes[id];
                 break;
+            case 8:
+                weaponMixer = weaponTypes[id];
+                break;
+            case 9:
+                weaponElevator = weaponTypes[id];
+                break;
+            case 10:
+                weaponBoulders = weaponTypes[id];
+                break;
+            case 11:
+                weaponShrink = weaponTypes[id];
+                break;
+            case 12:
+                weaponPlatforms = weaponTypes[id];
+                break;
+            case 13:
+                weaponDiamonds = weaponTypes[id];
+                break;
+            case 14:
+                weaponSpinners = weaponTypes[id];
+                break;
+            case 15:
+                weaponChoise = weaponTypes[id];
+                break;
+            case 16:
+                weaponZigzag = weaponTypes[id];
+                break;
+            case 17:
+                weaponFinal = weaponTypes[id];
+                break;
             default:
                 break;
         }
@@ -85,6 +125,26 @@ public class WeaponSystem : MonoBehaviour
                 return weaponMovement;
             case 7:
                 return weaponTraps;
+            case 8:
+                return weaponMixer;
+            case 9:
+                return weaponElevator;
+            case 10:
+                return weaponBoulders;
+            case 11:
+                return weaponShrink;
+            case 12:
+                return weaponPlatforms;
+            case 13:
+                return weaponDiamonds;
+            case 14:
+                return weaponSpinners;
+            case 15:
+                return weaponChoise;
+            case 16:
+                return weaponZigzag;
+            case 17:
+                return weaponFinal;
             default:
                 return false;
         }
@@ -136,6 +196,26 @@ public class WeaponSystem : MonoBehaviour
                 return weaponMovement;
             case 7:
                 return weaponTraps;
+            case 8:
+                return weaponMixer;
+            case 9:
+                return weaponElevator;
+            case 10:
+                return weaponBoulders;
+            case 11:
+                return weaponShrink;
+            case 12:
+                return weaponPlatforms;
+            case 13:
+                return weaponDiamonds;
+            case 14:
+                return weaponSpinners;
+            case 15:
+                return weaponChoise;
+            case 16:
+                return weaponZigzag;
+            case 17:
+                return weaponFinal;
             default:
                 return null;
         }
@@ -190,6 +270,36 @@ public class WeaponSystem : MonoBehaviour
                 break;
             case "LevelTraps":
                 Instantiate(weaponTraps, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelMixer":
+                Instantiate(weaponMixer, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelElevator":
+                Instantiate(weaponElevator, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelBoulders":
+                Instantiate(weaponBoulders, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelShrink":
+                Instantiate(weaponShrink, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelPlatforms":
+                Instantiate(weaponPlatforms, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelDiamonds":
+                Instantiate(weaponDiamonds, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelSpinners":
+                Instantiate(weaponSpinners, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelChoise":
+                Instantiate(weaponChoise, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelZigzag":
+                Instantiate(weaponZigzag, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                break;
+            case "LevelFinal":
+                Instantiate(weaponFinal, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             default:
                 break;

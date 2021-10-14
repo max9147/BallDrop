@@ -6,9 +6,6 @@ public class CheckFail : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ball"))
-        {
-            Destroy(collision.gameObject);
-        }
+        Destroy(collision.gameObject);
     }
 }

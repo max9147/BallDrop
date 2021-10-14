@@ -52,6 +52,36 @@ public class BallSystem : MonoBehaviour
             case 7:
                 StartCoroutine(WaitTimeTraps());
                 break;
+            case 8:
+                StartCoroutine(WaitTimeMixer());
+                break;
+            case 9:
+                StartCoroutine(WaitTimeElevator());
+                break;
+            case 10:
+                StartCoroutine(WaitTimeBoulders());
+                break;
+            case 11:
+                StartCoroutine(WaitTimeShrink());
+                break;
+            case 12:
+                StartCoroutine(WaitTimePlatforms());
+                break;
+            case 13:
+                StartCoroutine(WaitTimeDiamonds());
+                break;
+            case 14:
+                StartCoroutine(WaitTimeSpinners());
+                break;
+            case 15:
+                StartCoroutine(WaitTimeChoise());
+                break;
+            case 16:
+                StartCoroutine(WaitTimeZigzag());
+                break;
+            case 17:
+                StartCoroutine(WaitTimeFinal());
+                break;
             default:
                 break;
         }
@@ -103,5 +133,65 @@ public class BallSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         SpawnBall(7);
+    }
+
+    private IEnumerator WaitTimeMixer()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(8);
+    }
+
+    private IEnumerator WaitTimeElevator()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(9);
+    }
+
+    private IEnumerator WaitTimeBoulders()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(10);
+    }
+
+    private IEnumerator WaitTimeShrink()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(11);
+    }
+
+    private IEnumerator WaitTimePlatforms()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(12);
+    }
+
+    private IEnumerator WaitTimeDiamonds()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(13);
+    }
+
+    private IEnumerator WaitTimeSpinners()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(14);
+    }
+
+    private IEnumerator WaitTimeChoise()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(15);
+    }
+
+    private IEnumerator WaitTimeZigzag()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(16);
+    }
+
+    private IEnumerator WaitTimeFinal()
+    {
+        yield return new WaitForSeconds(10f);
+        SpawnBall(17);
     }
 }

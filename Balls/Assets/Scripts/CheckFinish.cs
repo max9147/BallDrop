@@ -8,17 +8,20 @@ public class CheckFinish : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        switch (tag)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ball"))
         {
-            case "RewardLow":
-                moneySystem.GetComponent<BallScoring>().ScoreBall(1f);
-                break;
-            case "RewardHigh":
-                moneySystem.GetComponent<BallScoring>().ScoreBall(1.5f);
-                break;
-            default:
-                break;
+            switch (tag)
+            {
+                case "RewardLow":
+                    moneySystem.GetComponent<BallScoring>().ScoreBall(1f);
+                    break;
+                case "RewardHigh":
+                    moneySystem.GetComponent<BallScoring>().ScoreBall(1.5f);
+                    break;
+                default:
+                    break;
+            }
+            Destroy(collision.gameObject);
         }
-        Destroy(collision.gameObject);
     }
 }

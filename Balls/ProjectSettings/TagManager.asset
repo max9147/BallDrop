@@ -20,6 +20,16 @@ TagManager:
   - WeaponFlamethrower
   - LevelMovement
   - LevelTraps
+  - LevelMixer
+  - LevelElevator
+  - LevelBoulders
+  - LevelPlatforms
+  - LevelDiamonds
+  - LevelSpinners
+  - LevelChoise
+  - LevelZigzag
+  - LevelFinal
+  - LevelShrink
   layers:
   - Default
   - TransparentFX
