@@ -20,6 +20,9 @@ public class BallDetection : MonoBehaviour
             case "WeaponFlamethrower":
                 transform.parent.GetComponent<Flamethrower>().AddBallInRadius(collision.gameObject);
                 break;
+            case "WeaponHive":
+                transform.parent.GetComponent<Hive>().AddBallInRadius(collision.gameObject);
+                break;
             default:
                 break;
         }
@@ -40,6 +43,9 @@ public class BallDetection : MonoBehaviour
                 break;
             case "WeaponFlamethrower":
                 transform.parent.GetComponent<Flamethrower>().RemoveBallFromRadius(collision.gameObject);
+                break;
+            case "WeaponHive":
+                transform.parent.GetComponent<Hive>().RemoveBallFromRadius(collision.gameObject);
                 break;
             default:
                 break;

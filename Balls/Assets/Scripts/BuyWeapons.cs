@@ -23,7 +23,10 @@ public class BuyWeapons : MonoBehaviour
             {
                 touchPos = cam.ScreenToWorldPoint(touch.position);
                 touchHit = Physics2D.Raycast(touchPos, Vector2.zero);
-                touchedObject = touchHit.collider.gameObject;
+                if (touchHit)
+                {
+                    touchedObject = touchHit.collider.gameObject;
+                }                
             }
             if (touch.phase == TouchPhase.Ended)
             {
