@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1109287704974806642}
   - component: {fileID: 3157835583394112888}
   - component: {fileID: 1129561511983130802}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Flame
   m_TagString: WeaponFlamethrower
   m_Icon: {fileID: 0}
@@ -4906,7 +4906,7 @@ GameObject:
   - component: {fileID: 7851343333161573980}
   - component: {fileID: 4676367127064664766}
   - component: {fileID: -1653684376836999451}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponFlamethrower
   m_TagString: WeaponFlamethrower
   m_Icon: {fileID: 0}

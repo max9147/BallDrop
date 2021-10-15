@@ -30,6 +30,7 @@ public class Hive : MonoBehaviour
         if (target && canAttack)
         {
             Attack(target);
+            target = null;
             canAttack = false;
             StartCoroutine(ResetStatus());
         }

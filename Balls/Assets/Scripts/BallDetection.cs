@@ -23,6 +23,12 @@ public class BallDetection : MonoBehaviour
             case "WeaponHive":
                 transform.parent.GetComponent<Hive>().AddBallInRadius(collision.gameObject);
                 break;
+            case "WeaponCannon":
+                transform.parent.GetComponent<Cannon>().AddBallInRadius(collision.gameObject);
+                break;
+            case "WeaponLightning":
+                transform.parent.GetComponent<Lightning>().AddBallInRadius(collision.gameObject);
+                break;
             default:
                 break;
         }
@@ -46,6 +52,12 @@ public class BallDetection : MonoBehaviour
                 break;
             case "WeaponHive":
                 transform.parent.GetComponent<Hive>().RemoveBallFromRadius(collision.gameObject);
+                break;
+            case "WeaponCannon":
+                transform.parent.GetComponent<Cannon>().RemoveBallFromRadius(collision.gameObject);
+                break;
+            case "WeaponLightning":
+                transform.parent.GetComponent<Lightning>().RemoveBallFromRadius(collision.gameObject);
                 break;
             default:
                 break;

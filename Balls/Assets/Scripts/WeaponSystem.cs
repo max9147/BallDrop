@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class WeaponSystem : MonoBehaviour
 {
     private bool weaponAvailable;
-    private float weaponCost;
+    private double weaponCost;
+    private int weaponsBought;
+    private GameObject curSpawned;
     private GameObject weaponPochinko;
     private GameObject weaponFunnel;
     private GameObject weaponGaps;
@@ -36,7 +38,8 @@ public class WeaponSystem : MonoBehaviour
 
     private void Start()
     {
-        weaponCost = 5f;
+        weaponsBought = 0;
+        weaponCost = Mathf.Floor(5f * Mathf.Pow(1.5f, weaponsBought));
         RefreshWeaponCost();
     }
 
@@ -221,7 +224,7 @@ public class WeaponSystem : MonoBehaviour
         }
     }
 
-    public float GetWeaponCost()
+    public double GetWeaponCost()
     {
         return weaponCost;
     }
@@ -237,75 +240,104 @@ public class WeaponSystem : MonoBehaviour
         {
             if (item)
             {
-                item.transform.Find("Canvas").Find("Cost").GetComponent<TextMeshProUGUI>().text = "$" + weaponCost;
+                if (weaponCost < 1000d)
+                {
+                    item.transform.Find("Canvas").Find("Cost").GetComponent<TextMeshProUGUI>().text = "$" + weaponCost.ToString("F0");
+                }
+                else if (weaponCost < 1000000d)
+                {
+                    item.transform.Find("Canvas").Find("Cost").GetComponent<TextMeshProUGUI>().text = "$" + (weaponCost / 1000d).ToString("F2") + "K";
+                }
+                else if (weaponCost < 1000000000d)
+                {
+                    item.transform.Find("Canvas").Find("Cost").GetComponent<TextMeshProUGUI>().text = "$" + (weaponCost / 1000000d).ToString("F2") + "M";
+                }
+                else if (weaponCost < 1000000000000d)
+                {
+                    item.transform.Find("Canvas").Find("Cost").GetComponent<TextMeshProUGUI>().text = "$" + (weaponCost / 1000000000d).ToString("F2") + "B";
+                }
+                else
+                {
+                    item.transform.Find("Canvas").Find("Cost").GetComponent<TextMeshProUGUI>().text = "$" + (weaponCost / 1000000000000d).ToString("F2") + "T";
+                }
             }
         }
         CheckWeaponAvaliable();
     }
 
+    public void SellWeapon()
+    {
+        weaponsBought--;
+        weaponCost = Mathf.Floor(5 * Mathf.Pow(1.5f, weaponsBought));
+        RefreshWeaponCost();
+
+    }
+
     public void SpawnWeapon(GameObject spot)
     {
+        spot.SetActive(false);
         switch (spot.tag)
         {
             case "LevelPochinko":
-                Instantiate(weaponPochinko, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponPochinko, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
-            case "LevelFunnel":                
-                Instantiate(weaponFunnel, spot.transform.position, Quaternion.identity, spot.transform.parent);
+            case "LevelFunnel":
+                curSpawned = Instantiate(weaponFunnel, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelGaps":
-                Instantiate(weaponGaps, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponGaps, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelSqueeze":
-                Instantiate(weaponSqueeze, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponSqueeze, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelMills":
-                Instantiate(weaponMills, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponMills, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelVerticals":
-                Instantiate(weaponVerticals, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponVerticals, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelMovement":
-                Instantiate(weaponMovement, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponMovement, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelTraps":
-                Instantiate(weaponTraps, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponTraps, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelMixer":
-                Instantiate(weaponMixer, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponMixer, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelElevator":
-                Instantiate(weaponElevator, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponElevator, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelBoulders":
-                Instantiate(weaponBoulders, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponBoulders, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelShrink":
-                Instantiate(weaponShrink, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponShrink, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelPlatforms":
-                Instantiate(weaponPlatforms, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponPlatforms, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelDiamonds":
-                Instantiate(weaponDiamonds, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponDiamonds, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelSpinners":
-                Instantiate(weaponSpinners, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponSpinners, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelChoise":
-                Instantiate(weaponChoise, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponChoise, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelZigzag":
-                Instantiate(weaponZigzag, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponZigzag, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelFinal":
-                Instantiate(weaponFinal, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponFinal, spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             default:
                 break;
         }
-        Destroy(spot);
-        weaponCost = Mathf.Ceil(weaponCost * 1.5f);
+        spot.transform.parent = curSpawned.transform;
+        weaponsBought++;
+        weaponCost = Mathf.Floor(5 * Mathf.Pow(1.5f, weaponsBought));
         RefreshWeaponCost();
     }
 }

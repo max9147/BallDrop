@@ -12,7 +12,7 @@ public class Laser : MonoBehaviour
     {
         checkRadius = 1f;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
-        ResetLaser();
+        transform.Find("Laser").gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -30,19 +30,23 @@ public class Laser : MonoBehaviour
         }
         if (target)
         {
-            target.transform.localScale -= new Vector3(0.001f, 0.001f, 0.001f);
+            target.transform.localScale -= new Vector3(0.001f, 0.001f, 0.001f);            
+            if (!transform.Find("Laser").gameObject.activeInHierarchy)
+            {
+                transform.Find("Laser").gameObject.SetActive(true);
+            }
             transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.position.x, transform.position.y, -1f));
             transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(1, new Vector3(target.transform.position.x, target.transform.position.y, -1f));
             transform.Find("Laser").GetComponent<LineRenderer>().endWidth = target.transform.localScale.x / 5f;
             if (target.transform.localScale.x <= 0.05f || !ballsInRadius.Contains(target))
             {
                 target = null;
-                ResetLaser();
+                transform.Find("Laser").gameObject.SetActive(false);
             }
         }
-        else
+        else if (transform.Find("Laser").gameObject.activeInHierarchy)
         {
-            ResetLaser();
+            transform.Find("Laser").gameObject.SetActive(false);
         }
     }
 
@@ -54,11 +58,5 @@ public class Laser : MonoBehaviour
     public void RemoveBallFromRadius(GameObject ball)
     {
         ballsInRadius.Remove(ball);
-    }
-
-    public void ResetLaser()
-    {
-        transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.position.x, transform.position.y, -1f));
-        transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(1, new Vector3(transform.position.x, transform.position.y, -1f));
     }
 }

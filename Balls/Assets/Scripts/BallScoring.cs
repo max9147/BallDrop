@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BallScoring : MonoBehaviour
 {
-    private float ballCost;
+    private double ballCost;
 
     private void Start()
     {
-        ballCost = 1f;
+        ballCost = 1d;
     }
 
     public void ScoreBall(float multiplier)
     {
-        GetComponent<MoneySystem>().AddMoney(ballCost * multiplier);
+        GetComponent<MoneySystem>().AddMoney(ballCost * multiplier, true);
     }
 }

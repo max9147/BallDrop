@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 7851343333161573980}
   - component: {fileID: 4676367127064664766}
   - component: {fileID: 3635994070506918072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponGas
   m_TagString: WeaponGas
   m_Icon: {fileID: 0}

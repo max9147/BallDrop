@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 7851343333161573980}
   - component: {fileID: 4676367127064664766}
   - component: {fileID: 798457676137955249}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponLaser
   m_TagString: WeaponLaser
   m_Icon: {fileID: 0}
