@@ -22,17 +22,14 @@ public class Lightning : MonoBehaviour
     {
         if (ballsInRadius.Count > 0)
         {
-            foreach (var item in ballsInRadius)
+            if (!target)
             {
-                if (item.transform.localScale.x < 0.05f)
+                target = ballsInRadius[Random.Range(0, ballsInRadius.Count)];
+                if (target.transform.localScale.x <= 0.05f)
                 {
-                    ballsInRadius.Remove(item);
+                    target = null;
                 }
             }
-        }
-        if (ballsInRadius.Count > 0)
-        {
-            target = ballsInRadius[Random.Range(0, ballsInRadius.Count)];
         }
         if (target && canAttack)
         {
@@ -47,8 +44,8 @@ public class Lightning : MonoBehaviour
     {
         target.transform.localScale -= new Vector3(0.025f, 0.025f, 0.025f);
         curBolt = Instantiate(bolt, transform);
-        curBolt.GetComponent<LightningBoltScript>().StartObject = gameObject;
-        curBolt.GetComponent<LightningBoltScript>().EndObject = target;
+        curBolt.GetComponent<Bolt>().StartObject = gameObject;
+        curBolt.GetComponent<Bolt>().EndObject = target;
         StartCoroutine(DestroyBolt(curBolt));
     }
 
@@ -64,7 +61,7 @@ public class Lightning : MonoBehaviour
 
     private IEnumerator DestroyBolt(GameObject boltToDestroy)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         Destroy(boltToDestroy);
     }
 

@@ -173,4 +173,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f229006095584f545b9b7e1e3f91c092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bolt: {fileID: 178460, guid: a84cb58ef7faa67488076810242453b9, type: 3}
+  bolt: {fileID: 178460, guid: 72360feff96487740b3421f39280bafd, type: 3}

@@ -15,17 +15,14 @@ public class Hive : MonoBehaviour
     {
         if (ballsInRadius.Count > 0)
         {
-            foreach (var item in ballsInRadius)
+            if (!target)
             {
-                if (item.transform.localScale.x < 0.05f)
+                target = ballsInRadius[Random.Range(0, ballsInRadius.Count)];
+                if (target.transform.localScale.x <= 0.05f)
                 {
-                    ballsInRadius.Remove(item);
+                    target = null;
                 }
             }
-        }
-        if (ballsInRadius.Count > 0)
-        {
-            target = ballsInRadius[Random.Range(0, ballsInRadius.Count)];
         }
         if (target && canAttack)
         {

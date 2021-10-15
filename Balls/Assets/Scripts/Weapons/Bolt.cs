@@ -38,7 +38,7 @@ using System.Collections.Generic;
 /// Allows creation of simple lightning bolts
 /// </summary>
 [RequireComponent(typeof(LineRenderer))]
-public class LightningBoltScript : MonoBehaviour
+public class Bolt : MonoBehaviour
 {
     [Tooltip("The game object where the lightning will emit from. If null, StartPosition is used.")]
     public GameObject StartObject;
