@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 1677330}
   - component: {fileID: 1677329}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponSniperImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 66bc499f0f9e119499fde664f37bcd17, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2140,7 +2140,7 @@ GameObject:
   - component: {fileID: 47105632}
   - component: {fileID: 47105631}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponShockerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2185,7 +2185,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Shocker
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2212,12 +2212,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2498,7 +2498,7 @@ GameObject:
   - component: {fileID: 53779471}
   - component: {fileID: 53779470}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: WeaponSpikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2518,7 +2518,7 @@ RectTransform:
   - {fileID: 1547170579}
   - {fileID: 1973118530}
   m_Father: {fileID: 415166951}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2576,7 +2576,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 8
+          m_IntArgument: 7
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6106,7 +6106,7 @@ GameObject:
   - component: {fileID: 144492481}
   - component: {fileID: 144492480}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: WeaponPoison
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6126,7 +6126,7 @@ RectTransform:
   - {fileID: 222876950}
   - {fileID: 491510377}
   m_Father: {fileID: 415166951}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6184,7 +6184,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 7
+          m_IntArgument: 8
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6264,7 +6264,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -490}
+  m_AnchoredPosition: {x: 280, y: -490}
   m_SizeDelta: {x: 300, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &148763591
@@ -6782,12 +6782,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.6
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -8709,7 +8709,7 @@ GameObject:
   - component: {fileID: 222876952}
   - component: {fileID: 222876951}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponPoisonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8754,7 +8754,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Poison
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8781,12 +8781,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -8952,7 +8952,7 @@ GameObject:
   - component: {fileID: 234050086}
   - component: {fileID: 234050085}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponHiveText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9024,12 +9024,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.6
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -9843,7 +9843,7 @@ GameObject:
   - component: {fileID: 269560052}
   - component: {fileID: 269560051}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: WeaponSaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9867,7 +9867,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 280, y: -180}
+  m_AnchoredPosition: {x: 0, y: -180}
   m_SizeDelta: {x: 300, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &269560051
@@ -10002,6 +10002,13 @@ MonoBehaviour:
   - {fileID: 526269648}
   - {fileID: 1163639233}
   - {fileID: 973760310}
+  - {fileID: 53779470}
+  - {fileID: 144492480}
+  - {fileID: 321077523}
+  - {fileID: 269560051}
+  - {fileID: 385988678}
+  - {fileID: 765739731}
+  - {fileID: 1507270136}
   weaponSelectionScreen: {fileID: 1360480431}
   weaponSystem: {fileID: 1061770333}
 --- !u!4 &272924413
@@ -10040,6 +10047,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3857b934b705aba42b3bf11eb1e60688, type: 3}
   - {fileID: 21300000, guid: b16e9cfabd5bc2843b7bfc47cd956d0a, type: 3}
   - {fileID: 21300000, guid: 5807e8a60eb1249458e96b24659fa5fa, type: 3}
+  - {fileID: 21300000, guid: e6216f80a3c09d34dbed85ec9780c9c4, type: 3}
+  - {fileID: 21300000, guid: 742a44110fee70641abd3b3eefce2003, type: 3}
+  - {fileID: 21300000, guid: e92fce6808ed207438392179f3c2217a, type: 3}
+  - {fileID: 21300000, guid: e40f287727988d3438b6cca3488bb0d5, type: 3}
+  - {fileID: 21300000, guid: 66bc499f0f9e119499fde664f37bcd17, type: 3}
+  - {fileID: 21300000, guid: ab6f4526e86198740830bb0fd69a6402, type: 3}
+  - {fileID: 21300000, guid: 201129d5449937f4891b3b54f25fb36e, type: 3}
 --- !u!1 &275271800
 GameObject:
   m_ObjectHideFlags: 0
@@ -10448,7 +10462,7 @@ GameObject:
   - component: {fileID: 278077755}
   - component: {fileID: 278077754}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponCannonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10520,12 +10534,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 65.45
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -11262,7 +11276,7 @@ GameObject:
   - component: {fileID: 321077524}
   - component: {fileID: 321077523}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: WeaponDarkMagic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13367,7 +13381,7 @@ GameObject:
   - component: {fileID: 383183570}
   - component: {fileID: 383183569}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponSawText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13412,7 +13426,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Saw
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13439,12 +13453,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -13711,7 +13725,7 @@ GameObject:
   - component: {fileID: 385988679}
   - component: {fileID: 385988678}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: WeaponSniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13735,7 +13749,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -180}
+  m_AnchoredPosition: {x: 280, y: -180}
   m_SizeDelta: {x: 300, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &385988678
@@ -14453,8 +14467,8 @@ RectTransform:
   - {fileID: 526269647}
   - {fileID: 1163639232}
   - {fileID: 973760309}
-  - {fileID: 144492479}
   - {fileID: 53779469}
+  - {fileID: 144492479}
   - {fileID: 321077522}
   - {fileID: 269560050}
   - {fileID: 385988677}
@@ -14974,12 +14988,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.6
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -15311,7 +15325,7 @@ GameObject:
   - component: {fileID: 439044339}
   - component: {fileID: 439044338}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponShockerImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15356,7 +15370,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ab6f4526e86198740830bb0fd69a6402, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16355,12 +16369,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -17099,7 +17113,7 @@ GameObject:
   - component: {fileID: 491510379}
   - component: {fileID: 491510378}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponPoisonImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17144,7 +17158,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 742a44110fee70641abd3b3eefce2003, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17346,12 +17360,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -19933,12 +19947,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.35
-  m_fontSizeBase: 70
+  m_fontSize: 36
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -21375,7 +21389,7 @@ GameObject:
   - component: {fileID: 626793531}
   - component: {fileID: 626793530}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponSniperText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21420,7 +21434,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Sniper
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -21447,12 +21461,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -23218,7 +23232,7 @@ GameObject:
   - component: {fileID: 681600525}
   - component: {fileID: 681600524}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponCannonImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26594,7 +26608,7 @@ GameObject:
   - component: {fileID: 765460569}
   - component: {fileID: 765460568}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponLightningText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26666,12 +26680,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56.5
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -26729,7 +26743,7 @@ GameObject:
   - component: {fileID: 765739732}
   - component: {fileID: 765739731}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: WeaponShocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32332,7 +32346,7 @@ GameObject:
   - component: {fileID: 918311616}
   - component: {fileID: 918311615}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponLightningImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33979,7 +33993,7 @@ GameObject:
   - component: {fileID: 987237063}
   - component: {fileID: 987237062}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponDarkMagicText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34024,7 +34038,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Dark magic
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -34051,12 +34065,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -35432,7 +35446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Shotgun
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -35459,12 +35473,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -37207,12 +37221,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -37556,6 +37570,13 @@ MonoBehaviour:
   - {fileID: 5162605150111878422, guid: e2591af7ca9c213408a6c8d84e673632, type: 3}
   - {fileID: 5162605150111878422, guid: 1fcd24fbb28f09e4eb675c4623309861, type: 3}
   - {fileID: 5162605150111878422, guid: ab45af21622255e4fa386a2806b0739a, type: 3}
+  - {fileID: 5162605150111878422, guid: 3db8ffad231dd394fb3db3c0fa528ff9, type: 3}
+  - {fileID: 5162605150111878422, guid: 812c7bca7e8a8e3468aa52e0582f92ed, type: 3}
+  - {fileID: 5162605150111878422, guid: e23343e08cb3a434cbbd163dd0ef758d, type: 3}
+  - {fileID: 5162605150111878422, guid: 18b80ba24e7a17f4aa11ccf5380ff43e, type: 3}
+  - {fileID: 5162605150111878422, guid: a0a96e9a3abb12c4e8984e78038df132, type: 3}
+  - {fileID: 5162605150111878422, guid: 629721706263e434e9c837c3a8192c0c, type: 3}
+  - {fileID: 5162605150111878422, guid: 4ce0dc0373ffa00418162a3453a84eb4, type: 3}
   weaponsUnused:
   - {fileID: 7902181364036113631}
   - {fileID: 7902181363848390064}
@@ -38200,7 +38221,7 @@ GameObject:
   - component: {fileID: 1087020836}
   - component: {fileID: 1087020835}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponDarkMagicImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38245,7 +38266,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e92fce6808ed207438392179f3c2217a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -50397,7 +50418,7 @@ GameObject:
   - component: {fileID: 1507270137}
   - component: {fileID: 1507270136}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: WeaponShotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50421,7 +50442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 280, y: -490}
+  m_AnchoredPosition: {x: 0, y: -490}
   m_SizeDelta: {x: 300, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1507270136
@@ -50736,12 +50757,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.6
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -51598,7 +51619,7 @@ GameObject:
   - component: {fileID: 1547170581}
   - component: {fileID: 1547170580}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponSpikesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51643,7 +51664,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Spikes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -51670,12 +51691,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -53256,12 +53277,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
+  m_fontSize: 36
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 36
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -57534,7 +57555,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 201129d5449937f4891b3b54f25fb36e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -63307,7 +63328,7 @@ GameObject:
   - component: {fileID: 1932668530}
   - component: {fileID: 1932668529}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponSawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63352,7 +63373,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e40f287727988d3438b6cca3488bb0d5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -64391,7 +64412,7 @@ GameObject:
   - component: {fileID: 1973118532}
   - component: {fileID: 1973118531}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponSpikesImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64436,7 +64457,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e6216f80a3c09d34dbed85ec9780c9c4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -67074,7 +67095,7 @@ GameObject:
   - component: {fileID: 2069991486}
   - component: {fileID: 2069991485}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponHiveImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

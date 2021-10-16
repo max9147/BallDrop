@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hive : MonoBehaviour
+public class DarkMagic : MonoBehaviour
 {
-    public GameObject bee;
+    public GameObject pentagram;
 
     private bool canAttack = true;
-    private GameObject curBee;
+    private GameObject curPentagram;
     private GameObject target;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
@@ -35,14 +35,13 @@ public class Hive : MonoBehaviour
 
     private void Attack()
     {
-        curBee = Instantiate(bee, transform.position, Quaternion.identity);
-        curBee.GetComponent<Bee>().TakeAim(target);
-        curBee.GetComponent<Bee>().SetParentHive(gameObject);
+        curPentagram = Instantiate(pentagram, target.transform.position, Quaternion.identity);
+        curPentagram.GetComponent<Pentagram>().SetParentDarkMagic(gameObject);
     }
 
     public void DealDamage(GameObject curTarget)
     {
-        curTarget.transform.localScale -= new Vector3(0.0005f, 0.0005f, 0.0005f);
+        curTarget.transform.localScale -= new Vector3(0.0006f, 0.0006f, 0.0006f);
     }
 
     public void AddBallInRadius(GameObject ball)

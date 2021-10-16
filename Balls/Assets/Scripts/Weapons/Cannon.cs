@@ -39,17 +39,17 @@ public class Cannon : MonoBehaviour
             }
             else if (!isReloading)
             {
-                Shoot(target);
+                Shoot();
             }
         }
     }
 
-    private void Shoot(GameObject target)
+    private void Shoot()
     {
         currentBullet = Instantiate(bullet, transform.position, Quaternion.identity, transform);
-        currentBullet.GetComponent<CannonBullet>().TakeAim(target.transform.position);
+        currentBullet.transform.up = target.transform.position - transform.position;
         isReloading = true;
-        StartCoroutine("Reload");
+        StartCoroutine(Reload());
     }
 
     public void AddBallInRadius(GameObject ball)

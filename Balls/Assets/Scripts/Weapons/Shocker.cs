@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Shocker : MonoBehaviour
 {
     private bool isReloading = false;
     private float checkRadius;
-    private GameObject currentBullet;
     private GameObject target;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
-    public GameObject bullet;
-
     private void Start()
     {
-        checkRadius = 2f;
+        checkRadius = 0.8f;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
     }
 
@@ -31,25 +28,26 @@ public class Gun : MonoBehaviour
                 }
             }
         }
-        if (target)
+        if (target && !isReloading)
         {
-            if (target.transform.localScale.x <= 0.05f || !ballsInRadius.Contains(target))
-            {
-                target = null;
-            }
-            else if (!isReloading)
-            {
-                Shoot(target);
-            }            
+            Shoot();
+            target = null;
         }
     }
 
-    private void Shoot(GameObject target)
+    private void Shoot()
     {
-        currentBullet = Instantiate(bullet, transform.position, Quaternion.identity, transform);
-        currentBullet.GetComponent<GunBullet>().TakeAim(target);
+        transform.Find("Shock").gameObject.SetActive(true);
+        StartCoroutine(ResetStatus());
+        foreach (var item in ballsInRadius)
+        {
+            if (item.transform.localScale.x > 0.05f)
+            {
+                DealDamage(item);
+            }
+        }
         isReloading = true;
-        StartCoroutine("Reload");
+        StartCoroutine(Reload());
     }
 
     public void AddBallInRadius(GameObject ball)
@@ -62,17 +60,20 @@ public class Gun : MonoBehaviour
         ballsInRadius.Remove(ball);
     }
 
-    public void DealDamage()
+    public void DealDamage(GameObject damagedBall)
     {
-        if (target)
-        {
-            target.transform.localScale -= new Vector3(0.06f, 0.06f, 0.06f);
-        }
+        damagedBall.transform.localScale -= new Vector3(0.03f, 0.03f, 0.03f);
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         isReloading = false;
+    }
+
+    private IEnumerator ResetStatus()
+    {
+        yield return new WaitForSeconds(0.2f);
+        transform.Find("Shock").gameObject.SetActive(false);
     }
 }

@@ -133,7 +133,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 12903071
   m_SortingLayer: 1
-  m_SortingOrder: -1
+  m_SortingOrder: 1
   m_Positions: []
   m_Parameters:
     serializedVersion: 3

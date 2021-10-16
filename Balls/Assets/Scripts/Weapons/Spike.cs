@@ -2,12 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CannonBullet : MonoBehaviour
+public class Spike : MonoBehaviour
 {
+    private float lifeTime;
     private List<GameObject> damagedBalls = new List<GameObject>();
+
+    private void Start()
+    {
+        lifeTime = 0.4f;
+    }
 
     private void FixedUpdate()
     {
+        lifeTime -= Time.deltaTime;
+        if (lifeTime <= 0)
+        {
+            Destroy(gameObject);
+        }
         transform.Translate(Vector3.up * 0.08f);
     }
 
@@ -15,7 +26,7 @@ public class CannonBullet : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ball") && !damagedBalls.Contains(collision.gameObject))
         {
-            transform.parent.GetComponent<Cannon>().DealDamage(collision.gameObject);
+            transform.parent.GetComponent<Spikes>().DealDamage(collision.gameObject);
             damagedBalls.Add(collision.gameObject);
         }
     }

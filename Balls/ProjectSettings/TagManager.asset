@@ -33,6 +33,13 @@ TagManager:
   - WeaponHive
   - WeaponCannon
   - WeaponLightning
+  - WeaponSpikes
+  - WeaponPoison
+  - WeaponDarkMagic
+  - WeaponSaw
+  - WeaponSniper
+  - WeaponShocker
+  - WeaponShotgun
   layers:
   - Default
   - TransparentFX

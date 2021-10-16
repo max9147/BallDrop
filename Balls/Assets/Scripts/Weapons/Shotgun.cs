@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Shotgun : MonoBehaviour
 {
     private bool isReloading = false;
+    private int bulletCount;
     private float checkRadius;
     private GameObject currentBullet;
     private GameObject target;
@@ -14,6 +15,7 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
+        bulletCount = 3;
         checkRadius = 2f;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
     }
@@ -39,17 +41,21 @@ public class Gun : MonoBehaviour
             }
             else if (!isReloading)
             {
-                Shoot(target);
-            }            
+                Shoot();
+            }
         }
     }
 
-    private void Shoot(GameObject target)
+    private void Shoot()
     {
-        currentBullet = Instantiate(bullet, transform.position, Quaternion.identity, transform);
-        currentBullet.GetComponent<GunBullet>().TakeAim(target);
+        for (int i = 0; i < bulletCount; i++)
+        {
+            currentBullet = Instantiate(bullet, transform.position, Quaternion.identity, transform);
+            currentBullet.transform.up = target.transform.position - currentBullet.transform.position;
+            currentBullet.transform.Rotate(0, 0, (-(bulletCount / 2) + i) * 25);
+        }
         isReloading = true;
-        StartCoroutine("Reload");
+        StartCoroutine(Reload());
     }
 
     public void AddBallInRadius(GameObject ball)
@@ -62,17 +68,17 @@ public class Gun : MonoBehaviour
         ballsInRadius.Remove(ball);
     }
 
-    public void DealDamage()
+    public void DealDamage(GameObject target)
     {
         if (target)
         {
-            target.transform.localScale -= new Vector3(0.06f, 0.06f, 0.06f);
+            target.transform.localScale -= new Vector3(0.03f, 0.03f, 0.03f);
         }
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         isReloading = false;
     }
 }
