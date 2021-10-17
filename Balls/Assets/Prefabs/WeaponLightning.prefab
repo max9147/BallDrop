@@ -174,3 +174,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bolt: {fileID: 178460, guid: 72360feff96487740b3421f39280bafd, type: 3}
+  settings: {fileID: 11400000, guid: 559ec480f545ff042995f0114c2fbb22, type: 2}

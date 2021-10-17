@@ -5,6 +5,7 @@ using UnityEngine;
 public class Poison : MonoBehaviour
 {
     public GameObject poisonPS;
+    public GameSettings settings;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -12,6 +13,7 @@ public class Poison : MonoBehaviour
         {
             collision.gameObject.AddComponent<Poisoned>();
             collision.gameObject.GetComponent<Poisoned>().SetPoisonPS(poisonPS);
+            collision.gameObject.GetComponent<Poisoned>().SetSettings(settings);
         }
         else
         {

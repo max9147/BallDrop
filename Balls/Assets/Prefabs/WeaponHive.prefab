@@ -184,3 +184,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bee: {fileID: 5162605150111878422, guid: 2d5025adec0bf3c4eb5bc3e87cc1838e, type: 3}
+  settings: {fileID: 11400000, guid: 559ec480f545ff042995f0114c2fbb22, type: 2}

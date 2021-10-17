@@ -9,9 +9,11 @@ public class Bee : MonoBehaviour
     private GameObject currentTarget;
     private GameObject parentHive;
 
+    public GameSettings settings;
+
     private void Start()
     {
-        lifeTime = 5f;
+        lifeTime = settings.hiveBeeLifeTime;
     }
 
     private void FixedUpdate()
@@ -23,7 +25,7 @@ public class Bee : MonoBehaviour
         }
         if (currentTarget)
         {
-            if (currentTarget.transform.localScale.x < 0.05f)
+            if (currentTarget.transform.localScale.x < settings.ballMinHP / 100)
             {
                 Destroy(gameObject);
             }

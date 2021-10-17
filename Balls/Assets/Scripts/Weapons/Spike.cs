@@ -7,9 +7,11 @@ public class Spike : MonoBehaviour
     private float lifeTime;
     private List<GameObject> damagedBalls = new List<GameObject>();
 
+    public GameSettings settings;
+
     private void Start()
     {
-        lifeTime = 0.4f;
+        lifeTime = settings.spikesLifeTime;
     }
 
     private void FixedUpdate()

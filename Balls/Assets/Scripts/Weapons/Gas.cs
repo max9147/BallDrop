@@ -6,14 +6,14 @@ public class Gas : MonoBehaviour
 {
     private bool isActive = false;
     private bool isDamaging = false;
-    private float checkRadius;
     private float inactiveTime = 0f;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
+    public GameSettings settings;
+
     private void Start()
     {
-        checkRadius = 1f;
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.gasRange;
     }
 
     private void FixedUpdate()
@@ -22,9 +22,9 @@ public class Gas : MonoBehaviour
         {
             foreach (var item in ballsInRadius)
             {
-                if (item.transform.localScale.x > 0.05f)
+                if (item.transform.localScale.x > settings.ballMinHP / 100)
                 {
-                    item.transform.localScale -= new Vector3(0.0005f, 0.0005f, 0.0005f);
+                    item.transform.localScale -= new Vector3(settings.gasDPS / 10000, settings.gasDPS / 10000, 0);
                 }
             }
         }

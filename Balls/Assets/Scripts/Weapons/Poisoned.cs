@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Poisoned : MonoBehaviour
 {
+    private bool isDecaying = true;
+    private float poisonTime;
     private GameObject curPoisonPS;
     private GameObject poisonPS;
-
-    public bool isDecaying = true;
-    public float poisonTime;
+    private GameSettings settings;
 
     private void Start()
     {
-        poisonTime = 4f;
+        poisonTime = settings.poisonTime;
         curPoisonPS = Instantiate(poisonPS, transform);
     }
 
@@ -27,7 +27,12 @@ public class Poisoned : MonoBehaviour
                 Destroy(this);
             }
         }
-        transform.localScale -= new Vector3(0.0006f, 0.0006f, 0.0006f);
+        transform.localScale -= new Vector3(settings.poisonDamage / 10000, settings.poisonDamage / 10000, 0);
+    }
+
+    public void SetSettings(GameSettings curSettings)
+    {
+        settings = curSettings;
     }
 
     public void SetPoisonPS(GameObject PS)
@@ -38,7 +43,7 @@ public class Poisoned : MonoBehaviour
     public void StartDecay()
     {
         isDecaying = true;
-        poisonTime = 4f;
+        poisonTime = settings.poisonTime;
     }
 
     public void StopDecay()

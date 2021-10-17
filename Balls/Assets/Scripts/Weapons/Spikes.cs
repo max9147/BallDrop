@@ -6,18 +6,17 @@ public class Spikes : MonoBehaviour
 {
     private bool isReloading = false;
     private int spikeCount;
-    private float checkRadius;
     private GameObject curSpike;
     private GameObject target;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject spike;
+    public GameSettings settings;
 
     private void Start()
     {
-        spikeCount = 8;
-        checkRadius = 1f;
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
+        spikeCount = settings.spikesCount;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.spikesRange;
     }
 
     private void FixedUpdate()
@@ -26,7 +25,7 @@ public class Spikes : MonoBehaviour
         {
             foreach (var item in ballsInRadius)
             {
-                if (item.transform.localScale.x > 0.05f && !item.transform.CompareTag("WeaponSpikes"))
+                if (item.transform.localScale.x > settings.ballMinHP / 100 && !item.transform.CompareTag("WeaponSpikes"))
                 {
                     target = item;
                     break;
@@ -35,7 +34,7 @@ public class Spikes : MonoBehaviour
         }
         if (target)
         {
-            if (target.transform.localScale.x <= 0.05f || !ballsInRadius.Contains(target))
+            if (target.transform.localScale.x <= settings.ballMinHP / 100 || !ballsInRadius.Contains(target))
             {
                 target = null;
             }
@@ -69,12 +68,12 @@ public class Spikes : MonoBehaviour
 
     public void DealDamage(GameObject damagedBall)
     {
-        damagedBall.transform.localScale -= new Vector3(0.03f, 0.03f, 0.03f);
+        damagedBall.transform.localScale -= new Vector3(settings.spikesDamage / 100, settings.spikesDamage / 100, 0);
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(settings.spikesReload);
         isReloading = false;
     }
 }

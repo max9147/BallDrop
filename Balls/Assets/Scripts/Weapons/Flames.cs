@@ -8,6 +8,8 @@ public class Flames : MonoBehaviour
     private GameObject currentTarget;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
+    public GameSettings settings;
+
     private void FixedUpdate()
     {
         if (isFiring)
@@ -15,7 +17,7 @@ public class Flames : MonoBehaviour
             transform.up = currentTarget.transform.position - transform.position;
             foreach (var item in ballsInRadius)
             {
-                item.transform.localScale -= new Vector3(0.0008f, 0.0008f, 0.0008f);
+                item.transform.localScale -= new Vector3(settings.flamethrowerDPS / 10000, settings.flamethrowerDPS / 10000, 0);
             }
         }
     }

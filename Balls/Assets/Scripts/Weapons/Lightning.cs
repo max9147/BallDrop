@@ -5,17 +5,16 @@ using UnityEngine;
 public class Lightning : MonoBehaviour
 {
     private bool canAttack = true;
-    private float checkRadius;
     private GameObject curBolt;
     private GameObject target;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject bolt;
+    public GameSettings settings;
 
     private void Start()
     {
-        checkRadius = 1.5f;
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.lightningRange;
     }
 
     private void FixedUpdate()
@@ -25,7 +24,7 @@ public class Lightning : MonoBehaviour
             if (!target)
             {
                 target = ballsInRadius[Random.Range(0, ballsInRadius.Count)];
-                if (target.transform.localScale.x <= 0.05f)
+                if (target.transform.localScale.x <= settings.ballMinHP / 100)
                 {
                     target = null;
                 }
@@ -42,7 +41,7 @@ public class Lightning : MonoBehaviour
 
     private void Attack()
     {
-        target.transform.localScale -= new Vector3(0.025f, 0.025f, 0.025f);
+        target.transform.localScale -= new Vector3(settings.lightningDamage / 100, settings.lightningDamage / 100, 0);
         curBolt = Instantiate(bolt, transform);
         curBolt.GetComponent<Bolt>().StartObject = gameObject;
         curBolt.GetComponent<Bolt>().EndObject = target;
@@ -67,7 +66,7 @@ public class Lightning : MonoBehaviour
 
     private IEnumerator ResetStatus()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(settings.lightningReload);
         canAttack = true;
     }
 }

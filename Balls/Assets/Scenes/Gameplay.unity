@@ -2007,7 +2007,7 @@ GameObject:
   - component: {fileID: 43361859}
   - component: {fileID: 43361858}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: WeaponPump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2027,7 +2027,7 @@ RectTransform:
   - {fileID: 1604280977}
   - {fileID: 1906588715}
   m_Father: {fileID: 415166951}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2085,7 +2085,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 16
+          m_IntArgument: 15
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6240,7 +6240,7 @@ GameObject:
   - component: {fileID: 148763592}
   - component: {fileID: 148763591}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: WeaponGrenades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10009,6 +10009,10 @@ MonoBehaviour:
   - {fileID: 385988678}
   - {fileID: 765739731}
   - {fileID: 1507270136}
+  - {fileID: 148763591}
+  - {fileID: 43361858}
+  - {fileID: 1118510593}
+  - {fileID: 791653228}
   weaponSelectionScreen: {fileID: 1360480431}
   weaponSystem: {fileID: 1061770333}
 --- !u!4 &272924413
@@ -10054,6 +10058,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 66bc499f0f9e119499fde664f37bcd17, type: 3}
   - {fileID: 21300000, guid: ab6f4526e86198740830bb0fd69a6402, type: 3}
   - {fileID: 21300000, guid: 201129d5449937f4891b3b54f25fb36e, type: 3}
+  - {fileID: 21300000, guid: 7f2aab5afb440594f98b125f406ef1a1, type: 3}
+  - {fileID: 21300000, guid: fc94c1c836f225a4caac326300684fb6, type: 3}
+  - {fileID: 21300000, guid: 37296b7390df8f349a746b46ee3f6f11, type: 3}
+  - {fileID: 21300000, guid: d389611527720104091d8b6763102376, type: 3}
 --- !u!1 &275271800
 GameObject:
   m_ObjectHideFlags: 0
@@ -14475,8 +14483,8 @@ RectTransform:
   - {fileID: 765739730}
   - {fileID: 1507270135}
   - {fileID: 148763590}
-  - {fileID: 1118510592}
   - {fileID: 43361857}
+  - {fileID: 1118510592}
   - {fileID: 791653227}
   m_Father: {fileID: 1360480432}
   m_RootOrder: 2
@@ -14607,7 +14615,7 @@ GameObject:
   - component: {fileID: 420503460}
   - component: {fileID: 420503459}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponVirusImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14652,7 +14660,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d389611527720104091d8b6763102376, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16297,7 +16305,7 @@ GameObject:
   - component: {fileID: 464018998}
   - component: {fileID: 464018997}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponVirusText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16342,7 +16350,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Virus
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17288,7 +17296,7 @@ GameObject:
   - component: {fileID: 500187988}
   - component: {fileID: 500187987}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponMinigunText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17333,7 +17341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Minigun
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -26876,7 +26884,7 @@ GameObject:
   - component: {fileID: 770791743}
   - component: {fileID: 770791742}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponGrenadesImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26921,7 +26929,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7f2aab5afb440594f98b125f406ef1a1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -28404,7 +28412,7 @@ GameObject:
   - component: {fileID: 791653229}
   - component: {fileID: 791653228}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: WeaponVirus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37149,7 +37157,7 @@ GameObject:
   - component: {fileID: 1057058279}
   - component: {fileID: 1057058278}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponGrenadesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37194,7 +37202,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Grenades
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -37539,7 +37547,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061770333}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -37577,6 +37585,10 @@ MonoBehaviour:
   - {fileID: 5162605150111878422, guid: a0a96e9a3abb12c4e8984e78038df132, type: 3}
   - {fileID: 5162605150111878422, guid: 629721706263e434e9c837c3a8192c0c, type: 3}
   - {fileID: 5162605150111878422, guid: 4ce0dc0373ffa00418162a3453a84eb4, type: 3}
+  - {fileID: 5162605150111878422, guid: 0f0977471710f6f4b832b862efed56d7, type: 3}
+  - {fileID: 5162605150111878422, guid: 6fea52494c9800449802a61c7528d8e7, type: 3}
+  - {fileID: 5162605150111878422, guid: 3f43362a906fe4e4799513f4f2ebad4d, type: 3}
+  - {fileID: 5162605150111878422, guid: c3f1067b2bbf5b645a7dd7625846815e, type: 3}
   weaponsUnused:
   - {fileID: 7902181364036113631}
   - {fileID: 7902181363848390064}
@@ -38822,7 +38834,7 @@ GameObject:
   - component: {fileID: 1118510594}
   - component: {fileID: 1118510593}
   m_Layer: 5
-  m_Name: Weapon
+  m_Name: WeaponMinigun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38842,7 +38854,7 @@ RectTransform:
   - {fileID: 500187986}
   - {fileID: 1680136076}
   m_Father: {fileID: 415166951}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -38900,7 +38912,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 15
+          m_IntArgument: 16
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -53205,7 +53217,7 @@ GameObject:
   - component: {fileID: 1604280979}
   - component: {fileID: 1604280978}
   m_Layer: 5
-  m_Name: WeaponText
+  m_Name: WeaponPumpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53250,7 +53262,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Pump
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -56302,7 +56314,7 @@ GameObject:
   - component: {fileID: 1680136078}
   - component: {fileID: 1680136077}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponMinigunImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56347,7 +56359,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 37296b7390df8f349a746b46ee3f6f11, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -62179,7 +62191,7 @@ GameObject:
   - component: {fileID: 1906588717}
   - component: {fileID: 1906588716}
   m_Layer: 5
-  m_Name: WeaponImage
+  m_Name: WeaponPumpImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62224,7 +62236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: fc94c1c836f225a4caac326300684fb6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Flamethrower : MonoBehaviour
 {
-    private float checkRadius;
     private GameObject target;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
+    public GameSettings settings;
+
     private void Start()
     {
-        checkRadius = 1f;
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.flamethrowerRange;
     }
 
     private void FixedUpdate()
@@ -20,7 +20,7 @@ public class Flamethrower : MonoBehaviour
         {
             foreach (var item in ballsInRadius)
             {
-                if (item.transform.localScale.x > 0.05f)
+                if (item.transform.localScale.x > settings.ballMinHP / 100)
                 {
                     target = item;
                     break;
@@ -30,7 +30,7 @@ public class Flamethrower : MonoBehaviour
         if (target)
         {
             transform.Find("Flame").GetComponent<Flames>().StartFiring(target);
-            if (target.transform.localScale.x <= 0.05f || !ballsInRadius.Contains(target))
+            if (target.transform.localScale.x <= settings.ballMinHP / 100 || !ballsInRadius.Contains(target))
             {
                 target = null;
                 transform.Find("Flame").GetComponent<Flames>().StopFiring();

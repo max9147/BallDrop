@@ -113,3 +113,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poisonPS: {fileID: 3185237795606767691, guid: 6d265dd658756364ca0a54feb513eb3d, type: 3}
+  settings: {fileID: 11400000, guid: 559ec480f545ff042995f0114c2fbb22, type: 2}

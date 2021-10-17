@@ -9,10 +9,10 @@ public class RotateObject : MonoBehaviour
         switch (tag)
         {
             case "Clockwise":
-                transform.Rotate(new Vector3(0, 0, -1));
+                transform.Rotate(new Vector3(0, 0, -0.5f));
                 break;
             case "CounterClockwise":
-                transform.Rotate(new Vector3(0, 0, 1));
+                transform.Rotate(new Vector3(0, 0, 0.5f));
                 break;
             default:
                 break;

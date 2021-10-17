@@ -40,6 +40,10 @@ TagManager:
   - WeaponSniper
   - WeaponShocker
   - WeaponShotgun
+  - WeaponGrenades
+  - WeaponPump
+  - WeaponMinigun
+  - WeaponVirus
   layers:
   - Default
   - TransparentFX

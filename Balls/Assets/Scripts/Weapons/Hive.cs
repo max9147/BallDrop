@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Hive : MonoBehaviour
 {
-    public GameObject bee;
-
     private bool canAttack = true;
     private GameObject curBee;
-    private GameObject target;
+    public GameObject target;
     private List<GameObject> ballsInRadius = new List<GameObject>();
+
+    public GameObject bee;
+    public GameSettings settings;
 
     private void FixedUpdate()
     {
@@ -18,7 +19,7 @@ public class Hive : MonoBehaviour
             if (!target)
             {
                 target = ballsInRadius[Random.Range(0, ballsInRadius.Count)];
-                if (target.transform.localScale.x <= 0.05f)
+                if (target.transform.localScale.x <= settings.ballMinHP / 100)
                 {
                     target = null;
                 }
@@ -42,7 +43,7 @@ public class Hive : MonoBehaviour
 
     public void DealDamage(GameObject curTarget)
     {
-        curTarget.transform.localScale -= new Vector3(0.0005f, 0.0005f, 0.0005f);
+        curTarget.transform.localScale -= new Vector3(settings.hiveBeeDamage / 10000, settings.hiveBeeDamage / 10000, 0);
     }
 
     public void AddBallInRadius(GameObject ball)
@@ -57,7 +58,7 @@ public class Hive : MonoBehaviour
 
     private IEnumerator ResetStatus()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(settings.hiveSpawnTime);
         canAttack = true;
     }
 }

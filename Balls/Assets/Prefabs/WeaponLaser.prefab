@@ -76,7 +76,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8549133550093871332
 Transform:
   m_ObjectHideFlags: 0
@@ -128,9 +128,9 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingLayerID: 12903071
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Positions:
   - {x: 0, y: 0, z: -1}
   - {x: 0, y: 0, z: -1}
@@ -312,3 +312,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8b3c84bc2897b4cac2186e0f9226a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: 559ec480f545ff042995f0114c2fbb22, type: 2}
