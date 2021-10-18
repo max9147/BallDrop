@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   laserRange: 1
-  laserDPS: 4
+  laserDPS: 4.2
   gasRange: 1
   gasDPS: 3.5
   gunRange: 2
-  gunDamage: 6.5
-  gunReload: 1.8
+  gunDamage: 6.4
+  gunReload: 1.5
   flamethrowerRange: 1
   flamethrowerDPS: 3.8
   hiveSpawnTime: 5
-  hiveBeeLifeTime: 3.5
-  hiveBeeDamage: 3.9
+  hiveLifeTime: 3
+  hiveDPS: 4.8
   cannonRange: 2.5
-  cannonDamage: 9
+  cannonDamage: 10
   cannonReload: 3.7
-  lightningRange: 1.5
-  lightningDamage: 4
+  lightningRange: 2
+  lightningDamage: 5.8
   lightningReload: 1
   spikesRange: 1
   spikesLifeTime: 0.2
@@ -36,5 +36,32 @@ MonoBehaviour:
   spikesReload: 2
   spikesCount: 8
   poisonTime: 4
-  poisonDamage: 4
+  poisonDPS: 3.3
+  darkMagicSpawnTime: 6
+  darkMagicLifeTime: 4
+  darkMagicDPS: 4
+  sawRange: 1
+  sawDPS: 3.2
+  sniperDamage: 9
+  sniperReload: 4.2
+  shockerRange: 0.8
+  shockerDamage: 4.1
+  shockerReload: 0.8
+  shotgunRange: 2
+  shotgunDamage: 3.8
+  shotgunReload: 2.5
+  shotgunBulletCount: 3
+  grenadesRange: 2
+  grenadesDamage: 15
+  grenadesReload: 5
+  grenadesDamageRange: 1.5
+  pumpDamage: 2.7
+  minigunRange: 2
+  minigunDamage: 3
+  minigunReload: 0.2
+  virusTime: 4
+  virusDamage: 4
+  ballSpawnTime: 10
+  ballCost: 1
   ballMinHP: 5
+  startMoney: 1e+14

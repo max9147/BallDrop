@@ -9,12 +9,13 @@ public class MoneySystem : MonoBehaviour
     private double moneyBuffer;
 
     public GameObject weaponSystem;
+    public GameSettings settings;
     public TextMeshProUGUI mainMoneyCounter;
     public TextMeshProUGUI mpsCounter;
 
     private void Start()
     {
-        money = 10000000d;
+        money = settings.startMoney;
         RefreshMoneyCounters();
     }
 

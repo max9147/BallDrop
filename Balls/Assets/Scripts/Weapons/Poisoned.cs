@@ -27,7 +27,7 @@ public class Poisoned : MonoBehaviour
                 Destroy(this);
             }
         }
-        transform.localScale -= new Vector3(settings.poisonDamage / 10000, settings.poisonDamage / 10000, 0);
+        transform.localScale -= new Vector3(settings.poisonDPS / 10000, settings.poisonDPS / 10000, 0);
     }
 
     public void SetSettings(GameSettings curSettings)

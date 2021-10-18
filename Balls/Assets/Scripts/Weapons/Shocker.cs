@@ -5,14 +5,14 @@ using UnityEngine;
 public class Shocker : MonoBehaviour
 {
     private bool isReloading = false;
-    private float checkRadius;
     private GameObject target;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
+    public GameSettings settings;
+
     private void Start()
     {
-        checkRadius = 0.8f;
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.shockerRange;
     }
 
     private void FixedUpdate()
@@ -21,7 +21,7 @@ public class Shocker : MonoBehaviour
         {
             foreach (var item in ballsInRadius)
             {
-                if (item.transform.localScale.x > 0.05f)
+                if (item.transform.localScale.x > settings.ballMinHP / 100)
                 {
                     target = item;
                     break;
@@ -41,7 +41,7 @@ public class Shocker : MonoBehaviour
         StartCoroutine(ResetStatus());
         foreach (var item in ballsInRadius)
         {
-            if (item.transform.localScale.x > 0.05f)
+            if (item.transform.localScale.x > settings.ballMinHP / 100)
             {
                 DealDamage(item);
             }
@@ -62,12 +62,12 @@ public class Shocker : MonoBehaviour
 
     public void DealDamage(GameObject damagedBall)
     {
-        damagedBall.transform.localScale -= new Vector3(0.03f, 0.03f, 0.03f);
+        damagedBall.transform.localScale -= new Vector3(settings.shockerDamage / 100, settings.shockerDamage / 100, 0);
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(settings.shockerReload);
         isReloading = false;
     }
 

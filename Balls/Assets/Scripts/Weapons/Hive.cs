@@ -43,7 +43,7 @@ public class Hive : MonoBehaviour
 
     public void DealDamage(GameObject curTarget)
     {
-        curTarget.transform.localScale -= new Vector3(settings.hiveBeeDamage / 10000, settings.hiveBeeDamage / 10000, 0);
+        curTarget.transform.localScale -= new Vector3(settings.hiveDPS / 10000, settings.hiveDPS / 10000, 0);
     }
 
     public void AddBallInRadius(GameObject ball)

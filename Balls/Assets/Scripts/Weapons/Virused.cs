@@ -6,13 +6,13 @@ public class Virused : MonoBehaviour
 {
     private GameObject curVirusPS;
     private GameObject virusPS;
+    private GameSettings settings;
 
     public bool isDecaying = true;
     public float virusTime;
 
     private void Start()
     {
-        virusTime = 4f;
         curVirusPS = Instantiate(virusPS, transform);
     }
 
@@ -27,7 +27,7 @@ public class Virused : MonoBehaviour
                 Destroy(this);
             }
         }
-        transform.localScale -= new Vector3(0.0006f, 0.0006f, 0.0006f);
+        transform.localScale -= new Vector3(settings.virusDamage / 10000, settings.virusDamage / 10000, 0);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -38,12 +38,19 @@ public class Virused : MonoBehaviour
             {
                 collision.gameObject.AddComponent<Virused>();
                 collision.gameObject.GetComponent<Virused>().SetVirusPS(virusPS);
+                collision.gameObject.GetComponent<Virused>().SetSettings(settings);
             }
             else
             {
                 collision.gameObject.GetComponent<Virused>().StopDecay();
             }
         }
+    }
+
+    public void SetSettings(GameSettings curSettings)
+    {
+        settings = curSettings;
+        virusTime = settings.virusTime;
     }
 
     public void SetVirusPS(GameObject PS)
@@ -54,7 +61,7 @@ public class Virused : MonoBehaviour
     public void StartDecay()
     {
         isDecaying = true;
-        virusTime = 4f;
+        virusTime = settings.virusTime;
     }
 
     public void StopDecay()

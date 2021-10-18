@@ -13,7 +13,7 @@ public class Bee : MonoBehaviour
 
     private void Start()
     {
-        lifeTime = settings.hiveBeeLifeTime;
+        lifeTime = settings.hiveLifeTime;
     }
 
     private void FixedUpdate()

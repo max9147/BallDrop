@@ -24,8 +24,8 @@ public class GameSettings : ScriptableObject
 
     [Header("Hive")]
     public float hiveSpawnTime;
-    public float hiveBeeLifeTime;
-    public float hiveBeeDamage;
+    public float hiveLifeTime;
+    public float hiveDPS;
 
     [Header("Cannon")]
     public float cannonRange;
@@ -46,8 +46,53 @@ public class GameSettings : ScriptableObject
 
     [Header("Poison")]
     public float poisonTime;
-    public float poisonDamage;
+    public float poisonDPS;
+
+    [Header("Dark magic")]
+    public float darkMagicSpawnTime;
+    public float darkMagicLifeTime;
+    public float darkMagicDPS;
+
+    [Header("Saw")]
+    public float sawRange;
+    public float sawDPS;
+
+    [Header("Sniper")]
+    public float sniperDamage;
+    public float sniperReload;
+
+    [Header("Shocker")]
+    public float shockerRange;
+    public float shockerDamage;
+    public float shockerReload;
+
+    [Header("Shotgun")]
+    public float shotgunRange;
+    public float shotgunDamage;
+    public float shotgunReload;
+    public int shotgunBulletCount;
+
+    [Header("Grenades")]
+    public float grenadesRange;
+    public float grenadesDamage;
+    public float grenadesReload;
+    public float grenadesDamageRange;
+
+    [Header("Pump")]
+    public float pumpDamage;
+
+    [Header("Minigun")]
+    public float minigunRange;
+    public float minigunDamage;
+    public float minigunReload;
+
+    [Header("Virus")]
+    public float virusTime;
+    public float virusDamage;
 
     [Header("General")]
+    public float ballSpawnTime;
+    public float ballCost;
     public float ballMinHP;
+    public float startMoney;
 }

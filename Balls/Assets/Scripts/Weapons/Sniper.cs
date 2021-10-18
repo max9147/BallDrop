@@ -10,6 +10,7 @@ public class Sniper : MonoBehaviour
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject bullet;
+    public GameSettings settings;
 
     private void FixedUpdate()
     {
@@ -17,7 +18,7 @@ public class Sniper : MonoBehaviour
         {
             foreach (var item in ballsInRadius)
             {
-                if (item.transform.localScale.x > 0.05f && !item.transform.CompareTag("WeaponSniper"))
+                if (item.transform.localScale.x > settings.ballMinHP / 100 && !item.transform.CompareTag("WeaponSniper"))
                 {
                     target = item;
                     break;
@@ -26,7 +27,7 @@ public class Sniper : MonoBehaviour
         }
         if (target)
         {
-            if (target.transform.localScale.x <= 0.05f || !ballsInRadius.Contains(target))
+            if (target.transform.localScale.x <= settings.ballMinHP / 100 || !ballsInRadius.Contains(target))
             {
                 target = null;
             }
@@ -57,12 +58,12 @@ public class Sniper : MonoBehaviour
 
     public void DealDamage(GameObject damagedBall)
     {
-        damagedBall.transform.localScale -= new Vector3(0.09f, 0.09f, 0.09f);
+        damagedBall.transform.localScale -= new Vector3(settings.sniperDamage / 100, settings.sniperDamage / 100, 0);
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(settings.sniperReload);
         isReloading = false;
     }
 }

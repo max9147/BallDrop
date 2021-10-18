@@ -184,7 +184,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.99
 --- !u!50 &3313572797298994318
 Rigidbody2D:
   serializedVersion: 4
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2eb9b156340ed34f9002f56c8574e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneySystem: {fileID: 0}
+  settings: {fileID: 11400000, guid: 559ec480f545ff042995f0114c2fbb22, type: 2}
 --- !u!1 &9206184557250179180
 GameObject:
   m_ObjectHideFlags: 0

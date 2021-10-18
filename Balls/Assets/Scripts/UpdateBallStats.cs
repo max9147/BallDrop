@@ -7,8 +7,9 @@ public class UpdateBallStats : MonoBehaviour
 {
     private float lifeTime = 0f;
     private Color startColor;
+    private GameObject moneySystem;
 
-    public GameObject moneySystem;
+    public GameSettings settings;
 
     private void Start()
     {
@@ -46,9 +47,9 @@ public class UpdateBallStats : MonoBehaviour
             moneySystem.GetComponent<BallScoring>().ScoreBall(0.2f);
             Destroy(gameObject);
         }
-        if (transform.localScale.x < 0.05f)
+        if (transform.localScale.x < settings.ballMinHP / 100)
         {
-            transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+            transform.localScale = new Vector3(settings.ballMinHP / 101, settings.ballMinHP / 101, 0);
         }
     }    
 }

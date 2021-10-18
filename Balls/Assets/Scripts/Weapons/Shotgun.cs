@@ -6,18 +6,17 @@ public class Shotgun : MonoBehaviour
 {
     private bool isReloading = false;
     private int bulletCount;
-    private float checkRadius;
     private GameObject currentBullet;
     private GameObject target;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject bullet;
+    public GameSettings settings;
 
     private void Start()
     {
-        bulletCount = 3;
-        checkRadius = 2f;
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
+        bulletCount = settings.shotgunBulletCount;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.shotgunRange;
     }
 
     private void FixedUpdate()
@@ -26,7 +25,7 @@ public class Shotgun : MonoBehaviour
         {
             foreach (var item in ballsInRadius)
             {
-                if (item.transform.localScale.x > 0.05f)
+                if (item.transform.localScale.x > settings.ballMinHP / 100)
                 {
                     target = item;
                     break;
@@ -35,7 +34,7 @@ public class Shotgun : MonoBehaviour
         }
         if (target)
         {
-            if (target.transform.localScale.x <= 0.05f || !ballsInRadius.Contains(target))
+            if (target.transform.localScale.x <= settings.ballMinHP / 100 || !ballsInRadius.Contains(target))
             {
                 target = null;
             }
@@ -52,7 +51,7 @@ public class Shotgun : MonoBehaviour
         {
             currentBullet = Instantiate(bullet, transform.position, Quaternion.identity, transform);
             currentBullet.transform.up = target.transform.position - currentBullet.transform.position;
-            currentBullet.transform.Rotate(0, 0, (-(bulletCount / 2) + i) * 25);
+            currentBullet.transform.Rotate(0, 0, (-(bulletCount / 2) + i) * 15);
         }
         isReloading = true;
         StartCoroutine(Reload());
@@ -72,13 +71,13 @@ public class Shotgun : MonoBehaviour
     {
         if (target)
         {
-            target.transform.localScale -= new Vector3(0.03f, 0.03f, 0.03f);
+            target.transform.localScale -= new Vector3(settings.shotgunDamage / 100, settings.shotgunDamage / 100, 0);
         }
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(settings.shotgunReload);
         isReloading = false;
     }
 }

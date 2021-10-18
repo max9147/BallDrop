@@ -8,6 +8,7 @@ public class Pump : MonoBehaviour
     private List<GameObject> targets = new List<GameObject>();
 
     public GameObject hose;
+    public GameSettings settings;
 
     private void FixedUpdate()
     {
@@ -23,7 +24,7 @@ public class Pump : MonoBehaviour
                 }
                 else
                 {
-                    targets[i].transform.localScale -= new Vector3(0.0005f, 0.0005f, 0.0005f);
+                    targets[i].transform.localScale -= new Vector3(settings.pumpDamage / 10000, settings.pumpDamage / 10000, 0);
                     hoses[i].GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.position.x, transform.position.y, -1f));
                     hoses[i].GetComponent<LineRenderer>().SetPosition(1, new Vector3(targets[i].transform.position.x, targets[i].transform.position.y, -1f));
                 }

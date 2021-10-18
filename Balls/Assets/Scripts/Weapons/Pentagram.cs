@@ -8,9 +8,11 @@ public class Pentagram : MonoBehaviour
     private GameObject parentDarkMagic;
     private List<GameObject> damagedBalls = new List<GameObject>();
 
+    public GameSettings settings;
+
     private void Start()
     {
-        lifeTime = 3f;
+        lifeTime = settings.darkMagicLifeTime;
     }
 
     private void FixedUpdate()

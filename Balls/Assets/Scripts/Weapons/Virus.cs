@@ -5,6 +5,7 @@ using UnityEngine;
 public class Virus : MonoBehaviour
 {
     public GameObject virusPS;
+    public GameSettings settings;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -12,6 +13,7 @@ public class Virus : MonoBehaviour
         {
             collision.gameObject.AddComponent<Virused>();
             collision.gameObject.GetComponent<Virused>().SetVirusPS(virusPS);
+            collision.gameObject.GetComponent<Virused>().SetSettings(settings);
         }
         else
         {

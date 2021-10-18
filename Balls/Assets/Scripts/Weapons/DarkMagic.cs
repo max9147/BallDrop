@@ -11,6 +11,8 @@ public class DarkMagic : MonoBehaviour
     private GameObject target;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
+    public GameSettings settings;
+
     private void FixedUpdate()
     {
         if (ballsInRadius.Count > 0)
@@ -18,7 +20,7 @@ public class DarkMagic : MonoBehaviour
             if (!target)
             {
                 target = ballsInRadius[Random.Range(0, ballsInRadius.Count)];
-                if (target.transform.localScale.x <= 0.05f)
+                if (target.transform.localScale.x <= settings.ballMinHP / 100)
                 {
                     target = null;
                 }
@@ -35,13 +37,13 @@ public class DarkMagic : MonoBehaviour
 
     private void Attack()
     {
-        curPentagram = Instantiate(pentagram, target.transform.position, Quaternion.identity);
+        curPentagram = Instantiate(pentagram, target.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0), Quaternion.identity);
         curPentagram.GetComponent<Pentagram>().SetParentDarkMagic(gameObject);
     }
 
     public void DealDamage(GameObject curTarget)
     {
-        curTarget.transform.localScale -= new Vector3(0.0006f, 0.0006f, 0.0006f);
+        curTarget.transform.localScale -= new Vector3(settings.darkMagicDPS / 10000, settings.darkMagicDPS / 10000, 0);
     }
 
     public void AddBallInRadius(GameObject ball)
@@ -56,7 +58,7 @@ public class DarkMagic : MonoBehaviour
 
     private IEnumerator ResetStatus()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(settings.darkMagicSpawnTime);
         canAttack = true;
     }
 }

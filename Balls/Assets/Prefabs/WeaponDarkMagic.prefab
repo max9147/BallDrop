@@ -184,3 +184,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pentagram: {fileID: 5162605150111878422, guid: f47f81259d1c313478d713bc2ed507c1, type: 3}
+  settings: {fileID: 11400000, guid: 559ec480f545ff042995f0114c2fbb22, type: 2}

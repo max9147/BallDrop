@@ -48,7 +48,7 @@ public class Gun : MonoBehaviour
         currentBullet = Instantiate(bullet, transform.position, Quaternion.identity, transform);
         currentBullet.GetComponent<GunBullet>().TakeAim(target);
         isReloading = true;
-        StartCoroutine("Reload");
+        StartCoroutine(Reload());
     }
 
     public void AddBallInRadius(GameObject ball)

@@ -5,17 +5,16 @@ using UnityEngine;
 public class Minigun : MonoBehaviour
 {
     private bool isReloading = false;
-    private float checkRadius;
     private GameObject currentBullet;
     private GameObject target;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject bullet;
+    public GameSettings settings;
 
     private void Start()
     {
-        checkRadius = 2f;
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.minigunRange;
     }
 
     private void FixedUpdate()
@@ -24,7 +23,7 @@ public class Minigun : MonoBehaviour
         {
             foreach (var item in ballsInRadius)
             {
-                if (item.transform.localScale.x > 0.05f)
+                if (item.transform.localScale.x > settings.ballMinHP / 100)
                 {
                     target = item;
                     break;
@@ -33,7 +32,7 @@ public class Minigun : MonoBehaviour
         }
         if (target)
         {
-            if (target.transform.localScale.x <= 0.05f || !ballsInRadius.Contains(target))
+            if (target.transform.localScale.x <= settings.ballMinHP / 100 || !ballsInRadius.Contains(target))
             {
                 target = null;
             }
@@ -49,7 +48,7 @@ public class Minigun : MonoBehaviour
         currentBullet = Instantiate(bullet, transform.position, Quaternion.identity, transform);
         currentBullet.GetComponent<MinigunBullet>().TakeAim(target);
         isReloading = true;
-        StartCoroutine("Reload");
+        StartCoroutine(Reload());
     }
 
     public void AddBallInRadius(GameObject ball)
@@ -66,13 +65,13 @@ public class Minigun : MonoBehaviour
     {
         if (target)
         {
-            target.transform.localScale -= new Vector3(0.01f, 0.01f, 0.01f);
+            target.transform.localScale -= new Vector3(settings.minigunDamage / 100, settings.minigunDamage / 100, 0);
         }
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(settings.minigunReload);
         isReloading = false;
     }
 }

@@ -10,6 +10,7 @@ public class BallSystem : MonoBehaviour
     public GameObject ballPrefab;
     public GameObject weaponSystem;
     public GameObject[] levels;
+    public GameSettings settings;
 
     private void Start()
     {        
@@ -89,109 +90,109 @@ public class BallSystem : MonoBehaviour
 
     private IEnumerator WaitTimePochinko()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(0);
     }
 
     private IEnumerator WaitTimeFunnel()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(1);
     }
 
     private IEnumerator WaitTimeGaps()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(2);
     }
 
     private IEnumerator WaitTimeSqueeze()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(3);
     }
 
     private IEnumerator WaitTimeMills()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(4);
     }
 
     private IEnumerator WaitTimeVerticals()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(5);
     }
 
     private IEnumerator WaitTimeMovement()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(6);
     }
 
     private IEnumerator WaitTimeTraps()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(7);
     }
 
     private IEnumerator WaitTimeMixer()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(8);
     }
 
     private IEnumerator WaitTimeElevator()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(9);
     }
 
     private IEnumerator WaitTimeBoulders()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(10);
     }
 
     private IEnumerator WaitTimeShrink()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(11);
     }
 
     private IEnumerator WaitTimePlatforms()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(12);
     }
 
     private IEnumerator WaitTimeDiamonds()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(13);
     }
 
     private IEnumerator WaitTimeSpinners()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(14);
     }
 
     private IEnumerator WaitTimeChoise()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(15);
     }
 
     private IEnumerator WaitTimeZigzag()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(16);
     }
 
     private IEnumerator WaitTimeFinal()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(settings.ballSpawnTime);
         SpawnBall(17);
     }
 }

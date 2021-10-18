@@ -5666,6 +5666,7 @@ MonoBehaviour:
   - {fileID: 1468207979}
   - {fileID: 1302298745}
   - {fileID: 296829786}
+  settings: {fileID: 11400000, guid: 559ec480f545ff042995f0114c2fbb22, type: 2}
 --- !u!1 &139470898
 GameObject:
   m_ObjectHideFlags: 0
@@ -65716,6 +65717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSystem: {fileID: 1061770333}
+  settings: {fileID: 11400000, guid: 559ec480f545ff042995f0114c2fbb22, type: 2}
   mainMoneyCounter: {fileID: 1178666670}
   mpsCounter: {fileID: 1590616828}
 --- !u!114 &2018828817
@@ -65730,6 +65732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12e38bc36644954db2e4d90547f7ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: 559ec480f545ff042995f0114c2fbb22, type: 2}
 --- !u!1 &2024605939
 GameObject:
   m_ObjectHideFlags: 0

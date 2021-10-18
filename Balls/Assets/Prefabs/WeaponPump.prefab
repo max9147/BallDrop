@@ -113,3 +113,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hose: {fileID: 1619270967444899277, guid: 60d32fc81bd4c3a4ea8241477e2c4f57, type: 3}
+  settings: {fileID: 11400000, guid: 559ec480f545ff042995f0114c2fbb22, type: 2}

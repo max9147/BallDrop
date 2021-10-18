@@ -9,6 +9,13 @@ public class Grenade : MonoBehaviour
     private Vector3 currentTargetPos;
     private List<GameObject> ballsInRange = new List<GameObject>();
 
+    public GameSettings settings;
+
+    private void Start()
+    {
+        GetComponent<CircleCollider2D>().radius = settings.grenadesDamageRange;
+    }
+
     private void FixedUpdate()
     {
         if (!isDetonating && currentTarget)
@@ -22,7 +29,7 @@ public class Grenade : MonoBehaviour
         }
         if (isDetonating)
         {
-            transform.Find("RadiusImage").transform.localScale += new Vector3(0.015f, 0.015f, 0.015f);
+            transform.Find("RadiusImage").transform.localScale += new Vector3(settings.grenadesDamageRange / 100, settings.grenadesDamageRange / 100, 0);
         }
     }
 

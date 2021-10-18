@@ -5,17 +5,16 @@ using UnityEngine;
 public class Grenades : MonoBehaviour
 {
     private bool isReloading = false;
-    private float checkRadius;
     private GameObject currentGrenade;
     private GameObject target;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject grenade;
+    public GameSettings settings;
 
     private void Start()
     {
-        checkRadius = 2f;
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = checkRadius;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.grenadesRange;
     }
 
     private void FixedUpdate()
@@ -24,7 +23,7 @@ public class Grenades : MonoBehaviour
         {
             foreach (var item in ballsInRadius)
             {
-                if (item.transform.localScale.x > 0.05f && !item.transform.CompareTag("WeaponCannon"))
+                if (item.transform.localScale.x > settings.ballMinHP / 100 && !item.transform.CompareTag("WeaponGrenades"))
                 {
                     target = item;
                     break;
@@ -33,7 +32,7 @@ public class Grenades : MonoBehaviour
         }
         if (target)
         {
-            if (target.transform.localScale.x <= 0.05f || !ballsInRadius.Contains(target))
+            if (target.transform.localScale.x <= settings.ballMinHP / 100 || !ballsInRadius.Contains(target))
             {
                 target = null;
             }
@@ -64,12 +63,12 @@ public class Grenades : MonoBehaviour
 
     public void DealDamage(GameObject damagedBall)
     {
-        damagedBall.transform.localScale -= new Vector3(0.15f, 0.15f, 0.15f);
+        damagedBall.transform.localScale -= new Vector3(settings.grenadesDamage / 100, settings.grenadesDamage / 100, 0);
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(settings.grenadesReload);
         isReloading = false;
     }
 }
