@@ -46,6 +46,8 @@ public class WeaponSystem : MonoBehaviour
     public void AssignWeapon(int id)
     {
         UISystem.GetComponent<ButtonGraphics>().ChangeButtonWeapon(id);
+        UISystem.GetComponent<UpgradeSystem>().SetUpgradedWeapon(id);
+        UISystem.GetComponent<UpgradeSystem>().AllowOpening(true);
         ballSystem.GetComponent<BallSystem>().SpawnBall(levelSystem.GetComponent<LevelSystem>().GetCurrentLevel());
         switch (levelSystem.GetComponent<LevelSystem>().GetCurrentLevel())
         {
