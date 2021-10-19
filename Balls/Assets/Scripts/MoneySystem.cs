@@ -15,8 +15,7 @@ public class MoneySystem : MonoBehaviour
 
     private void Start()
     {
-        money = settings.startMoney;
-        RefreshMoneyCounters();
+        ResetMoney();
     }
 
     private void FixedUpdate()
@@ -102,6 +101,12 @@ public class MoneySystem : MonoBehaviour
         money -= amount;
         RefreshMoneyCounters();
         CheckAllAvailabilities();
+    }
+
+    public void ResetMoney()
+    {
+        money = settings.startMoney;
+        RefreshMoneyCounters();
     }
 
     private IEnumerator RemoveFromBuffer(double amount)

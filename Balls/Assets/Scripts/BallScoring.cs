@@ -6,6 +6,7 @@ public class BallScoring : MonoBehaviour
 {
     private float ballCost;
 
+    public GameObject UISystem;
     public GameSettings settings;
 
     private void Start()
@@ -16,5 +17,6 @@ public class BallScoring : MonoBehaviour
     public void ScoreBall(float multiplier)
     {
         GetComponent<MoneySystem>().AddMoney(ballCost * multiplier, true);
+        UISystem.GetComponent<PrestigeSystem>().AddTotalEarnings(ballCost * multiplier);
     }
 }

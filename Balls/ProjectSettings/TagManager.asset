@@ -44,6 +44,7 @@ TagManager:
   - WeaponPump
   - WeaponMinigun
   - WeaponVirus
+  - Ball
   layers:
   - Default
   - TransparentFX

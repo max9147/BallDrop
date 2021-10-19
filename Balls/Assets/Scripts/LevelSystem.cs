@@ -30,7 +30,6 @@ public class LevelSystem : MonoBehaviour
         selectionOutline.transform.position = levelButtons[id].transform.position;
         UISystem.GetComponent<WeaponSelection>().CheckWeaponSelection(id);
         UISystem.GetComponent<UpgradeSystem>().SetUpgradedLevel(id);        
-        Debug.Log(weaponSystem.GetComponent<WeaponSystem>().GetLevelWeapon(id));
         if (!weaponSystem.GetComponent<WeaponSystem>().GetLevelWeapon(id))
         {
             UISystem.GetComponent<UpgradeSystem>().AllowOpening(false);

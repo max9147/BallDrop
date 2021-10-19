@@ -64,4 +64,4 @@ MonoBehaviour:
   ballSpawnTime: 10
   ballCost: 1
   ballMinHP: 5
-  startMoney: 1e+14
+  startMoney: 10

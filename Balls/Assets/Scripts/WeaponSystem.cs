@@ -10,24 +10,7 @@ public class WeaponSystem : MonoBehaviour
     private double weaponCost;
     private int weaponsBought;
     private GameObject curSpawned;
-    private GameObject weaponPochinko;
-    private GameObject weaponFunnel;
-    private GameObject weaponGaps;
-    private GameObject weaponSqueeze;
-    private GameObject weaponMills;
-    private GameObject weaponVerticals;
-    private GameObject weaponMovement;
-    private GameObject weaponTraps;
-    private GameObject weaponMixer;
-    private GameObject weaponElevator;
-    private GameObject weaponBoulders;
-    private GameObject weaponShrink;
-    private GameObject weaponPlatforms;
-    private GameObject weaponDiamonds;
-    private GameObject weaponSpinners;
-    private GameObject weaponChoise;
-    private GameObject weaponZigzag;
-    private GameObject weaponFinal;
+    private GameObject[] weaponLevel = new GameObject[18];
 
     public GameObject ballSystem;
     public GameObject levelSystem;
@@ -49,110 +32,23 @@ public class WeaponSystem : MonoBehaviour
         UISystem.GetComponent<UpgradeSystem>().SetUpgradedWeapon(id);
         UISystem.GetComponent<UpgradeSystem>().AllowOpening(true);
         ballSystem.GetComponent<BallSystem>().SpawnBall(levelSystem.GetComponent<LevelSystem>().GetCurrentLevel());
-        switch (levelSystem.GetComponent<LevelSystem>().GetCurrentLevel())
+        weaponLevel[levelSystem.GetComponent<LevelSystem>().GetCurrentLevel()] = weaponTypes[id];
+    }
+
+    public void UnassignWeapons()
+    {
+        for (int i = 0; i < weaponLevel.Length; i++)
         {
-            case 0:
-                weaponPochinko = weaponTypes[id];
-                break;
-            case 1:
-                weaponFunnel = weaponTypes[id];
-                break;
-            case 2:
-                weaponGaps = weaponTypes[id];
-                break;
-            case 3:
-                weaponSqueeze = weaponTypes[id];
-                break;
-            case 4:
-                weaponMills = weaponTypes[id];
-                break;
-            case 5:
-                weaponVerticals = weaponTypes[id];
-                break;
-            case 6:
-                weaponMovement = weaponTypes[id];
-                break;
-            case 7:
-                weaponTraps = weaponTypes[id];
-                break;
-            case 8:
-                weaponMixer = weaponTypes[id];
-                break;
-            case 9:
-                weaponElevator = weaponTypes[id];
-                break;
-            case 10:
-                weaponBoulders = weaponTypes[id];
-                break;
-            case 11:
-                weaponShrink = weaponTypes[id];
-                break;
-            case 12:
-                weaponPlatforms = weaponTypes[id];
-                break;
-            case 13:
-                weaponDiamonds = weaponTypes[id];
-                break;
-            case 14:
-                weaponSpinners = weaponTypes[id];
-                break;
-            case 15:
-                weaponChoise = weaponTypes[id];
-                break;
-            case 16:
-                weaponZigzag = weaponTypes[id];
-                break;
-            case 17:
-                weaponFinal = weaponTypes[id];
-                break;
-            default:
-                break;
+            weaponLevel[i] = null;
         }
+        weaponsBought = 0;
+        weaponCost = Mathf.Floor(5f * Mathf.Pow(1.5f, weaponsBought));
+        RefreshWeaponCost();
     }
 
     public bool CheckWeapon(int id)
-    {        
-        switch (id)
-        {
-            case 0:
-                return weaponPochinko;
-            case 1:
-                return weaponFunnel;
-            case 2:
-                return weaponGaps;
-            case 3:
-                return weaponSqueeze;
-            case 4:
-                return weaponMills;
-            case 5:
-                return weaponVerticals;
-            case 6:
-                return weaponMovement;
-            case 7:
-                return weaponTraps;
-            case 8:
-                return weaponMixer;
-            case 9:
-                return weaponElevator;
-            case 10:
-                return weaponBoulders;
-            case 11:
-                return weaponShrink;
-            case 12:
-                return weaponPlatforms;
-            case 13:
-                return weaponDiamonds;
-            case 14:
-                return weaponSpinners;
-            case 15:
-                return weaponChoise;
-            case 16:
-                return weaponZigzag;
-            case 17:
-                return weaponFinal;
-            default:
-                return false;
-        }
+    {
+        return weaponLevel[id];
     }
 
     public void CheckWeaponAvaliable()
@@ -183,47 +79,7 @@ public class WeaponSystem : MonoBehaviour
 
     public GameObject GetLevelWeapon(int id)
     {
-        switch (id)
-        {
-            case 0:
-                return weaponPochinko;
-            case 1:
-                return weaponFunnel;
-            case 2:
-                return weaponGaps;
-            case 3:
-                return weaponSqueeze;
-            case 4:
-                return weaponMills;
-            case 5:
-                return weaponVerticals;
-            case 6:
-                return weaponMovement;
-            case 7:
-                return weaponTraps;
-            case 8:
-                return weaponMixer;
-            case 9:
-                return weaponElevator;
-            case 10:
-                return weaponBoulders;
-            case 11:
-                return weaponShrink;
-            case 12:
-                return weaponPlatforms;
-            case 13:
-                return weaponDiamonds;
-            case 14:
-                return weaponSpinners;
-            case 15:
-                return weaponChoise;
-            case 16:
-                return weaponZigzag;
-            case 17:
-                return weaponFinal;
-            default:
-                return null;
-        }
+        return weaponLevel[id];
     }
 
     public double GetWeaponCost()
@@ -272,7 +128,6 @@ public class WeaponSystem : MonoBehaviour
         weaponsBought--;
         weaponCost = Mathf.Floor(5 * Mathf.Pow(1.5f, weaponsBought));
         RefreshWeaponCost();
-
     }
 
     public void SpawnWeapon(GameObject spot)
@@ -281,58 +136,58 @@ public class WeaponSystem : MonoBehaviour
         switch (spot.tag)
         {
             case "LevelPochinko":
-                curSpawned = Instantiate(weaponPochinko, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[0], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelFunnel":
-                curSpawned = Instantiate(weaponFunnel, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[1], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelGaps":
-                curSpawned = Instantiate(weaponGaps, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[2], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelSqueeze":
-                curSpawned = Instantiate(weaponSqueeze, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[3], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelMills":
-                curSpawned = Instantiate(weaponMills, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[4], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelVerticals":
-                curSpawned = Instantiate(weaponVerticals, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[5], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelMovement":
-                curSpawned = Instantiate(weaponMovement, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[6], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelTraps":
-                curSpawned = Instantiate(weaponTraps, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[7], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelMixer":
-                curSpawned = Instantiate(weaponMixer, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[8], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelElevator":
-                curSpawned = Instantiate(weaponElevator, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[9], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelBoulders":
-                curSpawned = Instantiate(weaponBoulders, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[10], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelShrink":
-                curSpawned = Instantiate(weaponShrink, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[11], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelPlatforms":
-                curSpawned = Instantiate(weaponPlatforms, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[12], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelDiamonds":
-                curSpawned = Instantiate(weaponDiamonds, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[13], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelSpinners":
-                curSpawned = Instantiate(weaponSpinners, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[14], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelChoise":
-                curSpawned = Instantiate(weaponChoise, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[15], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelZigzag":
-                curSpawned = Instantiate(weaponZigzag, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[16], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             case "LevelFinal":
-                curSpawned = Instantiate(weaponFinal, spot.transform.position, Quaternion.identity, spot.transform.parent);
+                curSpawned = Instantiate(weaponLevel[17], spot.transform.position, Quaternion.identity, spot.transform.parent);
                 break;
             default:
                 break;

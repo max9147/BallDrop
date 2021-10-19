@@ -34,4 +34,12 @@ public class WeaponSelection : MonoBehaviour
         weaponSelectionButtons[id].interactable = false;
         weaponSelectionScreen.SetActive(false);
     }
+
+    public void ClearWeaponSelection()
+    {
+        foreach (var item in weaponSelectionButtons)
+        {
+            item.interactable = true;
+        }
+    }
 }
