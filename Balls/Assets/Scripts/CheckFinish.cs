@@ -13,10 +13,10 @@ public class CheckFinish : MonoBehaviour
             switch (tag)
             {
                 case "RewardLow":
-                    moneySystem.GetComponent<BallScoring>().ScoreBall(1f);
+                    moneySystem.GetComponent<BallScoring>().ScoreBall(1d);
                     break;
                 case "RewardHigh":
-                    moneySystem.GetComponent<BallScoring>().ScoreBall(1.5f);
+                    moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d);
                     break;
                 default:
                     break;

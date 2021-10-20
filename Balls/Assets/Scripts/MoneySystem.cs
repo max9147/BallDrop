@@ -13,11 +13,6 @@ public class MoneySystem : MonoBehaviour
     public TextMeshProUGUI mainMoneyCounter;
     public TextMeshProUGUI mpsCounter;
 
-    private void Start()
-    {
-        ResetMoney();
-    }
-
     private void FixedUpdate()
     {
         if (moneyBuffer < 100d)
@@ -107,6 +102,14 @@ public class MoneySystem : MonoBehaviour
     {
         money = settings.startMoney;
         RefreshMoneyCounters();
+        CheckAllAvailabilities();
+    }
+
+    public void SetMoney(double amount)
+    {
+        money = amount;
+        RefreshMoneyCounters();
+        CheckAllAvailabilities();
     }
 
     private IEnumerator RemoveFromBuffer(double amount)

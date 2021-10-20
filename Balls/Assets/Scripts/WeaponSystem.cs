@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class WeaponSystem : MonoBehaviour
 {
     private bool weaponAvailable;
+    private bool[] weaponsAssigned = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
     private double weaponCost;
     private int weaponsBought;
     private GameObject curSpawned;
@@ -33,6 +34,12 @@ public class WeaponSystem : MonoBehaviour
         UISystem.GetComponent<UpgradeSystem>().AllowOpening(true);
         ballSystem.GetComponent<BallSystem>().SpawnBall(levelSystem.GetComponent<LevelSystem>().GetCurrentLevel());
         weaponLevel[levelSystem.GetComponent<LevelSystem>().GetCurrentLevel()] = weaponTypes[id];
+        weaponsAssigned[id] = true;
+    }
+
+    public bool GetAssignStatus(int id)
+    {
+        return weaponsAssigned[id];
     }
 
     public void UnassignWeapons()
@@ -40,6 +47,7 @@ public class WeaponSystem : MonoBehaviour
         for (int i = 0; i < weaponLevel.Length; i++)
         {
             weaponLevel[i] = null;
+            weaponsAssigned[i] = false;
         }
         weaponsBought = 0;
         weaponCost = Mathf.Floor(5f * Mathf.Pow(1.5f, weaponsBought));

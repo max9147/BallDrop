@@ -57,7 +57,7 @@ MonoBehaviour:
   grenadesDamageRange: 1.5
   pumpDamage: 2.7
   minigunRange: 2
-  minigunDamage: 3
+  minigunDamage: 0.8
   minigunReload: 0.2
   virusTime: 4
   virusDamage: 4

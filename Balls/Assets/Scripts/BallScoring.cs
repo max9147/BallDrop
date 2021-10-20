@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BallScoring : MonoBehaviour
 {
-    private float ballCost;
+    private double ballCost;
 
     public GameObject UISystem;
     public GameSettings settings;
@@ -14,9 +14,9 @@ public class BallScoring : MonoBehaviour
         ballCost = settings.ballCost;
     }
 
-    public void ScoreBall(float multiplier)
+    public void ScoreBall(double multiplier)
     {
-        GetComponent<MoneySystem>().AddMoney(ballCost * multiplier, true);
-        UISystem.GetComponent<PrestigeSystem>().AddTotalEarnings(ballCost * multiplier);
+        GetComponent<MoneySystem>().AddMoney(ballCost * multiplier * UISystem.GetComponent<PrestigeSystem>().GetBallValueBoost() / 100, true);
+        UISystem.GetComponent<PrestigeSystem>().AddTotalEarnings(ballCost * multiplier * UISystem.GetComponent<PrestigeSystem>().GetBallValueBoost() / 100);
     }
 }
