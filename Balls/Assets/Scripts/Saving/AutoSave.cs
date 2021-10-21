@@ -18,6 +18,7 @@ public class AutoSave : MonoBehaviour
             UISystem.GetComponent<PrestigeSystem>().SetPrestigeValues(save.prestigePointsCurrent, save.prestigePointsTotal, save.prestigePointsGain, save.prestigeValueBoost, save.totalEarnings);
             UISystem.GetComponent<PrestigeUpgrades>().SetUpgrade1(save.prestigeUpgrade1Level);
             UISystem.GetComponent<PrestigeUpgrades>().SetUpgrade2(save.prestigeUpgrade2Level);
+            UISystem.GetComponent<PrestigeUpgrades>().SetUpgrade3(save.prestigeUpgrade3Level);
             weaponSystem.GetComponent<WeaponSystem>().LoadLevelWeapons(save.weaponLevel);
             weaponSystem.GetComponent<WeaponSystem>().LoadValues(save.weaponAssignments, save.weaponBoughtCount, save.weaponCost);
         }

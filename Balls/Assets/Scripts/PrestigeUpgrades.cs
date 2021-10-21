@@ -9,10 +9,11 @@ public class PrestigeUpgrades : MonoBehaviour
     private bool[] upgradesMaxed = new bool[7];
     private double[] upgradeCosts = new double[7];
     private int[] upgradeLevels = new int[7];
-    private int[] maxLevels = new int[] { 17, 20, 10, 10, 10, 10, 10 };
-    private int[] levelCostIncrease = new int[] { 5, 4, 1, 1, 1, 1, 1 };
+    private int[] maxLevels = new int[] { 17, 20, 5, 10, 10, 10, 10 };
+    private int[] levelCostIncrease = new int[] { 5, 4, 150, 1, 1, 1, 1 };
 
     public Button[] upgradeButtons;
+    public GameObject ballSystem;
     public GameObject moneySystem;
     public GameObject[] levelButtons;
     public RenderTexture[] levelRenders;
@@ -26,7 +27,14 @@ public class PrestigeUpgrades : MonoBehaviour
         {
             upgradesMaxed[i] = false;
             upgradeLevels[i] = 0;
-            upgradeCosts[i] = 1;
+            if (i == 2)
+            {
+                upgradeCosts[i] = 50;
+            }
+            else
+            {
+                upgradeCosts[i] = 1;
+            }            
         }
     }
 
@@ -57,18 +65,39 @@ public class PrestigeUpgrades : MonoBehaviour
     {
         UpgradeRefresh(1);
         moneySystem.GetComponent<BallScoring>().UpgradeGlobalMul();
-        float mult = Mathf.Pow(2, upgradeLevels[1]);
-        if (mult < 1000d)
+        if (upgradeLevels[1] == maxLevels[1])
         {
-            upgradeDescriptions[1].text = "Increase ball cost multiplier (" + Mathf.Pow(2, upgradeLevels[1]) + "x -> " + Mathf.Pow(2, upgradeLevels[1] + 1) + "x)";
+            upgradeDescriptions[1].text = "Ball cost multiplier";
         }
-        else if (mult < 1000000d)
+        else
         {
-            upgradeDescriptions[1].text = "Increase ball cost multiplier (" + (Mathf.Pow(2, upgradeLevels[1]) / 1000d).ToString("F0") + "Kx -> " + (Mathf.Pow(2, upgradeLevels[1] + 1) / 1000d).ToString("F0") + "Kx)";
+            float mult = Mathf.Pow(2, upgradeLevels[1]);
+            if (mult < 1000d)
+            {
+                upgradeDescriptions[1].text = "Ball cost multiplier (" + Mathf.Pow(2, upgradeLevels[1]) + "x -> " + Mathf.Pow(2, upgradeLevels[1] + 1) + "x)";
+            }
+            else if (mult < 1000000d)
+            {
+                upgradeDescriptions[1].text = "Ball cost multiplier (" + (Mathf.Pow(2, upgradeLevels[1]) / 1000d).ToString("F0") + "Kx -> " + (Mathf.Pow(2, upgradeLevels[1] + 1) / 1000d).ToString("F0") + "Kx)";
+            }
+            else if (mult < 1000000000d)
+            {
+                upgradeDescriptions[1].text = "Ball cost multiplier (" + (Mathf.Pow(2, upgradeLevels[1]) / 1000000d).ToString("F0") + "Mx -> " + (Mathf.Pow(2, upgradeLevels[1] + 1) / 1000000d).ToString("F0") + "Mx)";
+            }
         }
-        else if (mult < 1000000000d)
+    }
+
+    public void BuyUpgrade3()
+    {
+        UpgradeRefresh(2);
+        ballSystem.GetComponent<BallSystem>().UpgradeGlobalMul();
+        if (upgradeLevels[2] == maxLevels[2])
         {
-            upgradeDescriptions[1].text = "Increase ball cost multiplier (" + (Mathf.Pow(2, upgradeLevels[1]) / 1000000d).ToString("F0") + "Mx -> " + (Mathf.Pow(2, upgradeLevels[1] + 1) / 1000000d).ToString("F0") + "Mx)";
+            upgradeDescriptions[2].text = "Global ball drop rate";
+        }
+        else
+        {
+            upgradeDescriptions[2].text = "Global ball drop rate (" + (1 - 0.1f * upgradeLevels[2]) + "x -> " + (1 - 0.1f * (upgradeLevels[2] + 1)) + "x)";
         }
     }
 
@@ -124,18 +153,39 @@ public class PrestigeUpgrades : MonoBehaviour
     {
         SetUpgradeRefresh(1, level);
         moneySystem.GetComponent<BallScoring>().SetGlobalMul(level);
-        float mult = Mathf.Pow(2, upgradeLevels[1]);
-        if (mult < 1000d)
+        if (upgradeLevels[1] == maxLevels[1])
         {
-            upgradeDescriptions[1].text = "Increase ball cost multiplier (" + Mathf.Pow(2, upgradeLevels[1]) + "x -> " + Mathf.Pow(2, upgradeLevels[1] + 1) + "x)";
+            upgradeDescriptions[1].text = "Ball cost multiplier";
         }
-        else if (mult < 1000000d)
+        else
         {
-            upgradeDescriptions[1].text = "Increase ball cost multiplier (" + (Mathf.Pow(2, upgradeLevels[1]) / 1000d).ToString("F0") + "Kx -> " + (Mathf.Pow(2, upgradeLevels[1] + 1) / 1000d).ToString("F0") + "Kx)";
+            float mult = Mathf.Pow(2, upgradeLevels[1]);
+            if (mult < 1000d)
+            {
+                upgradeDescriptions[1].text = "Ball cost multiplier (" + Mathf.Pow(2, upgradeLevels[1]) + "x -> " + Mathf.Pow(2, upgradeLevels[1] + 1) + "x)";
+            }
+            else if (mult < 1000000d)
+            {
+                upgradeDescriptions[1].text = "Ball cost multiplier (" + (Mathf.Pow(2, upgradeLevels[1]) / 1000d).ToString("F0") + "Kx -> " + (Mathf.Pow(2, upgradeLevels[1] + 1) / 1000d).ToString("F0") + "Kx)";
+            }
+            else if (mult < 1000000000d)
+            {
+                upgradeDescriptions[1].text = "Ball cost multiplier (" + (Mathf.Pow(2, upgradeLevels[1]) / 1000000d).ToString("F0") + "Mx -> " + (Mathf.Pow(2, upgradeLevels[1] + 1) / 1000000d).ToString("F0") + "Mx)";
+            }
         }
-        else if (mult < 1000000000d)
+    }
+
+    public void SetUpgrade3(int level)
+    {
+        SetUpgradeRefresh(2, level);
+        ballSystem.GetComponent<BallSystem>().SetGlobalMul(level);
+        if (upgradeLevels[2] == maxLevels[2])
         {
-            upgradeDescriptions[1].text = "Increase ball cost multiplier (" + (Mathf.Pow(2, upgradeLevels[1]) / 1000000d).ToString("F0") + "Mx -> " + (Mathf.Pow(2, upgradeLevels[1] + 1) / 1000000d).ToString("F0") + "Mx)";
+            upgradeDescriptions[2].text = "Global ball drop rate";
+        }
+        else
+        {
+            upgradeDescriptions[2].text = "Global ball drop rate (" + (1 - 0.1f * upgradeLevels[2]) + "x -> " + (1 - 0.1f * (upgradeLevels[2] + 1)) + "x)";
         }
     }
 

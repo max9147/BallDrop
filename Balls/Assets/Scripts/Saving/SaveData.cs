@@ -13,6 +13,7 @@ public class SaveData
     public double totalEarnings;
     public int prestigeUpgrade1Level;
     public int prestigeUpgrade2Level;
+    public int prestigeUpgrade3Level;
     public int[] weaponLevel = new int[18];
     public bool[] weaponAssignments = new bool[66];
     public int weaponBoughtCount;
@@ -28,6 +29,7 @@ public class SaveData
         totalEarnings = prestigeSystem.GetTotalEarnings();
         prestigeUpgrade1Level = prestigeUpgrades.GetUpgradeLevel(0);
         prestigeUpgrade2Level = prestigeUpgrades.GetUpgradeLevel(1);
+        prestigeUpgrade3Level = prestigeUpgrades.GetUpgradeLevel(2);
         weaponLevel = weaponSystem.GetComponent<WeaponSystem>().saveLevelWeapons();
         weaponAssignments = weaponSystem.GetComponent<WeaponSystem>().SaveAssignments();
         weaponBoughtCount = weaponSystem.GetComponent<WeaponSystem>().GetBoughtCount();
