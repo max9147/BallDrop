@@ -8,8 +8,10 @@ public class WeaponSystem : MonoBehaviour
 {
     private bool weaponAvailable;
     private bool[] weaponsAssigned = new bool[] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
+    private bool[] boughtWeapons = new bool[66];
     private double weaponCost;
     private int weaponsBought;
+    private int[] weaponLevelNum = new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
     private GameObject curSpawned;
     private GameObject[] weaponLevel = new GameObject[18];
 
@@ -18,13 +20,44 @@ public class WeaponSystem : MonoBehaviour
     public GameObject moneySystem;
     public GameObject UISystem;
     public GameObject[] weaponTypes;
-    public GameObject[] weaponsUnused;    
+    public GameObject[] weaponsUnused;
 
-    private void Start()
+    public void InitializeValues()
     {
+        for (int i = 0; i < boughtWeapons.Length; i++)
+        {
+            boughtWeapons[i] = false;
+        }
         weaponsBought = 0;
         weaponCost = Mathf.Floor(5f * Mathf.Pow(1.5f, weaponsBought));
         RefreshWeaponCost();
+    }
+
+    public void LoadValues(bool[] savedBought, int boughtCount, double cost)
+    {
+        boughtWeapons = savedBought;
+        for (int i = 0; i < boughtWeapons.Length; i++)
+        {
+            if (boughtWeapons[i])
+            {
+                SpawnWeapon(weaponsUnused[i]);
+            }
+        }
+        weaponsBought = boughtCount;
+        weaponCost = cost;
+        RefreshWeaponCost();
+    }
+
+    public bool[] SaveAssignments()
+    {
+        for (int i = 0; i < weaponsUnused.Length; i++)
+        {
+            if (!weaponsUnused[i].activeInHierarchy)
+            {
+                boughtWeapons[i] = true;
+            }
+        }
+        return boughtWeapons;
     }
 
     public void AssignWeapon(int id)
@@ -34,6 +67,7 @@ public class WeaponSystem : MonoBehaviour
         UISystem.GetComponent<UpgradeSystem>().AllowOpening(true);
         ballSystem.GetComponent<BallSystem>().SpawnBall(levelSystem.GetComponent<LevelSystem>().GetCurrentLevel());
         weaponLevel[levelSystem.GetComponent<LevelSystem>().GetCurrentLevel()] = weaponTypes[id];
+        weaponLevelNum[levelSystem.GetComponent<LevelSystem>().GetCurrentLevel()] = id;
         weaponsAssigned[id] = true;
     }
 
@@ -47,7 +81,12 @@ public class WeaponSystem : MonoBehaviour
         for (int i = 0; i < weaponLevel.Length; i++)
         {
             weaponLevel[i] = null;
+            weaponLevelNum[i] = -1;
             weaponsAssigned[i] = false;
+        }
+        for (int i = 0; i < boughtWeapons.Length; i++)
+        {
+            boughtWeapons[i] = false;
         }
         weaponsBought = 0;
         weaponCost = Mathf.Floor(5f * Mathf.Pow(1.5f, weaponsBought));
@@ -83,6 +122,35 @@ public class WeaponSystem : MonoBehaviour
                 }
             }
         }
+    }
+
+    public int[] saveLevelWeapons()
+    {
+        return weaponLevelNum;
+    }
+
+    public void LoadLevelWeapons(int[] weaponIDs)
+    {
+        for (int i = 0; i < weaponIDs.Length; i++)
+        {
+            if (weaponIDs[i] != -1)
+            {
+                weaponLevel[i] = weaponTypes[weaponIDs[i]];
+                weaponLevelNum[i] = weaponIDs[i];
+                weaponsAssigned[weaponIDs[i]] = true;
+            }
+        }
+        UISystem.GetComponent<WeaponSelection>().ClearWeaponSelection();
+    }
+
+    public int GetBoughtCount()
+    {
+        return weaponsBought;
+    }
+
+    public double GetCost()
+    {
+        return weaponCost;
     }
 
     public GameObject GetLevelWeapon(int id)

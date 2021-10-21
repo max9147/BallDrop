@@ -7,6 +7,7 @@ public class UpdateBallStats : MonoBehaviour
 {
     private float lifeTime = 0f;
     private Color startColor;
+    private GameObject ballSystem;
     private GameObject moneySystem;
 
     public GameSettings settings;
@@ -44,7 +45,7 @@ public class UpdateBallStats : MonoBehaviour
         }
         if (lifeTime >= 30f)
         {
-            moneySystem.GetComponent<BallScoring>().ScoreBall(0.2f);
+            moneySystem.GetComponent<BallScoring>().ScoreBall(settings.ballCost * 0.2);
             Destroy(gameObject);
         }
         if (transform.localScale.x < settings.ballMinHP / 100)

@@ -48,7 +48,7 @@ public class WeaponSelection : MonoBehaviour
             item.transform.Find("WeaponText").GetComponent<TextMeshProUGUI>().text = "?";
             item.transform.Find("WeaponImage").GetComponent<Image>().sprite = weaponLock;
         }
-        for (int i = 0; i <= GetComponent<PrestigeUpgrades>().GetFirstUpgradeLevel(); i++)
+        for (int i = 0; i <= GetComponent<PrestigeUpgrades>().GetUpgradeLevel(0); i++)
         {
             weaponSelectionButtons[i].transform.Find("WeaponText").GetComponent<TextMeshProUGUI>().text = weaponNames[i];
             weaponSelectionButtons[i].transform.Find("WeaponImage").GetComponent<Image>().sprite = weaponSprites[i];

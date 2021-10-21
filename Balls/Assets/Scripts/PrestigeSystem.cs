@@ -68,7 +68,7 @@ public class PrestigeSystem : MonoBehaviour
         if (!firstPress)
         {
             firstPress = true;
-            prestigeButtonText.text = "Are you sure?";
+            prestigeButtonText.text = "Press again to confirm";
         }
         else
         {

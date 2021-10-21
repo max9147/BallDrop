@@ -25,6 +25,10 @@ public class InteractWeapons : MonoBehaviour
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
             {
+                if (UISystem.GetComponent<UpgradeSystem>().CheckOpened())
+                {
+                    return;
+                }
                 touchPos = cam.ScreenToWorldPoint(touch.position);
                 touchHit = Physics2D.Raycast(touchPos, Vector2.zero);
                 if (touchHit)

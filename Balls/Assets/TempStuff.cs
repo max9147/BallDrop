@@ -10,8 +10,8 @@ public class TempStuff : MonoBehaviour
 
     public void DoubleMoney()
     {
-        moneySystem.GetComponent<MoneySystem>().AddMoney(300, false);
-        UISystem.GetComponent<PrestigeSystem>().AddTotalEarnings(300);
+        moneySystem.GetComponent<MoneySystem>().AddMoney(30000000000000, false);
+        UISystem.GetComponent<PrestigeSystem>().AddTotalEarnings(30000000000000);
     }
 
     public void DeleteSave()

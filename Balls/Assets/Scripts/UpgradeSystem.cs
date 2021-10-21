@@ -63,4 +63,16 @@ public class UpgradeSystem : MonoBehaviour
         }
         levelUpgradeTabs[id].SetActive(true);
     }
+
+    public bool CheckOpened()
+    {
+        if (curOpen == -1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }
