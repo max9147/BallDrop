@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class PrestigeUpgrades : MonoBehaviour
 {
     private bool[] upgradesMaxed = new bool[7];
-    private double[] upgradeCosts = new double[7];
+    private double[] upgradeCosts = new double[] { 1, 1, 50, 10, 10, 1, 2 };
     private int[] upgradeLevels = new int[7];
-    private int[] maxLevels = new int[] { 17, 20, 5, 10, 10, 10, 10 };
-    private int[] levelCostIncrease = new int[] { 5, 4, 150, 1, 1, 1, 1 };
+    private int[] maxLevels = new int[] { 17, 20, 5, 9, 10, 15, 6 };
+    private int[] levelCostIncrease = new int[] { 5, 4, 150, 20, 14, 6, 100 };
 
     public Button[] upgradeButtons;
     public GameObject ballSystem;
@@ -26,15 +26,7 @@ public class PrestigeUpgrades : MonoBehaviour
         for (int i = 0; i < 7; i++)
         {
             upgradesMaxed[i] = false;
-            upgradeLevels[i] = 0;
-            if (i == 2)
-            {
-                upgradeCosts[i] = 50;
-            }
-            else
-            {
-                upgradeCosts[i] = 1;
-            }            
+            upgradeLevels[i] = 0;           
         }
     }
 
@@ -71,19 +63,7 @@ public class PrestigeUpgrades : MonoBehaviour
         }
         else
         {
-            float mult = Mathf.Pow(2, upgradeLevels[1]);
-            if (mult < 1000d)
-            {
-                upgradeDescriptions[1].text = "Ball cost multiplier (" + Mathf.Pow(2, upgradeLevels[1]) + "x -> " + Mathf.Pow(2, upgradeLevels[1] + 1) + "x)";
-            }
-            else if (mult < 1000000d)
-            {
-                upgradeDescriptions[1].text = "Ball cost multiplier (" + (Mathf.Pow(2, upgradeLevels[1]) / 1000d).ToString("F0") + "Kx -> " + (Mathf.Pow(2, upgradeLevels[1] + 1) / 1000d).ToString("F0") + "Kx)";
-            }
-            else if (mult < 1000000000d)
-            {
-                upgradeDescriptions[1].text = "Ball cost multiplier (" + (Mathf.Pow(2, upgradeLevels[1]) / 1000000d).ToString("F0") + "Mx -> " + (Mathf.Pow(2, upgradeLevels[1] + 1) / 1000000d).ToString("F0") + "Mx)";
-            }
+            upgradeDescriptions[1].text = "Ball cost multiplier (" + Mathf.Pow(1.5f, upgradeLevels[1]).ToString("F1") + "x -> " + Mathf.Pow(1.5f, upgradeLevels[1] + 1).ToString("F1") + "x)";
         }
     }
 
@@ -93,11 +73,87 @@ public class PrestigeUpgrades : MonoBehaviour
         ballSystem.GetComponent<BallSystem>().UpgradeGlobalMul();
         if (upgradeLevels[2] == maxLevels[2])
         {
-            upgradeDescriptions[2].text = "Global ball drop rate";
+            upgradeDescriptions[2].text = "Ball drop rate";
         }
         else
         {
-            upgradeDescriptions[2].text = "Global ball drop rate (" + (1 - 0.1f * upgradeLevels[2]) + "x -> " + (1 - 0.1f * (upgradeLevels[2] + 1)) + "x)";
+            upgradeDescriptions[2].text = "Ball drop rate (" + (1 - 0.1f * upgradeLevels[2]) + "x -> " + (1 - 0.1f * (upgradeLevels[2] + 1)) + "x)";
+        }
+    }
+
+    public void BuyUpgrade4()
+    {
+        UpgradeRefresh(3);
+        moneySystem.GetComponent<BallScoring>().UpgradeFinishMul();
+        if (upgradeLevels[3] == maxLevels[3])
+        {
+            upgradeDescriptions[3].text = "Increase finish values";
+        }
+        else
+        {
+            upgradeDescriptions[3].text = "Increase finish values (" + (1 + 0.5f * upgradeLevels[3]) + "x -> " + (1 + 0.5f * (upgradeLevels[3] + 1)) + "x)";
+        }
+    }
+
+    public void BuyUpgrade5()
+    {
+        UpgradeRefresh(4);
+        GetComponent<OfflineIncome>().UpgradeMaxTime();
+        if (upgradeLevels[4] == maxLevels[4])
+        {
+            upgradeDescriptions[4].text = "Max offline income time";
+        }
+        else
+        {
+            upgradeDescriptions[4].text = "Max offline income time (" + (2 + upgradeLevels[4]) + "hr -> " + (2 + upgradeLevels[4] + 1) + "hr)";
+        }
+    }
+
+    public void BuyUpgrade6()
+    {
+        UpgradeRefresh(5);
+        ballSystem.GetComponent<BallSystem>().UpgradeGoldenChance();
+        if (upgradeLevels[5] == maxLevels[5])
+        {
+            upgradeDescriptions[5].text = "Increase golden ball chance";
+        }
+        else
+        {
+            upgradeDescriptions[5].text = "Increase golden ball chance (" + upgradeLevels[5] + "% -> " + (upgradeLevels[5] + 1) + "%)";
+        }
+    }
+
+    public void BuyUpgrade7()
+    {
+        UpgradeRefresh(6);
+        moneySystem.GetComponent<MoneySystem>().UpgradeStartMoney();
+        if (upgradeLevels[6] == maxLevels[6])
+        {
+            upgradeDescriptions[6].text = "More money after reset";
+        }
+        else
+        {
+            float temp = 10 * Mathf.Pow(100, upgradeLevels[6]);
+            if (temp < 1000d)
+            {
+                upgradeDescriptions[6].text = "More money after reset (" + 10 * Mathf.Pow(100, upgradeLevels[6]) + " -> " + 10 * Mathf.Pow(100, upgradeLevels[6] + 1) + ")";
+            }
+            else if (temp < 1000000d)
+            {
+                upgradeDescriptions[6].text = "More money after reset (" + (10 * Mathf.Pow(100, upgradeLevels[6]) / 1000d).ToString("F0") + "K -> " + (10 * Mathf.Pow(100, upgradeLevels[6] + 1) / 1000d).ToString("F0") + "K)";
+            }
+            else if (temp < 1000000000d)
+            {
+                upgradeDescriptions[6].text = "More money after reset (" + (10 * Mathf.Pow(100, upgradeLevels[6]) / 1000000d).ToString("F0") + "M -> " + (10 * Mathf.Pow(100, upgradeLevels[6] + 1) / 1000000d).ToString("F0") + "M)";
+            }
+            else if (temp < 1000000000000d)
+            {
+                upgradeDescriptions[6].text = "More money after reset (" + (10 * Mathf.Pow(100, upgradeLevels[6]) / 1000000000d).ToString("F0") + "B -> " + (10 * Mathf.Pow(100, upgradeLevels[6] + 1) / 1000000000d).ToString("F0") + "B)";
+            }
+            else
+            {
+                upgradeDescriptions[6].text = "More money after reset (" + (10 * Mathf.Pow(100, upgradeLevels[6]) / 1000000000000d).ToString("F0") + "T -> " + (10 * Mathf.Pow(100, upgradeLevels[6] + 1) / 1000000000000d).ToString("F0") + "T)";
+            }
         }
     }
 
@@ -159,19 +215,7 @@ public class PrestigeUpgrades : MonoBehaviour
         }
         else
         {
-            float mult = Mathf.Pow(2, upgradeLevels[1]);
-            if (mult < 1000d)
-            {
-                upgradeDescriptions[1].text = "Ball cost multiplier (" + Mathf.Pow(2, upgradeLevels[1]) + "x -> " + Mathf.Pow(2, upgradeLevels[1] + 1) + "x)";
-            }
-            else if (mult < 1000000d)
-            {
-                upgradeDescriptions[1].text = "Ball cost multiplier (" + (Mathf.Pow(2, upgradeLevels[1]) / 1000d).ToString("F0") + "Kx -> " + (Mathf.Pow(2, upgradeLevels[1] + 1) / 1000d).ToString("F0") + "Kx)";
-            }
-            else if (mult < 1000000000d)
-            {
-                upgradeDescriptions[1].text = "Ball cost multiplier (" + (Mathf.Pow(2, upgradeLevels[1]) / 1000000d).ToString("F0") + "Mx -> " + (Mathf.Pow(2, upgradeLevels[1] + 1) / 1000000d).ToString("F0") + "Mx)";
-            }
+            upgradeDescriptions[1].text = "Ball cost multiplier (" + Mathf.Pow(1.5f, upgradeLevels[1]).ToString("F1") + "x -> " + Mathf.Pow(1.5f, upgradeLevels[1] + 1).ToString("F1") + "x)";
         }
     }
 
@@ -181,18 +225,94 @@ public class PrestigeUpgrades : MonoBehaviour
         ballSystem.GetComponent<BallSystem>().SetGlobalMul(level);
         if (upgradeLevels[2] == maxLevels[2])
         {
-            upgradeDescriptions[2].text = "Global ball drop rate";
+            upgradeDescriptions[2].text = "Ball drop rate";
         }
         else
         {
-            upgradeDescriptions[2].text = "Global ball drop rate (" + (1 - 0.1f * upgradeLevels[2]) + "x -> " + (1 - 0.1f * (upgradeLevels[2] + 1)) + "x)";
+            upgradeDescriptions[2].text = "Ball drop rate (" + (1 - 0.1f * upgradeLevels[2]) + "x -> " + (1 - 0.1f * (upgradeLevels[2] + 1)) + "x)";
+        }
+    }
+
+    public void SetUpgrade4(int level)
+    {
+        SetUpgradeRefresh(3, level);
+        moneySystem.GetComponent<BallScoring>().SetFinishMul(level);
+        if (upgradeLevels[3] == maxLevels[3])
+        {
+            upgradeDescriptions[3].text = "Increase finish values";
+        }
+        else
+        {
+            upgradeDescriptions[3].text = "Increase finish values (" + (1 + 0.5f * upgradeLevels[3]) + "x -> " + (1 + 0.5f * (upgradeLevels[3] + 1)) + "x)";
+        }
+    }
+
+    public void SetUpgrade5(int level)
+    {
+        SetUpgradeRefresh(4, level);
+        GetComponent<OfflineIncome>().SetMaxTime(level);
+        if (upgradeLevels[4] == maxLevels[4])
+        {
+            upgradeDescriptions[4].text = "Max offline income time";
+        }
+        else
+        {
+            upgradeDescriptions[4].text = "Max offline income time (" + (2 + upgradeLevels[4]) + "hr -> " + (2 + upgradeLevels[4] + 1) + "hr)";
+        }
+    }
+
+    public void SetUpgrade6(int level)
+    {
+        SetUpgradeRefresh(5, level);
+        ballSystem.GetComponent<BallSystem>().SetGoldenChance(level);
+        if (upgradeLevels[5] == maxLevels[5])
+        {
+            upgradeDescriptions[5].text = "Increase golden ball chance";
+        }
+        else
+        {
+            upgradeDescriptions[5].text = "Increase golden ball chance (" + upgradeLevels[5] + "% -> " + (upgradeLevels[5] + 1) + "%)";
+        }
+    }
+
+    public void SetUpgrade7(int level)
+    {
+        SetUpgradeRefresh(6, level);
+        moneySystem.GetComponent<MoneySystem>().SetStartMoney(level);
+        if (upgradeLevels[6] == maxLevels[6])
+        {
+            upgradeDescriptions[6].text = "More money after reset";
+        }
+        else
+        {
+            float temp = 10 * Mathf.Pow(100, upgradeLevels[6]);
+            if (temp < 1000d)
+            {
+                upgradeDescriptions[6].text = "More money after reset (" + 10 * Mathf.Pow(100, upgradeLevels[6]) + " -> " + 10 * Mathf.Pow(100, upgradeLevels[6] + 1) + ")";
+            }
+            else if (temp < 1000000d)
+            {
+                upgradeDescriptions[6].text = "More money after reset (" + (10 * Mathf.Pow(100, upgradeLevels[6]) / 1000d).ToString("F0") + "K -> " + (10 * Mathf.Pow(100, upgradeLevels[6] + 1) / 1000d).ToString("F0") + "K)";
+            }
+            else if (temp < 1000000000d)
+            {
+                upgradeDescriptions[6].text = "More money after reset (" + (10 * Mathf.Pow(100, upgradeLevels[6]) / 1000000d).ToString("F0") + "M -> " + (10 * Mathf.Pow(100, upgradeLevels[6] + 1) / 1000000d).ToString("F0") + "M)";
+            }
+            else if (temp < 1000000000000d)
+            {
+                upgradeDescriptions[6].text = "More money after reset (" + (10 * Mathf.Pow(100, upgradeLevels[6]) / 1000000000d).ToString("F0") + "B -> " + (10 * Mathf.Pow(100, upgradeLevels[6] + 1) / 1000000000d).ToString("F0") + "B)";
+            }
+            else
+            {
+                upgradeDescriptions[6].text = "More money after reset (" + (10 * Mathf.Pow(100, upgradeLevels[6]) / 1000000000000d).ToString("F0") + "T -> " + (10 * Mathf.Pow(100, upgradeLevels[6] + 1) / 1000000000000d).ToString("F0") + "T)";
+            }
         }
     }
 
     private void SetUpgradeRefresh(int id, int level)
     {
         upgradeLevels[id] = level;
-        upgradeCosts[id] = Mathf.Pow(levelCostIncrease[id], level);
+        upgradeCosts[id] = upgradeCosts[id] * Mathf.Pow(levelCostIncrease[id], level);
         if (upgradeCosts[id] < 1000d)
         {
             upgradeCostTexts[id].text = upgradeCosts[id].ToString("F0");

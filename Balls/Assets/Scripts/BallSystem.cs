@@ -5,10 +5,12 @@ using UnityEngine;
 public class BallSystem : MonoBehaviour
 {
     private float globalMul = 1;
+    private float goldenChance = 0;
     private GameObject spawnedBall;
 
     public Color[] ballColors;
     public GameObject ballPrefab;
+    public GameObject goldenBallPrefab;
     public GameObject weaponSystem;
     public GameObject[] levels;
     public GameSettings settings;
@@ -34,10 +36,28 @@ public class BallSystem : MonoBehaviour
         globalMul = 1 - (0.1f * level);
     }
 
+    public void UpgradeGoldenChance()
+    {
+        goldenChance++;
+    }
+
+    public void SetGoldenChance(int level)
+    {
+        goldenChance = level;
+    }
+
     public void SpawnBall(int id)
     {
-        spawnedBall = Instantiate(ballPrefab, new Vector3(Random.Range(-1f, 1f) + levels[id].transform.position.x, 7f, 0f), Quaternion.identity);
-        spawnedBall.GetComponent<SpriteRenderer>().color = ballColors[Random.Range(0, ballColors.Length)];
+        float tryGold = Random.Range(0, 100);
+        if (tryGold < goldenChance)
+        {
+            spawnedBall = Instantiate(goldenBallPrefab, new Vector3(Random.Range(-1f, 1f) + levels[id].transform.position.x, 7f, 0f), Quaternion.identity);
+        }
+        else
+        {
+            spawnedBall = Instantiate(ballPrefab, new Vector3(Random.Range(-1f, 1f) + levels[id].transform.position.x, 7f, 0f), Quaternion.identity);
+            spawnedBall.GetComponent<SpriteRenderer>().color = ballColors[Random.Range(0, ballColors.Length)];
+        }        
         switch (id)
         {
             case 0:                

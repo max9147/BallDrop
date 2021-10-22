@@ -130,6 +130,11 @@ public class PrestigeSystem : MonoBehaviour
         {
             Destroy(item);
         }
+        toDestroy = GameObject.FindGameObjectsWithTag("GoldenBall");
+        foreach (var item in toDestroy)
+        {
+            Destroy(item);
+        }
         toDestroy = FindObjectsOfType<GameObject>();
         foreach (var item in toDestroy)
         {
@@ -148,7 +153,7 @@ public class PrestigeSystem : MonoBehaviour
         moneySystem.GetComponent<MoneySystem>().ResetMoney();
         prestigePointsCurrent += prestigePointsGain;
         prestigePointsTotal += prestigePointsGain;
-        prestigeValueBoost += prestigePointsGain * 0.1f;
+        prestigeValueBoost += prestigePointsGain * 0.01f;
         totalEarnings = 0;
         prestigePointsGain = 0;
         RefreshPrestigeStats();

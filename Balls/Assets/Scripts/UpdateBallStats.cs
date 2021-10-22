@@ -7,7 +7,6 @@ public class UpdateBallStats : MonoBehaviour
 {
     private float lifeTime = 0f;
     private Color startColor;
-    private GameObject ballSystem;
     private GameObject moneySystem;
 
     public GameSettings settings;
@@ -15,7 +14,10 @@ public class UpdateBallStats : MonoBehaviour
     private void Start()
     {
         moneySystem = GameObject.Find("MoneySystem");
-        startColor = GetComponent<SpriteRenderer>().color;
+        if (CompareTag("Ball"))
+        {
+            startColor = GetComponent<SpriteRenderer>().color;
+        }
     }
 
     private void Update()
@@ -33,19 +35,36 @@ public class UpdateBallStats : MonoBehaviour
 
     private void FixedUpdate()
     {
-        lifeTime += Time.deltaTime;        
-        if (lifeTime <= 20f)
+        lifeTime += Time.deltaTime;
+        if (CompareTag("Ball"))
         {
-            GetComponent<SpriteRenderer>().color = Color.Lerp(startColor, Color.white, lifeTime / 20f);
+            if (lifeTime <= 20f)
+            {
+                GetComponent<SpriteRenderer>().color = Color.Lerp(startColor, Color.white, lifeTime / 20f);
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.black, (lifeTime - 20f) / 10f);
+                transform.Find("Canvas").localPosition = new Vector3(Random.Range(-0.02f, 0.02f), Random.Range(-0.02f, 0.02f), 0f);
+            }
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = Color.Lerp(Color.white, Color.black, (lifeTime - 20f) / 10f);
-            transform.Find("Canvas").localPosition = new Vector3(Random.Range(-0.02f, 0.02f), Random.Range(-0.02f, 0.02f), 0f);
+            if (lifeTime > 20f)
+            {
+                transform.Find("Canvas").localPosition = new Vector3(Random.Range(-0.02f, 0.02f), Random.Range(-0.02f, 0.02f), 0f);
+            }
         }
         if (lifeTime >= 30f)
         {
-            moneySystem.GetComponent<BallScoring>().ScoreBall(settings.ballCost * 0.2);
+            if (CompareTag("Ball"))
+            {
+                moneySystem.GetComponent<BallScoring>().ScoreBall(0.2);
+            }
+            else
+            {
+                moneySystem.GetComponent<BallScoring>().ScoreBall(0.2 * 10);
+            }
             Destroy(gameObject);
         }
         if (transform.localScale.x < settings.ballMinHP / 100)

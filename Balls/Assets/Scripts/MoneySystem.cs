@@ -7,6 +7,7 @@ public class MoneySystem : MonoBehaviour
 {
     private double money;
     private double moneyBuffer;
+    private double startMoneyMul = 1;
 
     public GameObject weaponSystem;
     public GameSettings settings;
@@ -100,7 +101,7 @@ public class MoneySystem : MonoBehaviour
 
     public void ResetMoney()
     {
-        money = settings.startMoney;
+        money = settings.startMoney * startMoneyMul;
         RefreshMoneyCounters();
         CheckAllAvailabilities();
     }
@@ -110,6 +111,28 @@ public class MoneySystem : MonoBehaviour
         money = amount;
         RefreshMoneyCounters();
         CheckAllAvailabilities();
+    }
+
+    public void UpgradeStartMoney()
+    {
+        startMoneyMul *= 100;
+    }
+
+    public void SetStartMoney(int level)
+    {
+        startMoneyMul = 10 * Mathf.Pow(100, level);
+    }
+
+    public double GetBuffer()
+    {
+        if (moneyBuffer > 0)
+        {
+            return moneyBuffer;
+        }
+        else
+        {
+            return 0.1d;
+        }
     }
 
     private IEnumerator RemoveFromBuffer(double amount)
