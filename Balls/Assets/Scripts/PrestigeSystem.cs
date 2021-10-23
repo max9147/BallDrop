@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class PrestigeSystem : MonoBehaviour
 {
-    private bool firstPress = false;
     private double prestigePointsCurrent = 0;
     private double prestigePointsTotal = 0;
     private double prestigePointsGain = 0;
@@ -20,10 +19,13 @@ public class PrestigeSystem : MonoBehaviour
     public GameObject levelSystem;
     public GameObject moneySystem;
     public GameObject weaponSystem;
+    public GameObject prestigeConfirmation;
     public GameObject[] prestigeUpgradeButtons;
     public TextMeshProUGUI bottomPrestigeCounter;
     public TextMeshProUGUI currentPrestigePointsText;
     public TextMeshProUGUI prestigeButtonText;
+    public TextMeshProUGUI prestigeNormalText;
+    public TextMeshProUGUI prestigeDoubleText;
     public TextMeshProUGUI moneyLeftText;
     public TextMeshProUGUI prestigeValueBoostText;
 
@@ -65,21 +67,22 @@ public class PrestigeSystem : MonoBehaviour
 
     public void PressPrestige()
     {
-        if (!firstPress)
-        {
-            firstPress = true;
-            prestigeButtonText.text = "Press again to confirm";
-        }
-        else
-        {
-            PrestigeReset();
-        }
+        prestigeConfirmation.SetActive(true);
     }
 
-    public void RevokePressing()
+    public void ClosePrestige()
     {
-        firstPress = false;
-        RefreshPrestigeStats();
+        prestigeConfirmation.SetActive(false);
+    }
+
+    public void PressPrestigeNormal()
+    {
+        PrestigeReset(1);
+    }
+
+    public void PressPrestigeDouble()
+    {
+        PrestigeReset(2);
     }
 
     public void RefreshButtonStatus()
@@ -123,7 +126,7 @@ public class PrestigeSystem : MonoBehaviour
         RefreshButtonStatus();
     }
 
-    private void PrestigeReset()
+    private void PrestigeReset(int mul)
     {
         toDestroy = GameObject.FindGameObjectsWithTag("Ball");
         foreach (var item in toDestroy)
@@ -151,39 +154,47 @@ public class PrestigeSystem : MonoBehaviour
         GetComponent<WeaponSelection>().ClearWeaponSelection();
         ballSystem.GetComponent<BallSystem>().StopAllCoroutines();
         moneySystem.GetComponent<MoneySystem>().ResetMoney();
-        prestigePointsCurrent += prestigePointsGain;
-        prestigePointsTotal += prestigePointsGain;
-        prestigeValueBoost += prestigePointsGain * 0.01f;
+        prestigePointsCurrent += prestigePointsGain * mul;
+        prestigePointsTotal += prestigePointsGain * mul;
+        prestigeValueBoost += prestigePointsGain * mul * 0.01f;
         totalEarnings = 0;
         prestigePointsGain = 0;
         RefreshPrestigeStats();
         RefreshButtonStatus();
+        ClosePrestige();
     }
 
     private void RefreshPrestigeStats()
     {
-        if (!firstPress)
+        if (prestigePointsGain < 1000d)
         {
-            if (prestigePointsGain < 1000d)
-            {
-                prestigeButtonText.text = "+" + prestigePointsGain.ToString("F0");
-            }
-            else if (prestigePointsGain < 1000000d)
-            {
-                prestigeButtonText.text = "+" + (prestigePointsGain / 1000d).ToString("F2") + "K";
-            }
-            else if (prestigePointsGain < 1000000000d)
-            {
-                prestigeButtonText.text = "+" + (prestigePointsGain / 1000000d).ToString("F2") + "M";
-            }
-            else if (prestigePointsGain < 1000000000000d)
-            {
-                prestigeButtonText.text = "+" + (prestigePointsGain / 1000000000d).ToString("F2") + "B";
-            }
-            else
-            {
-                prestigeButtonText.text = "+" + (prestigePointsGain / 1000000000000d).ToString("F2") + "T";
-            }
+            prestigeButtonText.text = "+" + prestigePointsGain.ToString("F0");
+            prestigeNormalText.text = "Get " + prestigePointsGain.ToString("F0");
+            prestigeDoubleText.text = "Get " + (prestigePointsGain * 2).ToString("F0");
+        }
+        else if (prestigePointsGain < 1000000d)
+        {
+            prestigeButtonText.text = "+" + (prestigePointsGain / 1000d).ToString("F2") + "K";
+            prestigeNormalText.text = "Get " + (prestigePointsGain / 1000d).ToString("F2") + "K";
+            prestigeDoubleText.text = "Get " + (prestigePointsGain * 2 / 1000d).ToString("F2") + "K";
+        }
+        else if (prestigePointsGain < 1000000000d)
+        {
+            prestigeButtonText.text = "+" + (prestigePointsGain / 1000000d).ToString("F2") + "M";
+            prestigeNormalText.text = "Get " + (prestigePointsGain / 1000000d).ToString("F2") + "M";
+            prestigeDoubleText.text = "Get " + (prestigePointsGain * 2 / 1000000d).ToString("F2") + "M";
+        }
+        else if (prestigePointsGain < 1000000000000d)
+        {
+            prestigeButtonText.text = "+" + (prestigePointsGain / 1000000000d).ToString("F2") + "B";
+            prestigeNormalText.text = "Get " + (prestigePointsGain / 1000000000d).ToString("F2") + "B";
+            prestigeDoubleText.text = "Get " + (prestigePointsGain * 2 / 1000000000d).ToString("F2") + "B";
+        }
+        else
+        {
+            prestigeButtonText.text = "+" + (prestigePointsGain / 1000000000000d).ToString("F2") + "T";
+            prestigeNormalText.text = "Get " + (prestigePointsGain / 1000000000000d).ToString("F2") + "T";
+            prestigeDoubleText.text = "Get " + (prestigePointsGain * 2 / 1000000000000d).ToString("F2") + "T";
         }
         totalEarningsLeft = Math.Ceiling((prestigePointsGain + prestigePointsTotal + 1) * 1000 - totalEarnings);
         if (totalEarningsLeft < 1000d)

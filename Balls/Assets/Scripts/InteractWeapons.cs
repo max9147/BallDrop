@@ -22,13 +22,13 @@ public class InteractWeapons : MonoBehaviour
     {
         if (Input.touchCount > 0 && !UISystem.GetComponent<WeaponSelection>().GetWeaponSelectionScreenStatus())
         {
+            if (UISystem.GetComponent<UpgradeSystem>().CheckOpened() || UISystem.GetComponent<Settings>().GetSettingsStatus() || UISystem.GetComponent<OfflineIncome>().GetOfflineMenuStatus())
+            {
+                return;
+            }
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
             {
-                if (UISystem.GetComponent<UpgradeSystem>().CheckOpened())
-                {
-                    return;
-                }
                 touchPos = cam.ScreenToWorldPoint(touch.position);
                 touchHit = Physics2D.Raycast(touchPos, Vector2.zero);
                 if (touchHit)

@@ -15,7 +15,6 @@ public class UpgradeSystem : MonoBehaviour
     {
         if (canOpen)
         {
-            GetComponent<PrestigeSystem>().RevokePressing();
             if (curOpen == id)
             {
                 CloseUpgradeMenu();

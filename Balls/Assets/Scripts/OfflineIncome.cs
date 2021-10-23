@@ -28,7 +28,7 @@ public class OfflineIncome : MonoBehaviour
         {
             offlineTime = TimeSpan.FromHours(maxOfflineTime);
         }
-        offlineRevenue = Math.Floor(moneyPerSecond * offlineTime.TotalSeconds * 0.1d);
+        offlineRevenue = Math.Ceiling(moneyPerSecond * offlineTime.TotalSeconds * 0.2d);
         if (offlineRevenue < 1000d)
         {
             revenueString = "$" + offlineRevenue.ToString("F0");
@@ -62,12 +62,14 @@ public class OfflineIncome : MonoBehaviour
     public void SelectNormal()
     {
         moneySystem.GetComponent<MoneySystem>().AddMoney(offlineRevenue, false);
+        GetComponent<PrestigeSystem>().AddTotalEarnings(offlineRevenue);
         offlineMenu.SetActive(false);
     }
 
     public void SelectDouble()
     {
         moneySystem.GetComponent<MoneySystem>().AddMoney(offlineRevenue * 2, false);
+        GetComponent<PrestigeSystem>().AddTotalEarnings(offlineRevenue * 2);
         offlineMenu.SetActive(false);
     }
 
@@ -79,5 +81,10 @@ public class OfflineIncome : MonoBehaviour
     public void SetMaxTime(int level)
     {
         maxOfflineTime += level;
+    }
+
+    public bool GetOfflineMenuStatus()
+    {
+        return offlineMenu.activeInHierarchy;
     }
 }

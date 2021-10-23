@@ -127,11 +127,11 @@ public class MoneySystem : MonoBehaviour
     {
         if (moneyBuffer > 0)
         {
-            return moneyBuffer;
+            return moneyBuffer / 10;
         }
         else
         {
-            return 0.1d;
+            return 0.02d;
         }
     }
 
