@@ -156,6 +156,7 @@ public class PrestigeSystem : MonoBehaviour
         ballSystem.GetComponent<BallSystem>().ResetDroppedCounts();
         moneySystem.GetComponent<BallScoring>().ResetLevelIncomes();
         moneySystem.GetComponent<MoneySystem>().ResetMoney();
+        GetComponent<LevelUpgrades>().ResetUpgrades();
         prestigePointsCurrent += prestigePointsGain * mul;
         prestigePointsTotal += prestigePointsGain * mul;
         prestigeValueBoost += prestigePointsGain * mul * 0.01f;
