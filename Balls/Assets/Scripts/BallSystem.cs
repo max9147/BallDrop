@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BallSystem : MonoBehaviour
 {
+    private int[] droppedCounts = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private float globalMul = 1;
     private float goldenChance = 0;
     private GameObject spawnedBall;
@@ -14,6 +16,7 @@ public class BallSystem : MonoBehaviour
     public GameObject weaponSystem;
     public GameObject[] levels;
     public GameSettings settings;
+    public TextMeshProUGUI[] droppedCountsText;
 
     private void Start()
     {
@@ -23,6 +26,29 @@ public class BallSystem : MonoBehaviour
             {
                 SpawnBall(i);
             }
+        }
+    }
+
+    public int[] GetDroppedCounts()
+    {
+        return droppedCounts;
+    }
+
+    public void SetDroppedCounts(int[] savedDroppedCounts)
+    {
+        droppedCounts = savedDroppedCounts;
+        for (int i = 0; i < droppedCountsText.Length; i++)
+        {
+            droppedCountsText[i].text = "Total balls dropped: " + droppedCounts[i].ToString();
+        }
+    }
+
+    public void ResetDroppedCounts()
+    {
+        for (int i = 0; i < droppedCounts.Length; i++)
+        {
+            droppedCounts[i] = 0;
+            droppedCountsText[i].text = "Total balls dropped: " + droppedCounts[i].ToString();
         }
     }
 
@@ -55,9 +81,11 @@ public class BallSystem : MonoBehaviour
         }
         else
         {
-            spawnedBall = Instantiate(ballPrefab, new Vector3(Random.Range(-1f, 1f) + levels[id].transform.position.x, 7f, 0f), Quaternion.identity);
+            spawnedBall = Instantiate(ballPrefab, new Vector3(Random.Range(-1f, 1f) + levels[id].transform.position.x, 7f, 0f), Quaternion.identity, levels[id].transform);
             spawnedBall.GetComponent<SpriteRenderer>().color = ballColors[Random.Range(0, ballColors.Length)];
-        }        
+        }
+        droppedCounts[id]++;
+        droppedCountsText[id].text = "Total balls dropped: " + droppedCounts[id].ToString();
         switch (id)
         {
             case 0:                

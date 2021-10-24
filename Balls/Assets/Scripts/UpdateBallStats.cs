@@ -59,11 +59,11 @@ public class UpdateBallStats : MonoBehaviour
         {
             if (CompareTag("Ball"))
             {
-                moneySystem.GetComponent<BallScoring>().ScoreBall(0.2);
+                moneySystem.GetComponent<BallScoring>().ScoreBall(0.2, transform.parent.name);
             }
             else
             {
-                moneySystem.GetComponent<BallScoring>().ScoreBall(0.2 * 10);
+                moneySystem.GetComponent<BallScoring>().ScoreBall(0.2 * 10, transform.parent.name);
             }
             Destroy(gameObject);
         }

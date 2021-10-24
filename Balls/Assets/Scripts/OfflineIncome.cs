@@ -20,15 +20,18 @@ public class OfflineIncome : MonoBehaviour
     public TextMeshProUGUI doubleCollectText;
 
     public void CallOfflineProgress(string lastSavedTime, double moneyPerSecond)
-    {
-        offlineMenu.SetActive(true);
+    {        
         lastLogin = DateTime.Parse(lastSavedTime);
         offlineTime = DateTime.Now - lastLogin;
         if (offlineTime.TotalHours > maxOfflineTime)
         {
             offlineTime = TimeSpan.FromHours(maxOfflineTime);
         }
-        offlineRevenue = Math.Ceiling(moneyPerSecond * offlineTime.TotalSeconds * 0.2d);
+        offlineRevenue = Math.Floor(moneyPerSecond * offlineTime.TotalSeconds * 0.2d);
+        if (offlineRevenue > 0)
+        {
+            offlineMenu.SetActive(true);
+        }
         if (offlineRevenue < 1000d)
         {
             revenueString = "$" + offlineRevenue.ToString("F0");

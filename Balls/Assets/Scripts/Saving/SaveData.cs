@@ -25,8 +25,10 @@ public class SaveData
     public double weaponCost;
     public string curDateTime;
     public double curIncome;
+    public int[] levelDroppedCounts = new int[18];
+    public double[] levelIncomeCounts = new double[18];
 
-    public SaveData(MoneySystem moneySystem, PrestigeSystem prestigeSystem, PrestigeUpgrades prestigeUpgrades, WeaponSystem weaponSystem)
+    public SaveData(MoneySystem moneySystem, PrestigeSystem prestigeSystem, PrestigeUpgrades prestigeUpgrades, WeaponSystem weaponSystem, BallSystem ballSystem, BallScoring ballScoring)
     {
         money = moneySystem.GetMoneyAmount();
         prestigePointsCurrent = prestigeSystem.GetPrestigeCurrent();
@@ -47,5 +49,7 @@ public class SaveData
         weaponCost = weaponSystem.GetComponent<WeaponSystem>().GetCost();
         curDateTime = DateTime.Now.ToString();
         curIncome = moneySystem.GetComponent<MoneySystem>().GetBuffer();
+        levelDroppedCounts = ballSystem.GetComponent<BallSystem>().GetDroppedCounts();
+        levelIncomeCounts = ballScoring.GetLevelIncomes();
     }
 }

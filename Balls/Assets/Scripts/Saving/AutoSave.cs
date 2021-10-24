@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AutoSave : MonoBehaviour
 {
+    public GameObject ballSystem;
     public GameObject moneySystem;
     public GameObject UISystem;
     public GameObject weaponSystem;
@@ -26,6 +27,8 @@ public class AutoSave : MonoBehaviour
             weaponSystem.GetComponent<WeaponSystem>().LoadLevelWeapons(save.weaponLevel);
             weaponSystem.GetComponent<WeaponSystem>().LoadValues(save.weaponAssignments, save.weaponBoughtCount, save.weaponCost);
             UISystem.GetComponent<OfflineIncome>().CallOfflineProgress(save.curDateTime, save.curIncome);
+            ballSystem.GetComponent<BallSystem>().SetDroppedCounts(save.levelDroppedCounts);
+            moneySystem.GetComponent<BallScoring>().SetLevelIncomes(save.levelIncomeCounts);
         }
         else
         {
@@ -40,7 +43,7 @@ public class AutoSave : MonoBehaviour
     IEnumerator AutoSaveDelay()
     {
         yield return new WaitForSeconds(1);
-        SaveGameSystem.SaveGame(moneySystem.GetComponent<MoneySystem>(), UISystem.GetComponent<PrestigeSystem>(), UISystem.GetComponent<PrestigeUpgrades>(), weaponSystem.GetComponent<WeaponSystem>());
+        SaveGameSystem.SaveGame(moneySystem.GetComponent<MoneySystem>(), UISystem.GetComponent<PrestigeSystem>(), UISystem.GetComponent<PrestigeUpgrades>(), weaponSystem.GetComponent<WeaponSystem>(), ballSystem.GetComponent<BallSystem>(), moneySystem.GetComponent<BallScoring>());
         StartCoroutine(AutoSaveDelay());
     }
 }

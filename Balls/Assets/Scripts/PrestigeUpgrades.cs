@@ -87,11 +87,11 @@ public class PrestigeUpgrades : MonoBehaviour
         moneySystem.GetComponent<BallScoring>().UpgradeFinishMul();
         if (upgradeLevels[3] == maxLevels[3])
         {
-            upgradeDescriptions[3].text = "Increase finish values";
+            upgradeDescriptions[3].text = "Increase finish multiplier";
         }
         else
         {
-            upgradeDescriptions[3].text = "Increase finish values (" + (1 + 0.5f * upgradeLevels[3]) + "x -> " + (1 + 0.5f * (upgradeLevels[3] + 1)) + "x)";
+            upgradeDescriptions[3].text = "Increase finish multiplier (" + (1 + 0.5f * upgradeLevels[3]) + "x -> " + (1 + 0.5f * (upgradeLevels[3] + 1)) + "x)";
         }
     }
 
@@ -239,11 +239,11 @@ public class PrestigeUpgrades : MonoBehaviour
         moneySystem.GetComponent<BallScoring>().SetFinishMul(level);
         if (upgradeLevels[3] == maxLevels[3])
         {
-            upgradeDescriptions[3].text = "Increase finish values";
+            upgradeDescriptions[3].text = "Increase finish multiplier";
         }
         else
         {
-            upgradeDescriptions[3].text = "Increase finish values (" + (1 + 0.5f * upgradeLevels[3]) + "x -> " + (1 + 0.5f * (upgradeLevels[3] + 1)) + "x)";
+            upgradeDescriptions[3].text = "Increase finish multiplier (" + (1 + 0.5f * upgradeLevels[3]) + "x -> " + (1 + 0.5f * (upgradeLevels[3] + 1)) + "x)";
         }
     }
 

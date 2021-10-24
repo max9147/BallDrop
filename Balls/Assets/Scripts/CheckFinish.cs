@@ -18,21 +18,21 @@ public class CheckFinish : MonoBehaviour
                 case "RewardLow":
                     if (collision.CompareTag("Ball"))
                     {
-                        moneySystem.GetComponent<BallScoring>().ScoreBall(1d * multiplier);
+                        moneySystem.GetComponent<BallScoring>().ScoreBall(1d * multiplier, collision.transform.parent.name);
                     }
                     else
                     {
-                        moneySystem.GetComponent<BallScoring>().ScoreBall(1d * multiplier * 10);
+                        moneySystem.GetComponent<BallScoring>().ScoreBall(1d * multiplier * 10, collision.transform.parent.name);
                     }
                     break;
                 case "RewardHigh":                    
                     if (collision.CompareTag("Ball"))
                     {
-                        moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d * multiplier);
+                        moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d * multiplier, collision.transform.parent.name);
                     }
                     else
                     {
-                        moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d * multiplier * 10);
+                        moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d * multiplier * 10, collision.transform.parent.name);
                     }
                     break;
                 default:
