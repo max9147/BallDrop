@@ -22,6 +22,9 @@ public class SaveData
     public int[] levelUpgrades1 = new int[18];
     public int[] levelUpgrades2 = new int[18];
     public int[] levelUpgrades3 = new int[18];
+    public int[] weaponUpgrades1 = new int[18];
+    public int[] weaponUpgrades2 = new int[18];
+    public int[] weaponUpgrades3 = new int[18];
     public int[] weaponLevel = new int[18];
     public bool[] weaponAssignments = new bool[66];
     public int weaponBoughtCount;
@@ -31,7 +34,7 @@ public class SaveData
     public int[] levelDroppedCounts = new int[18];
     public double[] levelIncomeCounts = new double[18];
 
-    public SaveData(MoneySystem moneySystem, PrestigeSystem prestigeSystem, PrestigeUpgrades prestigeUpgrades, WeaponSystem weaponSystem, BallSystem ballSystem, BallScoring ballScoring, LevelUpgrades levelUpgrades)
+    public SaveData(MoneySystem moneySystem, PrestigeSystem prestigeSystem, PrestigeUpgrades prestigeUpgrades, WeaponSystem weaponSystem, BallSystem ballSystem, BallScoring ballScoring, LevelUpgrades levelUpgrades, WeaponUpgrades weaponUpgrades)
     {
         money = moneySystem.GetMoneyAmount();
         prestigePointsCurrent = prestigeSystem.GetPrestigeCurrent();
@@ -49,6 +52,9 @@ public class SaveData
         levelUpgrades1 = levelUpgrades.GetUpgrade1();
         levelUpgrades2 = levelUpgrades.GetUpgrade2();
         levelUpgrades3 = levelUpgrades.GetUpgrade3();
+        weaponUpgrades1 = weaponUpgrades.GetUpgrade1();
+        weaponUpgrades2 = weaponUpgrades.GetUpgrade2();
+        weaponUpgrades3 = weaponUpgrades.GetUpgrade3();
         weaponLevel = weaponSystem.GetComponent<WeaponSystem>().saveLevelWeapons();
         weaponAssignments = weaponSystem.GetComponent<WeaponSystem>().SaveAssignments();
         weaponBoughtCount = weaponSystem.GetComponent<WeaponSystem>().GetBoughtCount();

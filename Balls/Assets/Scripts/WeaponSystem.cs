@@ -158,6 +158,11 @@ public class WeaponSystem : MonoBehaviour
         return weaponLevel[id];
     }
 
+    public int GetLevelWeaponID(int levelID)
+    {
+        return weaponLevelNum[levelID];
+    }
+
     public double GetWeaponCost()
     {
         return weaponCost;

@@ -82,6 +82,7 @@ public class MoneySystem : MonoBehaviour
         RefreshMoneyCounters();
         CheckAllAvailabilities();
         UISystem.GetComponent<LevelUpgrades>().RefreshUpgrades();
+        UISystem.GetComponent<WeaponUpgrades>().RefreshUpgrades();
     }
 
     public void CheckAllAvailabilities()
@@ -100,6 +101,7 @@ public class MoneySystem : MonoBehaviour
         RefreshMoneyCounters();
         CheckAllAvailabilities();
         UISystem.GetComponent<LevelUpgrades>().RefreshUpgrades();
+        UISystem.GetComponent<WeaponUpgrades>().RefreshUpgrades();
     }
 
     public void ResetMoney()

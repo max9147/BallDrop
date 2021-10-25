@@ -21,7 +21,7 @@ public class LevelSystem : MonoBehaviour
 
     public void ChangeLevel(int id)
     {
-        if (currentLevel != id)
+        if (!weaponSystem.GetComponent<WeaponSystem>().GetLevelWeapon(id))
         {
             UISystem.GetComponent<UpgradeSystem>().CloseUpgradeMenu();
         }
@@ -37,6 +37,7 @@ public class LevelSystem : MonoBehaviour
         else
         {
             UISystem.GetComponent<UpgradeSystem>().AllowOpening(true);
+            UISystem.GetComponent<UpgradeSystem>().SetUpgradedWeapon(weaponSystem.GetComponent<WeaponSystem>().GetLevelWeaponID(id));
         }
     }
 

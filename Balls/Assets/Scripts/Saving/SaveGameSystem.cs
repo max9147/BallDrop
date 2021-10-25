@@ -6,12 +6,12 @@ using UnityEngine;
 
 public static class SaveGameSystem
 {
-    public static void SaveGame(MoneySystem moneySystem, PrestigeSystem prestigeSystem, PrestigeUpgrades prestigeUpgrades, WeaponSystem weaponSystem, BallSystem ballSystem, BallScoring ballScoring, LevelUpgrades levelUpgrades)
+    public static void SaveGame(MoneySystem moneySystem, PrestigeSystem prestigeSystem, PrestigeUpgrades prestigeUpgrades, WeaponSystem weaponSystem, BallSystem ballSystem, BallScoring ballScoring, LevelUpgrades levelUpgrades, WeaponUpgrades weaponUpgrades)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/data.save";
         FileStream stream = new FileStream(path, FileMode.Create);
-        SaveData data = new SaveData(moneySystem, prestigeSystem, prestigeUpgrades, weaponSystem, ballSystem, ballScoring, levelUpgrades);
+        SaveData data = new SaveData(moneySystem, prestigeSystem, prestigeUpgrades, weaponSystem, ballSystem, ballScoring, levelUpgrades, weaponUpgrades);
         formatter.Serialize(stream, data);
         stream.Close();
     }
