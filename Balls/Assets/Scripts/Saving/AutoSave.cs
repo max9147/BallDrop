@@ -38,6 +38,7 @@ public class AutoSave : MonoBehaviour
             moneySystem.GetComponent<MoneySystem>().ResetMoney();
             UISystem.GetComponent<PrestigeSystem>().AddTotalEarnings(0);
             UISystem.GetComponent<PrestigeUpgrades>().InitializeValues();
+            UISystem.GetComponent<LevelUpgrades>().ResetUpgrades();
             weaponSystem.GetComponent<WeaponSystem>().InitializeValues();
             moneySystem.GetComponent<BallScoring>().InitializeValues();
         }

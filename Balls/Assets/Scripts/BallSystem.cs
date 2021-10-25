@@ -8,6 +8,7 @@ public class BallSystem : MonoBehaviour
     private int[] droppedCounts = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private float globalMul = 1;
     private float goldenChance = 0;
+    private float[] levelSpeedUps = new float[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private GameObject spawnedBall;
 
     public Color[] ballColors;
@@ -26,6 +27,27 @@ public class BallSystem : MonoBehaviour
             {
                 SpawnBall(i);
             }
+        }
+    }
+
+    public void UpgradeSpeedUp(int level)
+    {
+        levelSpeedUps[level] += 0.5f;
+    }
+
+    public void SetSpeedUp(int[] levels)
+    {
+        for (int i = 0; i < levelSpeedUps.Length; i++)
+        {
+            levelSpeedUps[i] += levels[i] * 0.5f;
+        }
+    }
+
+    public void ResetSpeedUp()
+    {
+        for (int i = 0; i < levelSpeedUps.Length; i++)
+        {
+            levelSpeedUps[i] = 0;
         }
     }
 
@@ -149,109 +171,109 @@ public class BallSystem : MonoBehaviour
 
     private IEnumerator WaitTimePochinko()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[0]) * globalMul);
         SpawnBall(0);
     }
 
     private IEnumerator WaitTimeFunnel()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[1]) * globalMul);
         SpawnBall(1);
     }
 
     private IEnumerator WaitTimeGaps()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[2]) * globalMul);
         SpawnBall(2);
     }
 
     private IEnumerator WaitTimeSqueeze()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[3]) * globalMul);
         SpawnBall(3);
     }
 
     private IEnumerator WaitTimeMills()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[4]) * globalMul);
         SpawnBall(4);
     }
 
     private IEnumerator WaitTimeVerticals()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[5]) * globalMul);
         SpawnBall(5);
     }
 
     private IEnumerator WaitTimeMovement()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[6]) * globalMul);
         SpawnBall(6);
     }
 
     private IEnumerator WaitTimeTraps()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[7]) * globalMul);
         SpawnBall(7);
     }
 
     private IEnumerator WaitTimeMixer()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[8]) * globalMul);
         SpawnBall(8);
     }
 
     private IEnumerator WaitTimeElevator()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[9]) * globalMul);
         SpawnBall(9);
     }
 
     private IEnumerator WaitTimeBoulders()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[10]) * globalMul);
         SpawnBall(10);
     }
 
     private IEnumerator WaitTimeShrink()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[11]) * globalMul);
         SpawnBall(11);
     }
 
     private IEnumerator WaitTimePlatforms()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[12]) * globalMul);
         SpawnBall(12);
     }
 
     private IEnumerator WaitTimeDiamonds()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[13]) * globalMul);
         SpawnBall(13);
     }
 
     private IEnumerator WaitTimeSpinners()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[14]) * globalMul);
         SpawnBall(14);
     }
 
     private IEnumerator WaitTimeChoise()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[15]) * globalMul);
         SpawnBall(15);
     }
 
     private IEnumerator WaitTimeZigzag()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[16]) * globalMul);
         SpawnBall(16);
     }
 
     private IEnumerator WaitTimeFinal()
     {
-        yield return new WaitForSeconds(settings.ballSpawnTime * globalMul);
+        yield return new WaitForSeconds((settings.ballSpawnTime - levelSpeedUps[17]) * globalMul);
         SpawnBall(17);
     }
 }

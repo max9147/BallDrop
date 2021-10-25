@@ -10,6 +10,7 @@ public class MoneySystem : MonoBehaviour
     private double startMoneyMul = 1;
 
     public GameObject weaponSystem;
+    public GameObject UISystem;
     public GameSettings settings;
     public TextMeshProUGUI mainMoneyCounter;
     public TextMeshProUGUI mpsCounter;
@@ -80,6 +81,7 @@ public class MoneySystem : MonoBehaviour
         }        
         RefreshMoneyCounters();
         CheckAllAvailabilities();
+        UISystem.GetComponent<LevelUpgrades>().RefreshUpgrades();
     }
 
     public void CheckAllAvailabilities()
@@ -97,6 +99,7 @@ public class MoneySystem : MonoBehaviour
         money -= amount;
         RefreshMoneyCounters();
         CheckAllAvailabilities();
+        UISystem.GetComponent<LevelUpgrades>().RefreshUpgrades();
     }
 
     public void ResetMoney()
@@ -120,7 +123,7 @@ public class MoneySystem : MonoBehaviour
 
     public void SetStartMoney(int level)
     {
-        startMoneyMul = 10 * Mathf.Pow(100, level);
+        startMoneyMul = Mathf.Pow(100, level);
     }
 
     public double GetBuffer()

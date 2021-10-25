@@ -5,9 +5,74 @@ using UnityEngine;
 
 public class CheckFinish : MonoBehaviour
 {
-    private float multiplier = 1f;
+    private int levelID;
+    public float[] defaultMultipliers = new float[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+    private float prestigeMultiplier = 1f;
 
     public GameObject moneySystem;
+
+    private void Start()
+    {
+        switch (transform.parent.parent.name)
+        {
+            case "LevelPochinko":
+                levelID = 0;
+                break;
+            case "LevelFunnel":
+                levelID = 1;
+                break;
+            case "LevelGaps":
+                levelID = 2;
+                break;
+            case "LevelSqueeze":
+                levelID = 3;
+                break;
+            case "LevelMills":
+                levelID = 4;
+                break;
+            case "LevelVerticals":
+                levelID = 5;
+                break;
+            case "LevelMovement":
+                levelID = 6;
+                break;
+            case "LevelTraps":
+                levelID = 7;
+                break;
+            case "LevelMixer":
+                levelID = 8;
+                break;
+            case "LevelElevator":
+                levelID = 9;
+                break;
+            case "LevelBoulders":
+                levelID = 10;
+                break;
+            case "LevelShrink":
+                levelID = 11;
+                break;
+            case "LevelPlatforms":
+                levelID = 12;
+                break;
+            case "LevelDiamonds":
+                levelID = 13;
+                break;
+            case "LevelSpinners":
+                levelID = 14;
+                break;
+            case "LevelChoise":
+                levelID = 15;
+                break;
+            case "LevelZigzag":
+                levelID = 16;
+                break;
+            case "LevelFinal":
+                levelID = 17;
+                break;
+            default:
+                break;
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,21 +83,21 @@ public class CheckFinish : MonoBehaviour
                 case "RewardLow":
                     if (collision.CompareTag("Ball"))
                     {
-                        moneySystem.GetComponent<BallScoring>().ScoreBall(1d * multiplier, collision.transform.parent.name);
+                        moneySystem.GetComponent<BallScoring>().ScoreBall(1d * defaultMultipliers[levelID] * prestigeMultiplier, collision.transform.parent.name);
                     }
                     else
                     {
-                        moneySystem.GetComponent<BallScoring>().ScoreBall(1d * multiplier * 10, collision.transform.parent.name);
+                        moneySystem.GetComponent<BallScoring>().ScoreBall(1d * defaultMultipliers[levelID] * prestigeMultiplier * 10, collision.transform.parent.name);
                     }
                     break;
                 case "RewardHigh":                    
                     if (collision.CompareTag("Ball"))
                     {
-                        moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d * multiplier, collision.transform.parent.name);
+                        moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d * defaultMultipliers[levelID] * prestigeMultiplier, collision.transform.parent.name);
                     }
                     else
                     {
-                        moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d * multiplier * 10, collision.transform.parent.name);
+                        moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d * defaultMultipliers[levelID] * prestigeMultiplier * 10, collision.transform.parent.name);
                     }
                     break;
                 default:
@@ -42,29 +107,61 @@ public class CheckFinish : MonoBehaviour
         }
     }
 
-    public void IncreaseMultiplier()
+    public void SetDefaultMultiplier(int[] levels)
     {
-        multiplier += 0.5f;
+        for (int i = 0; i < defaultMultipliers.Length; i++)
+        {
+            defaultMultipliers[i] = 1 + levels[i] * 0.5f;
+        }
         if (CompareTag("RewardLow"))
         {
-            transform.Find("Canvas").Find("Multiplier").GetComponent<TextMeshProUGUI>().text = "x" + multiplier.ToString("F1");
+            transform.Find("Canvas").Find("Multiplier").GetComponent<TextMeshProUGUI>().text = "x" + (defaultMultipliers[levelID] * prestigeMultiplier).ToString("F1");
         }
         else
         {
-            transform.Find("Canvas").Find("Multiplier").GetComponent<TextMeshProUGUI>().text = "x" + (1.5f * multiplier).ToString("F1");
+            transform.Find("Canvas").Find("Multiplier").GetComponent<TextMeshProUGUI>().text = "x" + (1.5f * defaultMultipliers[levelID] * prestigeMultiplier).ToString("F1");
+        }
+    }
+
+    public void ResetDefaultMultiplier()
+    {
+        for (int i = 0; i < defaultMultipliers.Length; i++)
+        {
+            defaultMultipliers[i] = 1;
+        }
+        if (CompareTag("RewardLow"))
+        {
+            transform.Find("Canvas").Find("Multiplier").GetComponent<TextMeshProUGUI>().text = "x" + (defaultMultipliers[levelID] * prestigeMultiplier).ToString("F1");
+        }
+        else
+        {
+            transform.Find("Canvas").Find("Multiplier").GetComponent<TextMeshProUGUI>().text = "x" + (1.5f * defaultMultipliers[levelID] * prestigeMultiplier).ToString("F1");
+        }
+    }
+
+    public void IncreaseMultiplier()
+    {
+        prestigeMultiplier += 0.5f;
+        if (CompareTag("RewardLow"))
+        {
+            transform.Find("Canvas").Find("Multiplier").GetComponent<TextMeshProUGUI>().text = "x" + (defaultMultipliers[levelID] * prestigeMultiplier).ToString("F1");
+        }
+        else
+        {
+            transform.Find("Canvas").Find("Multiplier").GetComponent<TextMeshProUGUI>().text = "x" + (1.5f * defaultMultipliers[levelID] * prestigeMultiplier).ToString("F1");
         }
     }
 
     public void SetMultiplier(int level)
     {
-        multiplier = 1 + 0.5f * level;
+        prestigeMultiplier = 1 + 0.5f * level;
         if (CompareTag("RewardLow"))
         {
-            transform.Find("Canvas").Find("Multiplier").GetComponent<TextMeshProUGUI>().text = "x" + multiplier.ToString("F1");
+            transform.Find("Canvas").Find("Multiplier").GetComponent<TextMeshProUGUI>().text = "x" + (defaultMultipliers[levelID] * prestigeMultiplier).ToString("F1");
         }
         else
         {
-            transform.Find("Canvas").Find("Multiplier").GetComponent<TextMeshProUGUI>().text = "x" + (1.5f * multiplier).ToString("F1");
+            transform.Find("Canvas").Find("Multiplier").GetComponent<TextMeshProUGUI>().text = "x" + (1.5f * defaultMultipliers[levelID] * prestigeMultiplier).ToString("F1");
         }
     }
 }
