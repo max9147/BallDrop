@@ -5,6 +5,9 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     private bool isReloading = false;
+    public float damageIncrease = 0;
+    public float rangeIncrease = 0;
+    public float speedIncrease = 0;
     private GameObject currentBullet;
     private GameObject target;
     private GameObject UISystem;
@@ -15,8 +18,11 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.gunRange;
         UISystem = GameObject.Find("UISystem");
+        damageIncrease = UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[2];
+        rangeIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[2];
+        speedIncrease = 0.05f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[2];
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.gunRange + rangeIncrease;
     }
 
     private void FixedUpdate()
@@ -53,6 +59,38 @@ public class Gun : MonoBehaviour
         StartCoroutine(Reload());
     }
 
+    public void UpgradeDPS()
+    {
+        damageIncrease++;
+    }
+
+    public void SetDPS(int level)
+    {
+        damageIncrease = level;
+    }
+
+    public void UpgradeRange()
+    {
+        rangeIncrease += 0.1f;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.gunRange + rangeIncrease;
+    }
+
+    public void SetRange(int level)
+    {
+        rangeIncrease = 0.1f * level;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.gunRange + rangeIncrease;
+    }
+
+    public void UpgradeSpeed()
+    {
+        speedIncrease += 0.05f;
+    }
+
+    public void SetSpeed(int level)
+    {
+        speedIncrease = 0.05f * level;
+    }
+
     public void AddBallInRadius(GameObject ball)
     {
         ballsInRadius.Add(ball);
@@ -67,14 +105,14 @@ public class Gun : MonoBehaviour
     {
         if (target)
         {
-            target.transform.localScale -= new Vector3(settings.gunDamage / 100, settings.gunDamage / 100, 0);
-            UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(2, settings.gunDamage);
+            target.transform.localScale -= new Vector3((settings.gunDamage + damageIncrease) / 100, (settings.gunDamage + damageIncrease) / 100, 0);
+            UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(2, settings.gunDamage + damageIncrease);
         }
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(settings.gunReload);
+        yield return new WaitForSeconds(settings.gunReload - speedIncrease);
         isReloading = false;
     }
 }

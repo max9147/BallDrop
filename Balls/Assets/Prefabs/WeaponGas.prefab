@@ -174,6 +174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6cafabbfd0044f43b2213fb206fe9c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DPSIncrease: 0
+  rangeIncrease: 0
+  damageBoost: 0
   settings: {fileID: 11400000, guid: 559ec480f545ff042995f0114c2fbb22, type: 2}
 --- !u!1 &7625803358236086268
 GameObject:
@@ -1479,7 +1482,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 0, g: 1, b: 0.020182133, a: 0}
-        key1: {r: 0.14747167, g: 1, b: 0, a: 1}
+        key1: {r: 0.14747167, g: 1, b: 0, a: 0.19607843}
         key2: {r: 1, g: 1, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1495,7 +1498,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 17540
+        atime1: 23708
         atime2: 65535
         atime3: 0
         atime4: 0

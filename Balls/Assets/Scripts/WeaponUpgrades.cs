@@ -9,16 +9,16 @@ public class WeaponUpgrades : MonoBehaviour
     private int[] upgrade1Levels = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int[] upgrade2Levels = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int[] upgrade3Levels = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private int[] upgrade1MaxLevels = new int[] { 10, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
-    private int[] upgrade2MaxLevels = new int[] { 10, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16 };
-    private int[] upgrade3MaxLevels = new int[] { 3, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18 };
-    private double[] upgrade1Prices = new double[] { 5, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
-    private double[] upgrade2Prices = new double[] { 10, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8 };
-    private double[] upgrade3Prices = new double[] { 1000, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
+    private int[] upgrade1MaxLevels = new int[] { 10, 16, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private int[] upgrade2MaxLevels = new int[] { 10, 5, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private int[] upgrade3MaxLevels = new int[] { 3, 5, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private double[] upgrade1Prices = new double[] { 5, 10, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private double[] upgrade2Prices = new double[] { 10, 20, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private double[] upgrade3Prices = new double[] { 1000, 100, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private double[] weaponDamages = new double[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private float[] upgrade1PriceIncrease = new float[] { 14, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17 };
-    private float[] upgrade2PriceIncrease = new float[] { 13, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-    private float[] upgrade3PriceIncrease = new float[] { 1100, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
+    private float[] upgrade1PriceIncrease = new float[] { 14, 5, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private float[] upgrade2PriceIncrease = new float[] { 13, 140, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private float[] upgrade3PriceIncrease = new float[] { 1100, 100, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
     public Button[] upgrade1Buttons;
     public Button[] upgrade2Buttons;
@@ -32,7 +32,6 @@ public class WeaponUpgrades : MonoBehaviour
     public TextMeshProUGUI[] weaponDamageTexts;
     public TextMeshProUGUI[] weaponDPSTexts;
     public GameObject moneySystem;
-    public GameObject[] weaponPrefabs;
     public GameSettings settings;
 
     public void IncreaseDamage(int id, double amount)
@@ -77,6 +76,28 @@ public class WeaponUpgrades : MonoBehaviour
                 }
                 weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
                 break;
+            case 1:
+                GameObject[] weaponsGas = GameObject.FindGameObjectsWithTag("WeaponGas");
+                foreach (var item in weaponsGas)
+                {
+                    if (item.GetComponent<Gas>())
+                    {
+                        item.GetComponent<Gas>().UpgradeDPS();
+                    }
+                }
+                weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
+                break;
+            case 2:
+                GameObject[] weaponsGun = GameObject.FindGameObjectsWithTag("WeaponGun");
+                foreach (var item in weaponsGun)
+                {
+                    if (item.GetComponent<Gun>())
+                    {
+                        item.GetComponent<Gun>().UpgradeDPS();
+                    }
+                }
+                weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
+                break;
             default:
                 break;
         }
@@ -101,6 +122,28 @@ public class WeaponUpgrades : MonoBehaviour
                         }
                     }
                     weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                    break;
+                case 1:
+                    GameObject[] weaponsGas = GameObject.FindGameObjectsWithTag("WeaponGas");
+                    foreach (var item in weaponsGas)
+                    {
+                        if (item.GetComponent<Gas>())
+                        {
+                            item.GetComponent<Gas>().SetDPS(upgrade1Levels[1]);
+                        }
+                    }
+                    weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
+                    break;
+                case 2:
+                    GameObject[] weaponsGun = GameObject.FindGameObjectsWithTag("WeaponGun");
+                    foreach (var item in weaponsGun)
+                    {
+                        if (item.GetComponent<Gun>())
+                        {
+                            item.GetComponent<Gun>().SetDPS(upgrade1Levels[2]);
+                        }
+                    }
+                    weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
                     break;
                 default:
                     break;
@@ -135,6 +178,28 @@ public class WeaponUpgrades : MonoBehaviour
                 }
                 weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
                 break;
+            case 1:
+                GameObject[] weaponsGas = GameObject.FindGameObjectsWithTag("WeaponGas");
+                foreach (var item in weaponsGas)
+                {
+                    if (item.GetComponent<Gas>())
+                    {
+                        item.GetComponent<Gas>().UpgradeRange();
+                    }
+                }
+                weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
+                break;
+            case 2:
+                GameObject[] weaponsGun = GameObject.FindGameObjectsWithTag("WeaponGun");
+                foreach (var item in weaponsGun)
+                {
+                    if (item.GetComponent<Gun>())
+                    {
+                        item.GetComponent<Gun>().UpgradeRange();
+                    }
+                }
+                weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
+                break;
             default:
                 break;
         }
@@ -159,6 +224,28 @@ public class WeaponUpgrades : MonoBehaviour
                         }
                     }
                     weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                    break;
+                case 1:
+                    GameObject[] weaponsGas = GameObject.FindGameObjectsWithTag("WeaponGas");
+                    foreach (var item in weaponsGas)
+                    {
+                        if (item.GetComponent<Gas>())
+                        {
+                            item.GetComponent<Gas>().SetRange(upgrade2Levels[1]);
+                        }
+                    }
+                    weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
+                    break;
+                case 2:
+                    GameObject[] weaponsGun = GameObject.FindGameObjectsWithTag("WeaponGun");
+                    foreach (var item in weaponsGun)
+                    {
+                        if (item.GetComponent<Gun>())
+                        {
+                            item.GetComponent<Gun>().SetRange(upgrade2Levels[2]);
+                        }
+                    }
+                    weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
                     break;
                 default:
                     break;
@@ -193,6 +280,28 @@ public class WeaponUpgrades : MonoBehaviour
                 }
                 weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
                 break;
+            case 1:
+                GameObject[] weaponsGas = GameObject.FindGameObjectsWithTag("WeaponGas");
+                foreach (var item in weaponsGas)
+                {
+                    if (item.GetComponent<Gas>())
+                    {
+                        item.GetComponent<Gas>().UpgradeDamageBoost();
+                    }
+                }
+                weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
+                break;
+            case 2:
+                GameObject[] weaponsGun = GameObject.FindGameObjectsWithTag("WeaponGun");
+                foreach (var item in weaponsGun)
+                {
+                    if (item.GetComponent<Gun>())
+                    {
+                        item.GetComponent<Gun>().UpgradeSpeed();
+                    }
+                }
+                weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
+                break;
             default:
                 break;
         }
@@ -218,6 +327,28 @@ public class WeaponUpgrades : MonoBehaviour
                     }
                     weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
                     break;
+                case 1:
+                    GameObject[] weaponsGas = GameObject.FindGameObjectsWithTag("WeaponGas");
+                    foreach (var item in weaponsGas)
+                    {
+                        if (item.GetComponent<Gas>())
+                        {
+                            item.GetComponent<Gas>().SetDamageBoost(upgrade3Levels[1]);
+                        }
+                    }
+                    weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
+                    break;
+                case 2:
+                    GameObject[] weaponsGun = GameObject.FindGameObjectsWithTag("WeaponGun");
+                    foreach (var item in weaponsGun)
+                    {
+                        if (item.GetComponent<Gun>())
+                        {
+                            item.GetComponent<Gun>().SetSpeed(upgrade3Levels[2]);
+                        }
+                    }
+                    weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
+                    break;
                 default:
                     break;
             }
@@ -231,9 +362,9 @@ public class WeaponUpgrades : MonoBehaviour
 
     public void ResetUpgrades()
     {
-        upgrade1Prices = new double[] { 5, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
-        upgrade2Prices = new double[] { 10, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8 };
-        upgrade3Prices = new double[] { 1000, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
+        upgrade1Prices = new double[] { 5, 5, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        upgrade2Prices = new double[] { 10, 20, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        upgrade3Prices = new double[] { 1000, 100, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         for (int i = 0; i < upgrade1Levels.Length; i++)
         {
             upgrade1Levels[i] = 0;
@@ -252,6 +383,8 @@ public class WeaponUpgrades : MonoBehaviour
             weaponDamageTexts[i].text = "Total damage dealt: " + weaponDamages[i].ToString("F0");
         }
         weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+        weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
+        weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
     }
 
     public void RefreshUpgrades()
