@@ -6,6 +6,7 @@ public class Shocker : MonoBehaviour
 {
     private bool isReloading = false;
     private GameObject target;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameSettings settings;
@@ -13,6 +14,7 @@ public class Shocker : MonoBehaviour
     private void Start()
     {
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.shockerRange;
+        UISystem = GameObject.Find("UISystem");
     }
 
     private void FixedUpdate()
@@ -63,6 +65,7 @@ public class Shocker : MonoBehaviour
     public void DealDamage(GameObject damagedBall)
     {
         damagedBall.transform.localScale -= new Vector3(settings.shockerDamage / 100, settings.shockerDamage / 100, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(12, settings.shockerDamage);
     }
 
     private IEnumerator Reload()

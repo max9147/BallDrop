@@ -7,10 +7,16 @@ public class Sniper : MonoBehaviour
     private bool isReloading = false;
     private GameObject currentBullet;
     private GameObject target;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject bullet;
     public GameSettings settings;
+
+    private void Start()
+    {
+        UISystem = GameObject.Find("UISystem");
+    }
 
     private void FixedUpdate()
     {
@@ -59,6 +65,7 @@ public class Sniper : MonoBehaviour
     public void DealDamage(GameObject damagedBall)
     {
         damagedBall.transform.localScale -= new Vector3(settings.sniperDamage / 100, settings.sniperDamage / 100, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(11, settings.sniperDamage);
     }
 
     private IEnumerator Reload()

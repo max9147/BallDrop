@@ -6,9 +6,15 @@ public class Flames : MonoBehaviour
 {
     private bool isFiring = false;
     private GameObject currentTarget;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameSettings settings;
+
+    private void Start()
+    {
+        UISystem = GameObject.Find("UISystem");
+    }
 
     private void FixedUpdate()
     {
@@ -18,6 +24,7 @@ public class Flames : MonoBehaviour
             foreach (var item in ballsInRadius)
             {
                 item.transform.localScale -= new Vector3(settings.flamethrowerDPS / 10000, settings.flamethrowerDPS / 10000, 0);
+                UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(3, settings.flamethrowerDPS / 100);
             }
         }
     }

@@ -188,7 +188,7 @@ public class BallScoring : MonoBehaviour
                 levelIncomes[13] += ballCost * multiplier * UISystem.GetComponent<PrestigeSystem>().GetBallValueBoost() / 100 * globalMul * levelMuls[13];
                 levelIncomeTexts[13].text = "Level income: $" + ConvertMoneyToString(levelIncomes[13]);
                 break;
-            case "LevelSpinner":
+            case "LevelSpinners":
                 GetComponent<MoneySystem>().AddMoney(ballCost * multiplier * UISystem.GetComponent<PrestigeSystem>().GetBallValueBoost() / 100 * globalMul * levelMuls[14], true);
                 UISystem.GetComponent<PrestigeSystem>().AddTotalEarnings(ballCost * multiplier * UISystem.GetComponent<PrestigeSystem>().GetBallValueBoost() / 100 * globalMul * levelMuls[14]);
                 levelIncomes[14] += ballCost * multiplier * UISystem.GetComponent<PrestigeSystem>().GetBallValueBoost() / 100 * globalMul * levelMuls[14];

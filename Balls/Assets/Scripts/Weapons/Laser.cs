@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    private GameObject target;
+    private int targetCount = 1;
+    private float DPSIncrease = 0;
+    private float rangeIncrease = 0;
+    public List<GameObject> targets = new List<GameObject>();
     private List<GameObject> ballsInRadius = new List<GameObject>();
+    private GameObject UISystem;
 
+    public GameObject[] lasers;
     public GameSettings settings;
 
     private void Start()
     {
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.laserRange;
+        UISystem = GameObject.Find("UISystem");
+        DPSIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[0];
+        rangeIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[0];
+        targetCount = 1 + UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[0];
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.laserRange + rangeIncrease;
     }
 
     private void FixedUpdate()
@@ -20,33 +29,75 @@ public class Laser : MonoBehaviour
         {
             foreach (var item in ballsInRadius)
             {
-                if (item.transform.localScale.x > settings.ballMinHP / 100)
+                if (item.transform.localScale.x > settings.ballMinHP / 100 && !targets.Contains(item) && targets.Count < targetCount)
                 {
-                    target = item;
+                    targets.Add(item);
                     break;
                 }
             }
         }
-        if (target)
+        if (targets.Count > 0)
         {
-            target.transform.localScale -= new Vector3(settings.laserDPS / 10000, settings.laserDPS / 10000, 0);   
-            if (!transform.Find("Laser").gameObject.activeInHierarchy)
+            for (int i = 0; i < targets.Count; i++)
             {
-                transform.Find("Laser").gameObject.SetActive(true);
-            }
-            transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.position.x, transform.position.y, -1f));
-            transform.Find("Laser").GetComponent<LineRenderer>().SetPosition(1, new Vector3(target.transform.position.x, target.transform.position.y, -1f));
-            transform.Find("Laser").GetComponent<LineRenderer>().endWidth = target.transform.localScale.x / 5f;
-            if (target.transform.localScale.x <= settings.ballMinHP / 100 || !ballsInRadius.Contains(target))
-            {
-                target = null;
-                transform.Find("Laser").gameObject.SetActive(false);
+                targets[i].transform.localScale -= new Vector3((settings.laserDPS + DPSIncrease) / 10000, (settings.laserDPS + DPSIncrease) / 10000, 0);
+                UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(0, (settings.laserDPS + DPSIncrease) / 100);
+                if (!lasers[i].gameObject.activeInHierarchy)
+                {
+                    lasers[i].gameObject.SetActive(true);
+                }
+                lasers[i].GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.position.x, transform.position.y, -1f));
+                lasers[i].GetComponent<LineRenderer>().SetPosition(1, new Vector3(targets[i].transform.position.x, targets[i].transform.position.y, -1f));
+                lasers[i].GetComponent<LineRenderer>().endWidth = targets[i].transform.localScale.x / 5f;
+                if (targets[i].transform.localScale.x <= settings.ballMinHP / 100 || !ballsInRadius.Contains(targets[i]))
+                {
+                    targets.Remove(targets[i]);
+                    lasers[i].gameObject.SetActive(false);
+                }
             }
         }
-        else if (transform.Find("Laser").gameObject.activeInHierarchy)
+        else
         {
-            transform.Find("Laser").gameObject.SetActive(false);
+            foreach (var item in lasers)
+            {
+                if (item.activeInHierarchy)
+                {
+                    item.SetActive(false);
+                }
+            }
         }
+    }
+
+    public void UpgradeDPS()
+    {
+        DPSIncrease += 0.5f;
+    }
+
+    public void SetDPS(int level)
+    {
+        DPSIncrease = 0.5f * level;
+    }
+
+    public void UpgradeRange()
+    {
+        rangeIncrease += 0.1f;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.laserRange + rangeIncrease;
+    }
+
+    public void SetRange(int level)
+    {
+        rangeIncrease = 0.1f * level;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.laserRange + rangeIncrease;
+    }
+
+    public void UpgradeTargets()
+    {
+        targetCount++;
+    }
+
+    public void SetTargets(int level)
+    {
+        targetCount = 1 + level;
     }
 
     public void AddBallInRadius(GameObject ball)

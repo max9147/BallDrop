@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Saw : MonoBehaviour
 {
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameSettings settings;
@@ -12,6 +13,7 @@ public class Saw : MonoBehaviour
     {
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.sawRange;
         transform.Find("Blade").localScale = new Vector3(settings.sawRange * 0.8f, settings.sawRange * 0.8f, 0);
+        UISystem = GameObject.Find("UISystem");
     }
 
     private void FixedUpdate()
@@ -46,5 +48,6 @@ public class Saw : MonoBehaviour
     public void DealDamage(GameObject damagedBall)
     {
         damagedBall.transform.localScale -= new Vector3(settings.sawDPS / 10000, settings.sawDPS / 10000, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(10, settings.sawDPS / 100);
     }
 }

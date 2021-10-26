@@ -7,6 +7,7 @@ public class Lightning : MonoBehaviour
     private bool canAttack = true;
     private GameObject curBolt;
     private GameObject target;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject bolt;
@@ -15,6 +16,7 @@ public class Lightning : MonoBehaviour
     private void Start()
     {
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.lightningRange;
+        UISystem = GameObject.Find("UISystem");
     }
 
     private void FixedUpdate()
@@ -42,6 +44,7 @@ public class Lightning : MonoBehaviour
     private void Attack()
     {
         target.transform.localScale -= new Vector3(settings.lightningDamage / 100, settings.lightningDamage / 100, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(6, settings.lightningDamage);
         curBolt = Instantiate(bolt, transform);
         curBolt.GetComponent<Bolt>().StartObject = gameObject;
         curBolt.GetComponent<Bolt>().EndObject = target;

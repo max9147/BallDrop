@@ -6,6 +6,7 @@ public class Virused : MonoBehaviour
 {
     private GameObject curVirusPS;
     private GameObject virusPS;
+    private GameObject UISystem;
     private GameSettings settings;
 
     public bool isDecaying = true;
@@ -14,6 +15,7 @@ public class Virused : MonoBehaviour
     private void Start()
     {
         curVirusPS = Instantiate(virusPS, transform);
+        UISystem = GameObject.Find("UISystem");
     }
 
     private void FixedUpdate()
@@ -28,6 +30,7 @@ public class Virused : MonoBehaviour
             }
         }
         transform.localScale -= new Vector3(settings.virusDamage / 10000, settings.virusDamage / 10000, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(17, settings.virusDamage / 100);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

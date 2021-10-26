@@ -8,12 +8,14 @@ public class Poisoned : MonoBehaviour
     private float poisonTime;
     private GameObject curPoisonPS;
     private GameObject poisonPS;
+    private GameObject UISystem;
     private GameSettings settings;
 
     private void Start()
     {
         poisonTime = settings.poisonTime;
         curPoisonPS = Instantiate(poisonPS, transform);
+        UISystem = GameObject.Find("UISystem");
     }
 
     private void FixedUpdate()
@@ -28,6 +30,7 @@ public class Poisoned : MonoBehaviour
             }
         }
         transform.localScale -= new Vector3(settings.poisonDPS / 10000, settings.poisonDPS / 10000, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(8, settings.poisonDPS / 100);
     }
 
     public void SetSettings(GameSettings curSettings)

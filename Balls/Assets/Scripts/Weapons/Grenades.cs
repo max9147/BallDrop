@@ -7,6 +7,7 @@ public class Grenades : MonoBehaviour
     private bool isReloading = false;
     private GameObject currentGrenade;
     private GameObject target;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject grenade;
@@ -15,6 +16,7 @@ public class Grenades : MonoBehaviour
     private void Start()
     {
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.grenadesRange;
+        UISystem = GameObject.Find("UISystem");
     }
 
     private void FixedUpdate()
@@ -64,6 +66,7 @@ public class Grenades : MonoBehaviour
     public void DealDamage(GameObject damagedBall)
     {
         damagedBall.transform.localScale -= new Vector3(settings.grenadesDamage / 100, settings.grenadesDamage / 100, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(14, settings.grenadesDamage);
     }
 
     private IEnumerator Reload()

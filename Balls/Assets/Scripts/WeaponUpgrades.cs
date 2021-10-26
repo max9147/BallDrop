@@ -9,15 +9,16 @@ public class WeaponUpgrades : MonoBehaviour
     private int[] upgrade1Levels = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int[] upgrade2Levels = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int[] upgrade3Levels = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private int[] upgrade1MaxLevels = new int[] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
-    private int[] upgrade2MaxLevels = new int[] { 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16 };
-    private int[] upgrade3MaxLevels = new int[] { 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18 };
-    private double[] upgrade1Prices = new double[] { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
-    private double[] upgrade2Prices = new double[] { 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8 };
-    private double[] upgrade3Prices = new double[] { 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
-    private float[] upgrade1PriceIncrease = new float[] { 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17 };
-    private float[] upgrade2PriceIncrease = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
-    private float[] upgrade3PriceIncrease = new float[] { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
+    private int[] upgrade1MaxLevels = new int[] { 10, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
+    private int[] upgrade2MaxLevels = new int[] { 10, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16 };
+    private int[] upgrade3MaxLevels = new int[] { 3, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18 };
+    private double[] upgrade1Prices = new double[] { 5, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
+    private double[] upgrade2Prices = new double[] { 10, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8 };
+    private double[] upgrade3Prices = new double[] { 1000, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
+    private double[] weaponDamages = new double[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private float[] upgrade1PriceIncrease = new float[] { 14, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17 };
+    private float[] upgrade2PriceIncrease = new float[] { 13, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
+    private float[] upgrade3PriceIncrease = new float[] { 1100, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
 
     public Button[] upgrade1Buttons;
     public Button[] upgrade2Buttons;
@@ -28,7 +29,31 @@ public class WeaponUpgrades : MonoBehaviour
     public TextMeshProUGUI[] upgrade1Costs;
     public TextMeshProUGUI[] upgrade2Costs;
     public TextMeshProUGUI[] upgrade3Costs;
+    public TextMeshProUGUI[] weaponDamageTexts;
+    public TextMeshProUGUI[] weaponDPSTexts;
     public GameObject moneySystem;
+    public GameObject[] weaponPrefabs;
+    public GameSettings settings;
+
+    public void IncreaseDamage(int id, double amount)
+    {
+        weaponDamages[id] += amount;
+        weaponDamageTexts[id].text = "Total damage dealt: " + weaponDamages[id].ToString("F0");
+    }
+
+    public double[] GetDamage()
+    {
+        return weaponDamages;
+    }
+
+    public void SetDamage(double[] savedDamage)
+    {
+        for (int i = 0; i < weaponDamages.Length; i++)
+        {
+            weaponDamages[i] = savedDamage[i];
+            weaponDamageTexts[i].text = "Total damage dealt: " + weaponDamages[i].ToString("F0");
+        }
+    }
 
     public void BuyUpgrade1(int weapon)
     {
@@ -39,6 +64,22 @@ public class WeaponUpgrades : MonoBehaviour
         {
             Upgrade1Refresh(i);
         }
+        switch (weapon)
+        {
+            case 0:
+                GameObject[] weaponsLaser = GameObject.FindGameObjectsWithTag("WeaponLaser");
+                foreach (var item in weaponsLaser)
+                {
+                    if (item.GetComponent<Laser>())
+                    {
+                        item.GetComponent<Laser>().UpgradeDPS();
+                    }
+                }
+                weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                break;
+            default:
+                break;
+        }
     }
 
     public void SetUpgrade1(int[] weapons)
@@ -48,6 +89,22 @@ public class WeaponUpgrades : MonoBehaviour
         {
             upgrade1Prices[i] = upgrade1Prices[i] * Mathf.Pow(upgrade1PriceIncrease[i], upgrade1Levels[i]);
             Upgrade1Refresh(i);
+            switch (i)
+            {
+                case 0:
+                    GameObject[] weaponsLaser = GameObject.FindGameObjectsWithTag("WeaponLaser");
+                    foreach (var item in weaponsLaser)
+                    {
+                        if (item.GetComponent<Laser>())
+                        {
+                            item.GetComponent<Laser>().SetDPS(upgrade1Levels[0]);
+                        }
+                    }
+                    weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -65,6 +122,22 @@ public class WeaponUpgrades : MonoBehaviour
         {
             Upgrade2Refresh(i);
         }
+        switch (weapon)
+        {
+            case 0:
+                GameObject[] weaponsLaser = GameObject.FindGameObjectsWithTag("WeaponLaser");
+                foreach (var item in weaponsLaser)
+                {
+                    if (item.GetComponent<Laser>())
+                    {
+                        item.GetComponent<Laser>().UpgradeRange();
+                    }
+                }
+                weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                break;
+            default:
+                break;
+        }
     }
 
     public void SetUpgrade2(int[] weapons)
@@ -74,6 +147,22 @@ public class WeaponUpgrades : MonoBehaviour
         {
             upgrade2Prices[i] = upgrade2Prices[i] * Mathf.Pow(upgrade2PriceIncrease[i], upgrade2Levels[i]);
             Upgrade2Refresh(i);
+            switch (i)
+            {
+                case 0:
+                    GameObject[] weaponsLaser = GameObject.FindGameObjectsWithTag("WeaponLaser");
+                    foreach (var item in weaponsLaser)
+                    {
+                        if (item.GetComponent<Laser>())
+                        {
+                            item.GetComponent<Laser>().SetRange(upgrade2Levels[0]);
+                        }
+                    }
+                    weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -91,6 +180,22 @@ public class WeaponUpgrades : MonoBehaviour
         {
             Upgrade3Refresh(i);
         }
+        switch (weapon)
+        {
+            case 0:
+                GameObject[] weaponsLaser = GameObject.FindGameObjectsWithTag("WeaponLaser");
+                foreach (var item in weaponsLaser)
+                {
+                    if (item.GetComponent<Laser>())
+                    {
+                        item.GetComponent<Laser>().UpgradeTargets();
+                    }
+                }
+                weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                break;
+            default:
+                break;
+        }
     }
 
     public void SetUpgrade3(int[] weapons)
@@ -100,7 +205,23 @@ public class WeaponUpgrades : MonoBehaviour
         {
             upgrade3Prices[i] = upgrade3Prices[i] * Mathf.Pow(upgrade3PriceIncrease[i], upgrade3Levels[i]);
             Upgrade3Refresh(i);
-        }
+            switch (i)
+            {
+                case 0:
+                    GameObject[] weaponsLaser = GameObject.FindGameObjectsWithTag("WeaponLaser");
+                    foreach (var item in weaponsLaser)
+                    {
+                        if (item.GetComponent<Laser>())
+                        {
+                            item.GetComponent<Laser>().SetTargets(upgrade3Levels[0]);
+                        }
+                    }
+                    weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                    break;
+                default:
+                    break;
+            }
+        }        
     }
 
     public int[] GetUpgrade3()
@@ -110,6 +231,9 @@ public class WeaponUpgrades : MonoBehaviour
 
     public void ResetUpgrades()
     {
+        upgrade1Prices = new double[] { 5, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
+        upgrade2Prices = new double[] { 10, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8 };
+        upgrade3Prices = new double[] { 1000, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
         for (int i = 0; i < upgrade1Levels.Length; i++)
         {
             upgrade1Levels[i] = 0;
@@ -117,17 +241,17 @@ public class WeaponUpgrades : MonoBehaviour
             upgrade3Levels[i] = 0;
             upgrade1Sliders[i].value = 0;
             upgrade2Sliders[i].value = 0;
-            upgrade3Sliders[i].value = 0;
-            upgrade1Prices[i] = 10;
-            upgrade2Prices[i] = 8;
-            upgrade3Prices[i] = 15;
+            upgrade3Sliders[i].value = 0;            
             upgrade1Costs[i].text = upgrade1Prices[i].ToString();
             upgrade2Costs[i].text = upgrade2Prices[i].ToString();
             upgrade3Costs[i].text = upgrade3Prices[i].ToString();
             upgrade1Buttons[i].interactable = true;
             upgrade2Buttons[i].interactable = true;
             upgrade3Buttons[i].interactable = false;
+            weaponDamages[i] = 0;
+            weaponDamageTexts[i].text = "Total damage dealt: " + weaponDamages[i].ToString("F0");
         }
+        weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
     }
 
     public void RefreshUpgrades()

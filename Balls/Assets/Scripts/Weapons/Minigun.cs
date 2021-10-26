@@ -7,6 +7,7 @@ public class Minigun : MonoBehaviour
     private bool isReloading = false;
     private GameObject currentBullet;
     private GameObject target;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject bullet;
@@ -15,6 +16,7 @@ public class Minigun : MonoBehaviour
     private void Start()
     {
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.minigunRange;
+        UISystem = GameObject.Find("UISystem");
     }
 
     private void FixedUpdate()
@@ -66,6 +68,7 @@ public class Minigun : MonoBehaviour
         if (target)
         {
             target.transform.localScale -= new Vector3(settings.minigunDamage / 100, settings.minigunDamage / 100, 0);
+            UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(16, settings.minigunDamage);
         }
     }
 

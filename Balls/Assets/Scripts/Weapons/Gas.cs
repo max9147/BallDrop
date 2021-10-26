@@ -7,6 +7,7 @@ public class Gas : MonoBehaviour
     private bool isActive = false;
     private bool isDamaging = false;
     private float inactiveTime = 0f;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameSettings settings;
@@ -14,6 +15,7 @@ public class Gas : MonoBehaviour
     private void Start()
     {
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.gasRange;
+        UISystem = GameObject.Find("UISystem");
     }
 
     private void FixedUpdate()
@@ -25,6 +27,7 @@ public class Gas : MonoBehaviour
                 if (item.transform.localScale.x > settings.ballMinHP / 100)
                 {
                     item.transform.localScale -= new Vector3(settings.gasDPS / 10000, settings.gasDPS / 10000, 0);
+                    UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(1, settings.gasDPS / 100);
                 }
             }
         }

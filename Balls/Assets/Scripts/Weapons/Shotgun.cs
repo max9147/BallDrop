@@ -8,6 +8,7 @@ public class Shotgun : MonoBehaviour
     private int bulletCount;
     private GameObject currentBullet;
     private GameObject target;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject bullet;
@@ -17,6 +18,7 @@ public class Shotgun : MonoBehaviour
     {
         bulletCount = settings.shotgunBulletCount;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.shotgunRange;
+        UISystem = GameObject.Find("UISystem");
     }
 
     private void FixedUpdate()
@@ -72,6 +74,7 @@ public class Shotgun : MonoBehaviour
         if (target)
         {
             target.transform.localScale -= new Vector3(settings.shotgunDamage / 100, settings.shotgunDamage / 100, 0);
+            UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(13, settings.shotgunDamage);
         }
     }
 

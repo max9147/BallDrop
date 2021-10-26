@@ -7,6 +7,7 @@ public class Cannon : MonoBehaviour
     private bool isReloading = false;
     private GameObject currentBullet;
     private GameObject target;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject bullet;
@@ -15,6 +16,7 @@ public class Cannon : MonoBehaviour
     private void Start()
     {
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.cannonRange;
+        UISystem = GameObject.Find("UISystem");
     }
 
     private void FixedUpdate()
@@ -64,6 +66,7 @@ public class Cannon : MonoBehaviour
     public void DealDamage(GameObject damagedBall)
     {
         damagedBall.transform.localScale -= new Vector3(settings.cannonDamage / 100, settings.cannonDamage / 100, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(5, settings.cannonDamage);
     }
 
     private IEnumerator Reload()

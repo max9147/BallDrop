@@ -9,9 +9,15 @@ public class DarkMagic : MonoBehaviour
     private bool canAttack = true;
     private GameObject curPentagram;
     private GameObject target;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameSettings settings;
+
+    private void Start()
+    {
+        UISystem = GameObject.Find("UISystem");
+    }
 
     private void FixedUpdate()
     {
@@ -44,6 +50,7 @@ public class DarkMagic : MonoBehaviour
     public void DealDamage(GameObject curTarget)
     {
         curTarget.transform.localScale -= new Vector3(settings.darkMagicDPS / 10000, settings.darkMagicDPS / 10000, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(9, settings.darkMagicDPS / 100);
     }
 
     public void AddBallInRadius(GameObject ball)

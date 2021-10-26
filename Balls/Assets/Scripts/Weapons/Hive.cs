@@ -6,11 +6,17 @@ public class Hive : MonoBehaviour
 {
     private bool canAttack = true;
     private GameObject curBee;
-    public GameObject target;
+    private GameObject target;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject bee;
     public GameSettings settings;
+
+    private void Start()
+    {
+        UISystem = GameObject.Find("UISystem");
+    }
 
     private void FixedUpdate()
     {
@@ -44,6 +50,7 @@ public class Hive : MonoBehaviour
     public void DealDamage(GameObject curTarget)
     {
         curTarget.transform.localScale -= new Vector3(settings.hiveDPS / 10000, settings.hiveDPS / 10000, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(4, settings.hiveDPS / 100);
     }
 
     public void AddBallInRadius(GameObject ball)

@@ -27,14 +27,15 @@ public class AutoSave : MonoBehaviour
             UISystem.GetComponent<LevelUpgrades>().SetUpgrade1(save.levelUpgrades1);
             UISystem.GetComponent<LevelUpgrades>().SetUpgrade2(save.levelUpgrades2);
             UISystem.GetComponent<LevelUpgrades>().SetUpgrade3(save.levelUpgrades3);
-            UISystem.GetComponent<WeaponUpgrades>().SetUpgrade1(save.weaponUpgrades1);
-            UISystem.GetComponent<WeaponUpgrades>().SetUpgrade2(save.weaponUpgrades2);
-            UISystem.GetComponent<WeaponUpgrades>().SetUpgrade3(save.weaponUpgrades3);
             weaponSystem.GetComponent<WeaponSystem>().LoadLevelWeapons(save.weaponLevel);
             weaponSystem.GetComponent<WeaponSystem>().LoadValues(save.weaponAssignments, save.weaponBoughtCount, save.weaponCost);
             UISystem.GetComponent<OfflineIncome>().CallOfflineProgress(save.curDateTime, save.curIncome);
             ballSystem.GetComponent<BallSystem>().SetDroppedCounts(save.levelDroppedCounts);
             moneySystem.GetComponent<BallScoring>().SetLevelIncomes(save.levelIncomeCounts);
+            UISystem.GetComponent<WeaponUpgrades>().SetDamage(save.weaponDamages);
+            UISystem.GetComponent<WeaponUpgrades>().SetUpgrade1(save.weaponUpgrades1);
+            UISystem.GetComponent<WeaponUpgrades>().SetUpgrade2(save.weaponUpgrades2);
+            UISystem.GetComponent<WeaponUpgrades>().SetUpgrade3(save.weaponUpgrades3);
         }
         else
         {

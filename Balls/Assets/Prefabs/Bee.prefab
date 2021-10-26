@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 644039273769451865}
   m_Layer: 2
   m_Name: Bee
-  m_TagString: WeaponGun
+  m_TagString: WeaponHive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

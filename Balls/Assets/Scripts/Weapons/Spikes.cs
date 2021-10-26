@@ -8,6 +8,7 @@ public class Spikes : MonoBehaviour
     private int spikeCount;
     private GameObject curSpike;
     private GameObject target;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameObject spike;
@@ -17,6 +18,7 @@ public class Spikes : MonoBehaviour
     {
         spikeCount = settings.spikesCount;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.spikesRange;
+        UISystem = GameObject.Find("UISystem");
     }
 
     private void FixedUpdate()
@@ -69,6 +71,7 @@ public class Spikes : MonoBehaviour
     public void DealDamage(GameObject damagedBall)
     {
         damagedBall.transform.localScale -= new Vector3(settings.spikesDamage / 100, settings.spikesDamage / 100, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(7, settings.spikesDamage);
     }
 
     private IEnumerator Reload()
