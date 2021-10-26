@@ -174,9 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6cafabbfd0044f43b2213fb206fe9c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DPSIncrease: 0
-  rangeIncrease: 0
-  damageBoost: 0
   settings: {fileID: 11400000, guid: 559ec480f545ff042995f0114c2fbb22, type: 2}
 --- !u!1 &7625803358236086268
 GameObject:
@@ -225,7 +222,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1

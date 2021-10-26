@@ -74,7 +74,7 @@ public class WeaponUpgrades : MonoBehaviour
                         item.GetComponent<Laser>().UpgradeDPS();
                     }
                 }
-                weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0])).ToString("F2");
                 break;
             case 1:
                 GameObject[] weaponsGas = GameObject.FindGameObjectsWithTag("WeaponGas");
@@ -85,7 +85,7 @@ public class WeaponUpgrades : MonoBehaviour
                         item.GetComponent<Gas>().UpgradeDPS();
                     }
                 }
-                weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
+                weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1])).ToString("F2");
                 break;
             case 2:
                 GameObject[] weaponsGun = GameObject.FindGameObjectsWithTag("WeaponGun");
@@ -96,7 +96,7 @@ public class WeaponUpgrades : MonoBehaviour
                         item.GetComponent<Gun>().UpgradeDPS();
                     }
                 }
-                weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
+                weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2]))).ToString("F2");
                 break;
             default:
                 break;
@@ -121,7 +121,7 @@ public class WeaponUpgrades : MonoBehaviour
                             item.GetComponent<Laser>().SetDPS(upgrade1Levels[0]);
                         }
                     }
-                    weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                    weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0])).ToString("F2");
                     break;
                 case 1:
                     GameObject[] weaponsGas = GameObject.FindGameObjectsWithTag("WeaponGas");
@@ -132,7 +132,7 @@ public class WeaponUpgrades : MonoBehaviour
                             item.GetComponent<Gas>().SetDPS(upgrade1Levels[1]);
                         }
                     }
-                    weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
+                    weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1])).ToString("F2");
                     break;
                 case 2:
                     GameObject[] weaponsGun = GameObject.FindGameObjectsWithTag("WeaponGun");
@@ -143,7 +143,7 @@ public class WeaponUpgrades : MonoBehaviour
                             item.GetComponent<Gun>().SetDPS(upgrade1Levels[2]);
                         }
                     }
-                    weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
+                    weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2]))).ToString("F2");
                     break;
                 default:
                     break;
@@ -176,7 +176,7 @@ public class WeaponUpgrades : MonoBehaviour
                         item.GetComponent<Laser>().UpgradeRange();
                     }
                 }
-                weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0])).ToString("F2");
                 break;
             case 1:
                 GameObject[] weaponsGas = GameObject.FindGameObjectsWithTag("WeaponGas");
@@ -187,7 +187,7 @@ public class WeaponUpgrades : MonoBehaviour
                         item.GetComponent<Gas>().UpgradeRange();
                     }
                 }
-                weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
+                weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1])).ToString("F2");
                 break;
             case 2:
                 GameObject[] weaponsGun = GameObject.FindGameObjectsWithTag("WeaponGun");
@@ -198,7 +198,7 @@ public class WeaponUpgrades : MonoBehaviour
                         item.GetComponent<Gun>().UpgradeRange();
                     }
                 }
-                weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
+                weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2]))).ToString("F2");
                 break;
             default:
                 break;
@@ -223,7 +223,7 @@ public class WeaponUpgrades : MonoBehaviour
                             item.GetComponent<Laser>().SetRange(upgrade2Levels[0]);
                         }
                     }
-                    weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                    weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0])).ToString("F2");
                     break;
                 case 1:
                     GameObject[] weaponsGas = GameObject.FindGameObjectsWithTag("WeaponGas");
@@ -234,7 +234,7 @@ public class WeaponUpgrades : MonoBehaviour
                             item.GetComponent<Gas>().SetRange(upgrade2Levels[1]);
                         }
                     }
-                    weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
+                    weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1])).ToString("F2");
                     break;
                 case 2:
                     GameObject[] weaponsGun = GameObject.FindGameObjectsWithTag("WeaponGun");
@@ -245,7 +245,7 @@ public class WeaponUpgrades : MonoBehaviour
                             item.GetComponent<Gun>().SetRange(upgrade2Levels[2]);
                         }
                     }
-                    weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
+                    weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2]))).ToString("F2");
                     break;
                 default:
                     break;
@@ -278,7 +278,7 @@ public class WeaponUpgrades : MonoBehaviour
                         item.GetComponent<Laser>().UpgradeTargets();
                     }
                 }
-                weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0])).ToString("F2");
                 break;
             case 1:
                 GameObject[] weaponsGas = GameObject.FindGameObjectsWithTag("WeaponGas");
@@ -289,7 +289,7 @@ public class WeaponUpgrades : MonoBehaviour
                         item.GetComponent<Gas>().UpgradeDamageBoost();
                     }
                 }
-                weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
+                weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1])).ToString("F2");
                 break;
             case 2:
                 GameObject[] weaponsGun = GameObject.FindGameObjectsWithTag("WeaponGun");
@@ -300,7 +300,7 @@ public class WeaponUpgrades : MonoBehaviour
                         item.GetComponent<Gun>().UpgradeSpeed();
                     }
                 }
-                weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
+                weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2]))).ToString("F2");
                 break;
             default:
                 break;
@@ -325,7 +325,7 @@ public class WeaponUpgrades : MonoBehaviour
                             item.GetComponent<Laser>().SetTargets(upgrade3Levels[0]);
                         }
                     }
-                    weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
+                    weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0])).ToString("F2");
                     break;
                 case 1:
                     GameObject[] weaponsGas = GameObject.FindGameObjectsWithTag("WeaponGas");
@@ -347,7 +347,7 @@ public class WeaponUpgrades : MonoBehaviour
                             item.GetComponent<Gun>().SetSpeed(upgrade3Levels[2]);
                         }
                     }
-                    weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
+                    weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2]))).ToString("F2");
                     break;
                 default:
                     break;
@@ -382,9 +382,9 @@ public class WeaponUpgrades : MonoBehaviour
             weaponDamages[i] = 0;
             weaponDamageTexts[i].text = "Total damage dealt: " + weaponDamages[i].ToString("F0");
         }
-        weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0]));
-        weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1]));
-        weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2])));
+        weaponDPSTexts[0].text = "Estimated DPS: " + ((settings.laserDPS + 0.5f * upgrade1Levels[0]) * (1 + upgrade3Levels[0])).ToString("F2");
+        weaponDPSTexts[1].text = "Estimated DPS: " + (settings.gasDPS + 0.5f * (upgrade1Levels[1] + upgrade3Levels[1])).ToString("F2");
+        weaponDPSTexts[2].text = "Estimated DPS: " + ((settings.gunDamage + upgrade1Levels[2]) / (settings.gunReload - (0.05f * upgrade3Levels[2]))).ToString("F2");
     }
 
     public void RefreshUpgrades()
