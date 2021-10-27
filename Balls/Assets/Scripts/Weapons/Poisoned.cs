@@ -6,6 +6,9 @@ public class Poisoned : MonoBehaviour
 {
     private bool isDecaying = true;
     private float poisonTime;
+    private float damageIncrease = 0;
+    private float timeIncrease = 0;
+    private float damageBoost = 0;
     private GameObject curPoisonPS;
     private GameObject poisonPS;
     private GameObject UISystem;
@@ -13,9 +16,12 @@ public class Poisoned : MonoBehaviour
 
     private void Start()
     {
-        poisonTime = settings.poisonTime;
-        curPoisonPS = Instantiate(poisonPS, transform);
         UISystem = GameObject.Find("UISystem");
+        curPoisonPS = Instantiate(poisonPS, transform);
+        damageIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[8];
+        timeIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[8];
+        damageBoost = UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[8];
+        poisonTime = settings.poisonTime + timeIncrease;
     }
 
     private void FixedUpdate()
@@ -29,8 +35,8 @@ public class Poisoned : MonoBehaviour
                 Destroy(this);
             }
         }
-        transform.localScale -= new Vector3(settings.poisonDPS / 10000, settings.poisonDPS / 10000, 0);
-        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(8, settings.poisonDPS / 100);
+        transform.localScale -= new Vector3((settings.poisonDPS + damageIncrease + (damageBoost * (1 - transform.localScale.x))) / 10000, (settings.poisonDPS + damageIncrease + (damageBoost * (1 - transform.localScale.x))) / 10000, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(8, (settings.poisonDPS + damageIncrease + (damageBoost * (1 - transform.localScale.x))) / 100);
     }
 
     public void SetSettings(GameSettings curSettings)
@@ -46,7 +52,7 @@ public class Poisoned : MonoBehaviour
     public void StartDecay()
     {
         isDecaying = true;
-        poisonTime = settings.poisonTime;
+        poisonTime = settings.poisonTime + timeIncrease;
     }
 
     public void StopDecay()

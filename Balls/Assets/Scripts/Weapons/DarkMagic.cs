@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class DarkMagic : MonoBehaviour
 {
-    public GameObject pentagram;
-
     private bool canAttack = true;
+    private float damageIncrease = 0;
     private GameObject curPentagram;
     private GameObject target;
     private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
+    public GameObject pentagram;
     public GameSettings settings;
 
     private void Start()
     {
         UISystem = GameObject.Find("UISystem");
+        damageIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[9];
     }
 
     private void FixedUpdate()
@@ -47,10 +48,20 @@ public class DarkMagic : MonoBehaviour
         curPentagram.GetComponent<Pentagram>().SetParentDarkMagic(gameObject);
     }
 
+    public void UpgradeDPS()
+    {
+        damageIncrease += 0.5f;
+    }
+
+    public void SetDPS(int level)
+    {
+        damageIncrease = 0.5f * level;
+    }
+
     public void DealDamage(GameObject curTarget)
     {
-        curTarget.transform.localScale -= new Vector3(settings.darkMagicDPS / 10000, settings.darkMagicDPS / 10000, 0);
-        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(9, settings.darkMagicDPS / 100);
+        curTarget.transform.localScale -= new Vector3((settings.darkMagicDPS + damageIncrease) / 10000, (settings.darkMagicDPS + damageIncrease) / 10000, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(9, (settings.darkMagicDPS + damageIncrease) / 100);
     }
 
     public void AddBallInRadius(GameObject ball)

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Saw : MonoBehaviour
 {
+    private float DPSIncrease = 0;
+    private float rangeIncrease = 0;
+    private float damageBoost = 0;
     private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
@@ -11,9 +14,12 @@ public class Saw : MonoBehaviour
 
     private void Start()
     {
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.sawRange;
-        transform.Find("Blade").localScale = new Vector3(settings.sawRange * 0.8f, settings.sawRange * 0.8f, 0);
         UISystem = GameObject.Find("UISystem");
+        DPSIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[10];
+        rangeIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[10];
+        damageBoost = UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[10];
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.sawRange + rangeIncrease;
+        transform.Find("Blade").localScale = new Vector3((settings.sawRange + rangeIncrease) * 0.8f, (settings.sawRange + rangeIncrease) * 0.8f, 0);
     }
 
     private void FixedUpdate()
@@ -35,6 +41,38 @@ public class Saw : MonoBehaviour
         }
     }
 
+    public void UpgradeDPS()
+    {
+        DPSIncrease += 0.5f;
+    }
+
+    public void SetDPS(int level)
+    {
+        DPSIncrease = 0.5f * level;
+    }
+
+    public void UpgradeRange()
+    {
+        rangeIncrease += 0.1f;
+        transform.Find("Blade").localScale = new Vector3((settings.sawRange + rangeIncrease) * 0.8f, (settings.sawRange + rangeIncrease) * 0.8f, 0);
+    }
+
+    public void SetRange(int level)
+    {
+        rangeIncrease = 0.1f * level;
+        transform.Find("Blade").localScale = new Vector3((settings.sawRange + rangeIncrease) * 0.8f, (settings.sawRange + rangeIncrease) * 0.8f, 0);
+    }
+
+    public void UpgradeDamageBoost()
+    {
+        damageBoost++;
+    }
+
+    public void SetDamageBoost(int level)
+    {
+        damageBoost = level;
+    }
+
     public void AddBallInRadius(GameObject ball)
     {
         ballsInRadius.Add(ball);
@@ -47,7 +85,7 @@ public class Saw : MonoBehaviour
 
     public void DealDamage(GameObject damagedBall)
     {
-        damagedBall.transform.localScale -= new Vector3(settings.sawDPS / 10000, settings.sawDPS / 10000, 0);
-        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(10, settings.sawDPS / 100);
+        damagedBall.transform.localScale -= new Vector3((settings.sawDPS + DPSIncrease + (damageBoost * (1 - damagedBall.transform.localScale.x))) / 10000, (settings.sawDPS + DPSIncrease + (damageBoost * (1 - damagedBall.transform.localScale.x))) / 10000, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(10, (settings.sawDPS + DPSIncrease + (damageBoost * (1 - damagedBall.transform.localScale.x))) / 100);
     }
 }

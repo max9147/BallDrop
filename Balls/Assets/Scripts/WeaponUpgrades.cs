@@ -9,16 +9,16 @@ public class WeaponUpgrades : MonoBehaviour
     private int[] upgrade1Levels = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int[] upgrade2Levels = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int[] upgrade3Levels = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private int[] upgrade1MaxLevels = new int[] { 10, 16, 8, 10, 8, 6, 10, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private int[] upgrade2MaxLevels = new int[] { 10, 5, 10, 10, 7, 10, 10, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private int[] upgrade3MaxLevels = new int[] { 3, 5, 12, 5, 6, 17, 10, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private double[] upgrade1Prices = new double[] { 5, 10, 8, 8, 10, 30, 8, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private double[] upgrade2Prices = new double[] { 10, 20, 10, 10, 20, 10, 8, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private double[] upgrade3Prices = new double[] { 1000, 100, 4, 15, 30, 2, 8, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private int[] upgrade1MaxLevels = new int[] { 10, 16, 8, 10, 8, 6, 10, 5, 8, 8, 16, 0, 0, 0, 0, 0, 0, 0 };
+    private int[] upgrade2MaxLevels = new int[] { 10, 5, 10, 10, 7, 10, 10, 4, 12, 6, 5, 0, 0, 0, 0, 0, 0, 0 };
+    private int[] upgrade3MaxLevels = new int[] { 3, 5, 12, 5, 6, 17, 10, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0 };
+    private double[] upgrade1Prices = new double[] { 5, 10, 8, 8, 10, 30, 8, 5, 10, 5, 10, 0, 0, 0, 0, 0, 0, 0 };
+    private double[] upgrade2Prices = new double[] { 10, 20, 10, 10, 20, 10, 8, 50, 4, 20, 20, 0, 0, 0, 0, 0, 0, 0 };
+    private double[] upgrade3Prices = new double[] { 1000, 100, 4, 15, 30, 2, 8, 20, 10, 30, 100, 0, 0, 0, 0, 0, 0, 0 };
     private double[] weaponDamages = new double[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private float[] upgrade1PriceIncrease = new float[] { 14, 5, 25, 13, 24, 58, 13, 185, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private float[] upgrade2PriceIncrease = new float[] { 13, 140, 13, 13, 35, 13, 13, 380, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private float[] upgrade3PriceIncrease = new float[] { 1100, 100, 9, 150, 58, 5, 13, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private float[] upgrade1PriceIncrease = new float[] { 14, 5, 25, 13, 24, 58, 13, 185, 24, 26, 5, 0, 0, 0, 0, 0, 0, 0 };
+    private float[] upgrade2PriceIncrease = new float[] { 13, 140, 13, 13, 35, 13, 13, 380, 9, 62, 140, 0, 0, 0, 0, 0, 0, 0 };
+    private float[] upgrade3PriceIncrease = new float[] { 1100, 100, 9, 150, 58, 5, 13, 140, 160, 130, 100, 0, 0, 0, 0, 0, 0, 0 };
 
     public Button[] upgrade1Buttons;
     public Button[] upgrade2Buttons;
@@ -153,6 +153,31 @@ public class WeaponUpgrades : MonoBehaviour
                 }
                 weaponDPSTexts[7].text = "Estimated DPS: " + ((settings.spikesDamage + 0.5f * upgrade1Levels[7]) * (settings.spikesCount * upgrade2Levels[7] / 2) / (settings.spikesReload - 0.2f * upgrade3Levels[7])).ToString("F2");
                 break;
+            case 8:
+                weaponDPSTexts[8].text = "Estimated DPS: " + (settings.poisonDPS + 0.5f * (upgrade1Levels[8] + upgrade3Levels[8])).ToString("F2");
+                break;
+            case 9:
+                GameObject[] weaponsDarkMagic = GameObject.FindGameObjectsWithTag("WeaponDarkMagic");
+                foreach (var item in weaponsDarkMagic)
+                {
+                    if (item.GetComponent<DarkMagic>())
+                    {
+                        item.GetComponent<DarkMagic>().UpgradeDPS();
+                    }
+                }
+                weaponDPSTexts[9].text = "Estimated DPS: " + ((settings.darkMagicDPS + 0.5f * upgrade1Levels[9]) * (4 + 0.1f * upgrade3Levels[9])).ToString("F2");
+                break;
+            case 10:
+                GameObject[] weaponsSaw = GameObject.FindGameObjectsWithTag("WeaponSaw");
+                foreach (var item in weaponsSaw)
+                {
+                    if (item.GetComponent<Saw>())
+                    {
+                        item.GetComponent<Saw>().UpgradeDPS();
+                    }
+                }
+                weaponDPSTexts[10].text = "Estimated DPS: " + (settings.sawDPS + 0.5f * (upgrade1Levels[10] + upgrade3Levels[10])).ToString("F2");
+                break;
             default:
                 break;
         }
@@ -254,6 +279,31 @@ public class WeaponUpgrades : MonoBehaviour
                         }
                     }
                     weaponDPSTexts[7].text = "Estimated DPS: " + ((settings.spikesDamage + 0.5f * upgrade1Levels[7]) * (settings.spikesCount * upgrade2Levels[7] / 2) / (settings.spikesReload - 0.2f * upgrade3Levels[7])).ToString("F2");
+                    break;
+                case 8:
+                    weaponDPSTexts[8].text = "Estimated DPS: " + (settings.poisonDPS + 0.5f * (upgrade1Levels[8] + upgrade3Levels[8])).ToString("F2");
+                    break;
+                case 9:
+                    GameObject[] weaponsDarkMagic = GameObject.FindGameObjectsWithTag("WeaponDarkMagic");
+                    foreach (var item in weaponsDarkMagic)
+                    {
+                        if (item.GetComponent<DarkMagic>())
+                        {
+                            item.GetComponent<DarkMagic>().SetDPS(upgrade1Levels[9]);
+                        }
+                    }
+                    weaponDPSTexts[9].text = "Estimated DPS: " + ((settings.darkMagicDPS + 0.5f * upgrade1Levels[9]) * (4 + 0.1f * upgrade3Levels[9])).ToString("F2");
+                    break;
+                case 10:
+                    GameObject[] weaponsSaw = GameObject.FindGameObjectsWithTag("WeaponSaw");
+                    foreach (var item in weaponsSaw)
+                    {
+                        if (item.GetComponent<Saw>())
+                        {
+                            item.GetComponent<Saw>().SetDPS(upgrade1Levels[10]);
+                        }
+                    }
+                    weaponDPSTexts[10].text = "Estimated DPS: " + (settings.sawDPS + 0.5f * (upgrade1Levels[10] + upgrade3Levels[10])).ToString("F2");
                     break;
                 default:
                     break;
@@ -366,6 +416,23 @@ public class WeaponUpgrades : MonoBehaviour
                 }
                 weaponDPSTexts[7].text = "Estimated DPS: " + ((settings.spikesDamage + 0.5f * upgrade1Levels[7]) * (settings.spikesCount * upgrade2Levels[7] / 2) / (settings.spikesReload - 0.2f * upgrade3Levels[7])).ToString("F2");
                 break;
+            case 8:
+                weaponDPSTexts[8].text = "Estimated DPS: " + (settings.poisonDPS + 0.5f * (upgrade1Levels[8] + upgrade3Levels[8])).ToString("F2");
+                break;
+            case 9:                
+                weaponDPSTexts[9].text = "Estimated DPS: " + ((settings.darkMagicDPS + 0.5f * upgrade1Levels[9]) * (4 + 0.1f * upgrade3Levels[9])).ToString("F2");
+                break;
+            case 10:
+                GameObject[] weaponsSaw = GameObject.FindGameObjectsWithTag("WeaponSaw");
+                foreach (var item in weaponsSaw)
+                {
+                    if (item.GetComponent<Saw>())
+                    {
+                        item.GetComponent<Saw>().UpgradeRange();
+                    }
+                }
+                weaponDPSTexts[10].text = "Estimated DPS: " + (settings.sawDPS + 0.5f * (upgrade1Levels[10] + upgrade3Levels[10])).ToString("F2");
+                break;
             default:
                 break;
         }
@@ -469,6 +536,23 @@ public class WeaponUpgrades : MonoBehaviour
                     }
                     weaponDPSTexts[7].text = "Estimated DPS: " + ((settings.spikesDamage + 0.5f * upgrade1Levels[7]) * (settings.spikesCount * upgrade2Levels[7] / 2) / (settings.spikesReload - 0.2f * upgrade3Levels[7])).ToString("F2");
                     break;
+                case 8:
+                    weaponDPSTexts[8].text = "Estimated DPS: " + (settings.poisonDPS + 0.5f * (upgrade1Levels[8] + upgrade3Levels[8])).ToString("F2");
+                    break;
+                case 9:
+                    weaponDPSTexts[9].text = "Estimated DPS: " + ((settings.darkMagicDPS + 0.5f * upgrade1Levels[9]) * (4 + 0.1f * upgrade3Levels[9])).ToString("F2");
+                    break;
+                case 10:
+                    GameObject[] weaponsSaw = GameObject.FindGameObjectsWithTag("WeaponSaw");
+                    foreach (var item in weaponsSaw)
+                    {
+                        if (item.GetComponent<Saw>())
+                        {
+                            item.GetComponent<Saw>().SetRange(upgrade2Levels[10]);
+                        }
+                    }
+                    weaponDPSTexts[10].text = "Estimated DPS: " + (settings.sawDPS + 0.5f * (upgrade1Levels[10] + upgrade3Levels[10])).ToString("F2");
+                    break;
                 default:
                     break;
             }
@@ -571,6 +655,23 @@ public class WeaponUpgrades : MonoBehaviour
                 }
                 weaponDPSTexts[7].text = "Estimated DPS: " + ((settings.spikesDamage + 0.5f * upgrade1Levels[7]) * (settings.spikesCount * upgrade2Levels[7] / 2) / (settings.spikesReload - 0.2f * upgrade3Levels[7])).ToString("F2");
                 break;
+            case 8:
+                weaponDPSTexts[8].text = "Estimated DPS: " + (settings.poisonDPS + 0.5f * (upgrade1Levels[8] + upgrade3Levels[8])).ToString("F2");
+                break;
+            case 9:
+                weaponDPSTexts[9].text = "Estimated DPS: " + ((settings.darkMagicDPS + 0.5f * upgrade1Levels[9]) * (4 + 0.1f * upgrade3Levels[9])).ToString("F2");
+                break;
+            case 10:
+                GameObject[] weaponsSaw = GameObject.FindGameObjectsWithTag("WeaponSaw");
+                foreach (var item in weaponsSaw)
+                {
+                    if (item.GetComponent<Saw>())
+                    {
+                        item.GetComponent<Saw>().UpgradeDamageBoost();
+                    }
+                }
+                weaponDPSTexts[10].text = "Estimated DPS: " + (settings.sawDPS + 0.5f * (upgrade1Levels[10] + upgrade3Levels[10])).ToString("F2");
+                break;
             default:
                 break;
         }
@@ -665,6 +766,23 @@ public class WeaponUpgrades : MonoBehaviour
                     }
                     weaponDPSTexts[7].text = "Estimated DPS: " + ((settings.spikesDamage + 0.5f * upgrade1Levels[7]) * (settings.spikesCount * upgrade2Levels[7] / 2) / (settings.spikesReload - 0.2f * upgrade3Levels[7])).ToString("F2");
                     break;
+                case 8:
+                    weaponDPSTexts[8].text = "Estimated DPS: " + (settings.poisonDPS + 0.5f * (upgrade1Levels[8] + upgrade3Levels[8])).ToString("F2");
+                    break;
+                case 9:
+                    weaponDPSTexts[9].text = "Estimated DPS: " + ((settings.darkMagicDPS + 0.5f * upgrade1Levels[9]) * (4 + 0.1f * upgrade3Levels[9])).ToString("F2");
+                    break;
+                case 10:
+                    GameObject[] weaponsSaw = GameObject.FindGameObjectsWithTag("WeaponSaw");
+                    foreach (var item in weaponsSaw)
+                    {
+                        if (item.GetComponent<Saw>())
+                        {
+                            item.GetComponent<Saw>().SetDamageBoost(upgrade3Levels[10]);
+                        }
+                    }
+                    weaponDPSTexts[10].text = "Estimated DPS: " + (settings.sawDPS + 0.5f * (upgrade1Levels[10] + upgrade3Levels[10])).ToString("F2");
+                    break;
                 default:
                     break;
             }
@@ -678,9 +796,9 @@ public class WeaponUpgrades : MonoBehaviour
 
     public void ResetUpgrades()
     {
-        upgrade1Prices = new double[] { 5, 10, 8, 8, 10, 30, 8, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        upgrade2Prices = new double[] { 10, 20, 10, 10, 20, 10, 8, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        upgrade3Prices = new double[] { 1000, 100, 4, 15, 30, 2, 8, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        upgrade1Prices = new double[] { 5, 10, 8, 8, 10, 30, 8, 5, 10, 5, 10, 0, 0, 0, 0, 0, 0, 0 };
+        upgrade2Prices = new double[] { 10, 20, 10, 10, 20, 10, 8, 50, 4, 20, 20, 0, 0, 0, 0, 0, 0, 0 };
+        upgrade3Prices = new double[] { 1000, 100, 4, 15, 30, 2, 8, 20, 10, 30, 100, 0, 0, 0, 0, 0, 0, 0 };
         for (int i = 0; i < upgrade1Levels.Length; i++)
         {
             upgrade1Levels[i] = 0;
@@ -706,6 +824,9 @@ public class WeaponUpgrades : MonoBehaviour
         weaponDPSTexts[5].text = "Estimated DPS: " + ((settings.cannonDamage + upgrade1Levels[5]) / (settings.cannonReload - 0.1f * upgrade3Levels[5])).ToString("F2");
         weaponDPSTexts[6].text = "Estimated DPS: " + ((settings.lightningDamage + 0.5f * upgrade1Levels[6]) / (settings.lightningReload - 0.05f * upgrade3Levels[6])).ToString("F2");
         weaponDPSTexts[7].text = "Estimated DPS: " + ((settings.spikesDamage + 0.5f * upgrade1Levels[7]) * (settings.spikesCount * upgrade2Levels[7] / 2) / (settings.spikesReload - 0.2f * upgrade3Levels[7])).ToString("F2");
+        weaponDPSTexts[8].text = "Estimated DPS: " + (settings.poisonDPS + 0.5f * (upgrade1Levels[8] + upgrade3Levels[8])).ToString("F2");
+        weaponDPSTexts[9].text = "Estimated DPS: " + ((settings.darkMagicDPS + 0.5f * upgrade1Levels[9]) * (4 + 0.1f * upgrade3Levels[9])).ToString("F2");
+        weaponDPSTexts[10].text = "Estimated DPS: " + (settings.sawDPS + 0.5f * (upgrade1Levels[10] + upgrade3Levels[10])).ToString("F2");
     }
 
     public void RefreshUpgrades()

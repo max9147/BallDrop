@@ -5,14 +5,21 @@ using UnityEngine;
 public class Pentagram : MonoBehaviour
 {
     private float lifeTime;
+    private float timeIncrese = 0;
+    private float rangeIncrease = 0;
     private GameObject parentDarkMagic;
+    private GameObject UISystem;
     private List<GameObject> damagedBalls = new List<GameObject>();
 
     public GameSettings settings;
 
     private void Start()
     {
-        lifeTime = settings.darkMagicLifeTime;
+        UISystem = GameObject.Find("UISystem");
+        timeIncrese = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[9];
+        rangeIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[9];
+        lifeTime = settings.darkMagicLifeTime + timeIncrese;
+        transform.localScale = new Vector3(1 + rangeIncrease, 1 + rangeIncrease, 1);
     }
 
     private void FixedUpdate()
@@ -26,8 +33,11 @@ public class Pentagram : MonoBehaviour
         {
             if (item)
             {
-                parentDarkMagic.GetComponent<DarkMagic>().DealDamage(item.gameObject);
-            }            
+                if (parentDarkMagic)
+                {
+                    parentDarkMagic.GetComponent<DarkMagic>().DealDamage(item.gameObject);
+                }
+            }     
         }
     }
 
