@@ -5,6 +5,8 @@ using UnityEngine;
 public class Hive : MonoBehaviour
 {
     private bool canAttack = true;
+    private float DPSIncrease = 0;
+    private float speedIncrease = 0;
     private GameObject curBee;
     private GameObject target;
     private GameObject UISystem;
@@ -16,6 +18,8 @@ public class Hive : MonoBehaviour
     private void Start()
     {
         UISystem = GameObject.Find("UISystem");
+        DPSIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[4];
+        speedIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[4];
     }
 
     private void FixedUpdate()
@@ -47,10 +51,30 @@ public class Hive : MonoBehaviour
         curBee.GetComponent<Bee>().SetParentHive(gameObject);
     }
 
+    public void UpgradeDPS()
+    {
+        DPSIncrease += 0.5f;
+    }
+
+    public void SetDPS(int level)
+    {
+        DPSIncrease = 0.5f * level;
+    }
+
+    public void UpgradeSpeed()
+    {
+        speedIncrease += 0.5f;
+    }
+
+    public void SetSpeed(int level)
+    {
+        speedIncrease = 0.5f * level;
+    }
+
     public void DealDamage(GameObject curTarget)
     {
-        curTarget.transform.localScale -= new Vector3(settings.hiveDPS / 10000, settings.hiveDPS / 10000, 0);
-        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(4, settings.hiveDPS / 100);
+        curTarget.transform.localScale -= new Vector3((settings.hiveDPS + DPSIncrease) / 10000, (settings.hiveDPS + DPSIncrease) / 10000, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(4, (settings.hiveDPS + DPSIncrease) / 100);
     }
 
     public void AddBallInRadius(GameObject ball)
@@ -65,7 +89,7 @@ public class Hive : MonoBehaviour
 
     private IEnumerator ResetStatus()
     {
-        yield return new WaitForSeconds(settings.hiveSpawnTime);
+        yield return new WaitForSeconds(settings.hiveSpawnTime - speedIncrease);
         canAttack = true;
     }
 }

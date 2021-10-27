@@ -5,6 +5,9 @@ using UnityEngine;
 public class Lightning : MonoBehaviour
 {
     private bool canAttack = true;
+    private float damageIncrease = 0;
+    private float rangeIncrease = 0;
+    private float speedIncrease = 0;
     private GameObject curBolt;
     private GameObject target;
     private GameObject UISystem;
@@ -15,8 +18,11 @@ public class Lightning : MonoBehaviour
 
     private void Start()
     {
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.lightningRange;
         UISystem = GameObject.Find("UISystem");
+        damageIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[6];
+        rangeIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[6];
+        speedIncrease = 0.05f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[6];
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.lightningRange + rangeIncrease;
     }
 
     private void FixedUpdate()
@@ -43,12 +49,44 @@ public class Lightning : MonoBehaviour
 
     private void Attack()
     {
-        target.transform.localScale -= new Vector3(settings.lightningDamage / 100, settings.lightningDamage / 100, 0);
-        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(6, settings.lightningDamage);
+        target.transform.localScale -= new Vector3((settings.lightningDamage + damageIncrease) / 100, (settings.lightningDamage + damageIncrease) / 100, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(6, settings.lightningDamage + damageIncrease);
         curBolt = Instantiate(bolt, transform);
         curBolt.GetComponent<Bolt>().StartObject = gameObject;
         curBolt.GetComponent<Bolt>().EndObject = target;
         StartCoroutine(DestroyBolt(curBolt));
+    }
+
+    public void UpgradeDPS()
+    {
+        damageIncrease += 0.5f;
+    }
+
+    public void SetDPS(int level)
+    {
+        damageIncrease = 0.5f * level;
+    }
+
+    public void UpgradeRange()
+    {
+        rangeIncrease += 0.1f;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.lightningRange + rangeIncrease;
+    }
+
+    public void SetRange(int level)
+    {
+        rangeIncrease = 0.1f * level;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.lightningRange + rangeIncrease;
+    }
+
+    public void UpgradeSpeed()
+    {
+        speedIncrease += 0.05f;
+    }
+
+    public void SetSpeed(int level)
+    {
+        speedIncrease = 0.05f * level;
     }
 
     public void AddBallInRadius(GameObject ball)
@@ -69,7 +107,7 @@ public class Lightning : MonoBehaviour
 
     private IEnumerator ResetStatus()
     {
-        yield return new WaitForSeconds(settings.lightningReload);
+        yield return new WaitForSeconds(settings.lightningReload - speedIncrease);
         canAttack = true;
     }
 }

@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Flamethrower : MonoBehaviour
 {
+    private float rangeIncrease = 0;
     private GameObject target;
+    private GameObject UISystem;
     private List<GameObject> ballsInRadius = new List<GameObject>();
 
     public GameSettings settings;
 
     private void Start()
     {
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.flamethrowerRange;
+        UISystem = GameObject.Find("UISystem");
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.flamethrowerRange + 0.1f *UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[3];
     }
 
     private void FixedUpdate()
@@ -40,6 +43,18 @@ public class Flamethrower : MonoBehaviour
         {
             transform.Find("Flame").GetComponent<Flames>().StopFiring();
         }
+    }
+
+    public void UpgradeRange()
+    {
+        rangeIncrease += 0.1f;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.flamethrowerRange + rangeIncrease;
+    }
+
+    public void SetRange(int level)
+    {
+        rangeIncrease = 0.1f * level;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.flamethrowerRange + rangeIncrease;
     }
 
     public void AddBallInRadius(GameObject ball)

@@ -6,6 +6,9 @@ public class Spikes : MonoBehaviour
 {
     private bool isReloading = false;
     private int spikeCount;
+    private float damageIncrease;
+    private float spikeIncrease;
+    private float speedIncrease;
     private GameObject curSpike;
     private GameObject target;
     private GameObject UISystem;
@@ -16,9 +19,12 @@ public class Spikes : MonoBehaviour
 
     private void Start()
     {
+        UISystem = GameObject.Find("UISystem");
         spikeCount = settings.spikesCount;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.spikesRange;
-        UISystem = GameObject.Find("UISystem");
+        damageIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[7];
+        spikeIncrease = 2 * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[7];
+        speedIncrease = 0.2f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[7];
     }
 
     private void FixedUpdate()
@@ -49,13 +55,43 @@ public class Spikes : MonoBehaviour
 
     private void Shoot()
     {
-        for (int i = 0; i < spikeCount; i++)
+        for (int i = 0; i < spikeCount + spikeIncrease; i++)
         {
             curSpike = Instantiate(spike, transform.position, Quaternion.identity, transform);
-            curSpike.transform.Rotate(0, 0, i * (360 / spikeCount));
+            curSpike.transform.Rotate(0, 0, i * (360 / (spikeCount + spikeIncrease)));
         }
         isReloading = true;
         StartCoroutine(Reload());
+    }
+
+    public void UpgradeDPS()
+    {
+        damageIncrease += 0.5f;
+    }
+
+    public void SetDPS(int level)
+    {
+        damageIncrease = 0.5f * level;
+    }
+
+    public void UpgradeSpikes()
+    {
+        spikeIncrease += 2;
+    }
+
+    public void SetSpikes(int level)
+    {
+        spikeIncrease = 2 * level;
+    }
+
+    public void UpgradeSpeed()
+    {
+        speedIncrease += 0.2f;
+    }
+
+    public void SetSpeed(int level)
+    {
+        speedIncrease = 0.2f * level;
     }
 
     public void AddBallInRadius(GameObject ball)
@@ -70,13 +106,13 @@ public class Spikes : MonoBehaviour
 
     public void DealDamage(GameObject damagedBall)
     {
-        damagedBall.transform.localScale -= new Vector3(settings.spikesDamage / 100, settings.spikesDamage / 100, 0);
-        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(7, settings.spikesDamage);
+        damagedBall.transform.localScale -= new Vector3((settings.spikesDamage + damageIncrease) / 100, (settings.spikesDamage + damageIncrease) / 100, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(7, settings.spikesDamage + damageIncrease);
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(settings.spikesReload);
+        yield return new WaitForSeconds(settings.spikesReload - speedIncrease);
         isReloading = false;
     }
 }

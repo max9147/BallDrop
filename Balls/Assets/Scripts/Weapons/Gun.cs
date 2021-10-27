@@ -5,9 +5,9 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     private bool isReloading = false;
-    public float damageIncrease = 0;
-    public float rangeIncrease = 0;
-    public float speedIncrease = 0;
+    private float damageIncrease = 0;
+    private float rangeIncrease = 0;
+    private float speedIncrease = 0;
     private GameObject currentBullet;
     private GameObject target;
     private GameObject UISystem;

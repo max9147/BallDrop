@@ -5,6 +5,9 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     private bool isReloading = false;
+    private float damageIncrease = 0;
+    private float rangeIncrease = 0;
+    private float speedIncrease = 0;
     private GameObject currentBullet;
     private GameObject target;
     private GameObject UISystem;
@@ -15,8 +18,11 @@ public class Cannon : MonoBehaviour
 
     private void Start()
     {
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.cannonRange;
         UISystem = GameObject.Find("UISystem");
+        damageIncrease = 2 * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[5];
+        rangeIncrease = 0.2f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[5];
+        speedIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[5];
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.cannonRange + rangeIncrease;
     }
 
     private void FixedUpdate()
@@ -53,6 +59,38 @@ public class Cannon : MonoBehaviour
         StartCoroutine(Reload());
     }
 
+    public void UpgradeDPS()
+    {
+        damageIncrease += 2;
+    }
+
+    public void SetDPS(int level)
+    {
+        damageIncrease = 2 * level;
+    }
+
+    public void UpgradeRange()
+    {
+        rangeIncrease += 0.2f;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.cannonRange + rangeIncrease;
+    }
+
+    public void SetRange(int level)
+    {
+        rangeIncrease = 0.2f * level;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.cannonRange + rangeIncrease;
+    }
+
+    public void UpgradeSpeed()
+    {
+        speedIncrease += 0.1f;
+    }
+
+    public void SetSpeed(int level)
+    {
+        speedIncrease = 0.1f * level;
+    }
+
     public void AddBallInRadius(GameObject ball)
     {
         ballsInRadius.Add(ball);
@@ -65,13 +103,13 @@ public class Cannon : MonoBehaviour
 
     public void DealDamage(GameObject damagedBall)
     {
-        damagedBall.transform.localScale -= new Vector3(settings.cannonDamage / 100, settings.cannonDamage / 100, 0);
-        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(5, settings.cannonDamage);
+        damagedBall.transform.localScale -= new Vector3((settings.cannonDamage + damageIncrease) / 100, (settings.cannonDamage + damageIncrease) / 100, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(5, settings.cannonDamage + damageIncrease);
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(settings.cannonReload);
+        yield return new WaitForSeconds(settings.cannonReload - speedIncrease);
         isReloading = false;
     }
 }

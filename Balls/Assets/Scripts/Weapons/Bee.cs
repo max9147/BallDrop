@@ -8,12 +8,14 @@ public class Bee : MonoBehaviour
     private float lifeTime;
     private GameObject currentTarget;
     private GameObject parentHive;
+    private GameObject UISystem;
 
     public GameSettings settings;
 
     private void Start()
     {
-        lifeTime = settings.hiveLifeTime;
+        UISystem = GameObject.Find("UISystem");
+        lifeTime = settings.hiveLifeTime + 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[4];
     }
 
     private void FixedUpdate()
