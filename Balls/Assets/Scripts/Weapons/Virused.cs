@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Virused : MonoBehaviour
 {
+    private float damageIncrease = 0;
+    private float damageBoost = 0;
+    private float timeIncrease = 0;
     private GameObject curVirusPS;
     private GameObject virusPS;
     private GameObject UISystem;
@@ -14,8 +17,11 @@ public class Virused : MonoBehaviour
 
     private void Start()
     {
-        curVirusPS = Instantiate(virusPS, transform);
         UISystem = GameObject.Find("UISystem");
+        damageIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[17];
+        damageBoost = UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[17];
+        timeIncrease = UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[17];
+        curVirusPS = Instantiate(virusPS, transform);
     }
 
     private void FixedUpdate()
@@ -29,8 +35,8 @@ public class Virused : MonoBehaviour
                 Destroy(this);
             }
         }
-        transform.localScale -= new Vector3(settings.virusDamage / 10000, settings.virusDamage / 10000, 0);
-        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(17, settings.virusDamage / 100);
+        transform.localScale -= new Vector3((settings.virusDamage + damageIncrease + (damageBoost * (1 - transform.localScale.x))) / 10000, (settings.virusDamage + damageIncrease + (damageBoost * (1 - transform.localScale.x))) / 10000, 0);
+        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(17, (settings.virusDamage + damageIncrease + (damageBoost * (1 - transform.localScale.x))) / 100);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -53,7 +59,7 @@ public class Virused : MonoBehaviour
     public void SetSettings(GameSettings curSettings)
     {
         settings = curSettings;
-        virusTime = settings.virusTime;
+        virusTime = settings.virusTime + timeIncrease;
     }
 
     public void SetVirusPS(GameObject PS)
@@ -64,7 +70,7 @@ public class Virused : MonoBehaviour
     public void StartDecay()
     {
         isDecaying = true;
-        virusTime = settings.virusTime;
+        virusTime = settings.virusTime + timeIncrease;
     }
 
     public void StopDecay()

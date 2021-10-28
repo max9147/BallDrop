@@ -23,6 +23,7 @@ public class Cannon : MonoBehaviour
         rangeIncrease = 0.2f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[5];
         speedIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[5];
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.cannonRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.cannonRange + rangeIncrease, settings.cannonRange + rangeIncrease, 1);
     }
 
     private void FixedUpdate()
@@ -73,12 +74,14 @@ public class Cannon : MonoBehaviour
     {
         rangeIncrease += 0.2f;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.cannonRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.cannonRange + rangeIncrease, settings.cannonRange + rangeIncrease, 1);
     }
 
     public void SetRange(int level)
     {
         rangeIncrease = 0.2f * level;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.cannonRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.cannonRange + rangeIncrease, settings.cannonRange + rangeIncrease, 1);
     }
 
     public void UpgradeSpeed()

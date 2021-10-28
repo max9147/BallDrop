@@ -14,11 +14,6 @@ public class LevelSystem : MonoBehaviour
     public GameObject[] levelButtons;
     public GameObject[] levels;
 
-    private void Start()
-    {
-        ChangeLevel(0);
-    }
-
     public void ChangeLevel(int id)
     {
         if (!weaponSystem.GetComponent<WeaponSystem>().GetLevelWeapon(id))

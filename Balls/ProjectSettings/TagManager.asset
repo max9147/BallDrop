@@ -46,6 +46,7 @@ TagManager:
   - WeaponVirus
   - Ball
   - GoldenBall
+  - Tutorial
   layers:
   - Default
   - TransparentFX

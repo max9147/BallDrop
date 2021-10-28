@@ -19,6 +19,7 @@ public class Saw : MonoBehaviour
         rangeIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[10];
         damageBoost = UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[10];
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.sawRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.sawRange + rangeIncrease, settings.sawRange + rangeIncrease, 1);
         transform.Find("Blade").localScale = new Vector3((settings.sawRange + rangeIncrease) * 0.8f, (settings.sawRange + rangeIncrease) * 0.8f, 0);
     }
 
@@ -55,12 +56,16 @@ public class Saw : MonoBehaviour
     {
         rangeIncrease += 0.1f;
         transform.Find("Blade").localScale = new Vector3((settings.sawRange + rangeIncrease) * 0.8f, (settings.sawRange + rangeIncrease) * 0.8f, 0);
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.sawRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.sawRange + rangeIncrease, settings.sawRange + rangeIncrease, 1);
     }
 
     public void SetRange(int level)
     {
         rangeIncrease = 0.1f * level;
         transform.Find("Blade").localScale = new Vector3((settings.sawRange + rangeIncrease) * 0.8f, (settings.sawRange + rangeIncrease) * 0.8f, 0);
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.sawRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.sawRange + rangeIncrease, settings.sawRange + rangeIncrease, 1);
     }
 
     public void UpgradeDamageBoost()

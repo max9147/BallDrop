@@ -6,6 +6,9 @@ public class Shotgun : MonoBehaviour
 {
     private bool isReloading = false;
     private int bulletCount;
+    private int bulletIncrease = 0;
+    private float damageIncrease = 0;
+    private float speedIncrease = 0;
     private GameObject currentBullet;
     private GameObject target;
     private GameObject UISystem;
@@ -16,9 +19,13 @@ public class Shotgun : MonoBehaviour
 
     private void Start()
     {
-        bulletCount = settings.shotgunBulletCount;
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.shotgunRange;
         UISystem = GameObject.Find("UISystem");
+        damageIncrease = 0.2f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[13];
+        speedIncrease = 0.2f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[13];
+        bulletIncrease = UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[13];
+        bulletCount = settings.shotgunBulletCount + bulletIncrease;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.shotgunRange;
+        transform.Find("Radius").localScale = new Vector3(settings.shotgunRange, settings.shotgunRange, 1);
     }
 
     private void FixedUpdate()
@@ -59,6 +66,38 @@ public class Shotgun : MonoBehaviour
         StartCoroutine(Reload());
     }
 
+    public void UpgradeDPS()
+    {
+        damageIncrease += 0.2f;
+    }
+
+    public void SetDPS(int level)
+    {
+        damageIncrease = 0.2f * level;
+    }
+
+    public void UpgradeSpeed()
+    {
+        speedIncrease += 0.2f;
+    }
+
+    public void SetSpeed(int level)
+    {
+        speedIncrease = 0.2f * level;
+    }
+
+    public void UpgradeBullets()
+    {
+        bulletIncrease++;
+        bulletCount = settings.shotgunBulletCount + bulletIncrease;
+    }
+
+    public void SetBullets(int level)
+    {
+        bulletIncrease = level;
+        bulletCount = settings.shotgunBulletCount + bulletIncrease;
+    }
+
     public void AddBallInRadius(GameObject ball)
     {
         ballsInRadius.Add(ball);
@@ -73,14 +112,14 @@ public class Shotgun : MonoBehaviour
     {
         if (target)
         {
-            target.transform.localScale -= new Vector3(settings.shotgunDamage / 100, settings.shotgunDamage / 100, 0);
+            target.transform.localScale -= new Vector3((settings.shotgunDamage + damageIncrease) / 100, (settings.shotgunDamage + damageIncrease) / 100, 0);
             UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(13, settings.shotgunDamage);
         }
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(settings.shotgunReload);
+        yield return new WaitForSeconds(settings.shotgunReload - speedIncrease);
         isReloading = false;
     }
 }

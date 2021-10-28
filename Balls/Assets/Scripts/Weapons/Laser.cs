@@ -21,6 +21,7 @@ public class Laser : MonoBehaviour
         rangeIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[0];
         targetCount = 1 + UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[0];
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.laserRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.laserRange + rangeIncrease, settings.laserRange + rangeIncrease, 1);
     }
 
     private void FixedUpdate()
@@ -104,12 +105,14 @@ public class Laser : MonoBehaviour
     {
         rangeIncrease += 0.1f;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.laserRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(1 + rangeIncrease, 1 + rangeIncrease, 1);
     }
 
     public void SetRange(int level)
     {
         rangeIncrease = 0.1f * level;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.laserRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(1 + rangeIncrease, 1 + rangeIncrease, 1);
     }
 
     public void UpgradeTargets()

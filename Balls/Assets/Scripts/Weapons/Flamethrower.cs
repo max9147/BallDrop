@@ -14,7 +14,9 @@ public class Flamethrower : MonoBehaviour
     private void Start()
     {
         UISystem = GameObject.Find("UISystem");
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.flamethrowerRange + 0.1f *UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[3];
+        rangeIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[3];
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.flamethrowerRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.flamethrowerRange + rangeIncrease, settings.flamethrowerRange + rangeIncrease, 1);
     }
 
     private void FixedUpdate()
@@ -49,12 +51,14 @@ public class Flamethrower : MonoBehaviour
     {
         rangeIncrease += 0.1f;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.flamethrowerRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.flamethrowerRange + rangeIncrease, settings.flamethrowerRange + rangeIncrease, 1);
     }
 
     public void SetRange(int level)
     {
         rangeIncrease = 0.1f * level;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.flamethrowerRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.flamethrowerRange + rangeIncrease, settings.flamethrowerRange + rangeIncrease, 1);
     }
 
     public void AddBallInRadius(GameObject ball)

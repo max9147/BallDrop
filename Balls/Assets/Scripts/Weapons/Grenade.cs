@@ -5,6 +5,8 @@ using UnityEngine;
 public class Grenade : MonoBehaviour
 {
     private bool isDetonating = false;
+    private float rangeIncrease = 0;
+    private GameObject UISystem;
     private GameObject currentTarget;
     private Vector3 currentTargetPos;
     private List<GameObject> ballsInRange = new List<GameObject>();
@@ -13,7 +15,9 @@ public class Grenade : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<CircleCollider2D>().radius = settings.grenadesDamageRange;
+        UISystem = GameObject.Find("UISystem");
+        rangeIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[14];
+        GetComponent<CircleCollider2D>().radius = settings.grenadesDamageRange + rangeIncrease;
     }
 
     private void FixedUpdate()
@@ -29,7 +33,7 @@ public class Grenade : MonoBehaviour
         }
         if (isDetonating)
         {
-            transform.Find("RadiusImage").transform.localScale += new Vector3(settings.grenadesDamageRange / 100, settings.grenadesDamageRange / 100, 0);
+            transform.Find("RadiusImage").transform.localScale += new Vector3((settings.grenadesDamageRange + rangeIncrease) / 100, (settings.grenadesDamageRange + rangeIncrease) / 100, 0);
         }
     }
 

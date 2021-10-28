@@ -22,6 +22,7 @@ public class Gas : MonoBehaviour
         rangeIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[1];
         damageBoost = 1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[1];
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.gasRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.gasRange + rangeIncrease, settings.gasRange + rangeIncrease, 1);
         var particleSettings = transform.Find("GasCloud").GetComponent<ParticleSystem>().main;
         particleSettings.startLifetime = settings.gasRange + (7f * rangeIncrease);
     }
@@ -92,6 +93,7 @@ public class Gas : MonoBehaviour
     {
         rangeIncrease += 0.1f;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.gasRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.gasRange + rangeIncrease, settings.gasRange + rangeIncrease, 1);
         var particleSettings = transform.Find("GasCloud").GetComponent<ParticleSystem>().main;
         particleSettings.startLifetime = settings.gasRange + (7f * rangeIncrease);
     }
@@ -100,6 +102,7 @@ public class Gas : MonoBehaviour
     {
         rangeIncrease = 0.1f * level;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.gasRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.gasRange + rangeIncrease, settings.gasRange + rangeIncrease, 1);
         var particleSettings = transform.Find("GasCloud").GetComponent<ParticleSystem>().main;
         particleSettings.startLifetime = settings.gasRange + (7f * rangeIncrease);
     }

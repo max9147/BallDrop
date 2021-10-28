@@ -5,6 +5,7 @@ using UnityEngine;
 public class AutoSave : MonoBehaviour
 {
     public GameObject ballSystem;
+    public GameObject levelSystem;
     public GameObject moneySystem;
     public GameObject UISystem;
     public GameObject weaponSystem;
@@ -36,6 +37,7 @@ public class AutoSave : MonoBehaviour
             UISystem.GetComponent<WeaponUpgrades>().SetUpgrade1(save.weaponUpgrades1);
             UISystem.GetComponent<WeaponUpgrades>().SetUpgrade2(save.weaponUpgrades2);
             UISystem.GetComponent<WeaponUpgrades>().SetUpgrade3(save.weaponUpgrades3);
+            levelSystem.GetComponent<LevelSystem>().ChangeLevel(0);
         }
         else
         {
@@ -46,6 +48,7 @@ public class AutoSave : MonoBehaviour
             UISystem.GetComponent<WeaponUpgrades>().ResetUpgrades();
             weaponSystem.GetComponent<WeaponSystem>().InitializeValues();
             moneySystem.GetComponent<BallScoring>().InitializeValues();
+            UISystem.GetComponent<Tutorial>().AskTutorial();
         }
     }
 

@@ -22,6 +22,7 @@ public class Spikes : MonoBehaviour
         UISystem = GameObject.Find("UISystem");
         spikeCount = settings.spikesCount;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.spikesRange;
+        transform.Find("Radius").localScale = new Vector3(settings.spikesRange, settings.spikesRange, 1);
         damageIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[7];
         spikeIncrease = 2 * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[7];
         speedIncrease = 0.2f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[7];

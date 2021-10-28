@@ -23,6 +23,7 @@ public class Gun : MonoBehaviour
         rangeIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[2];
         speedIncrease = 0.05f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[2];
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.gunRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.gunRange + rangeIncrease, settings.gunRange + rangeIncrease, 1);
     }
 
     private void FixedUpdate()
@@ -73,12 +74,14 @@ public class Gun : MonoBehaviour
     {
         rangeIncrease += 0.1f;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.gunRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.gunRange + rangeIncrease, settings.gunRange + rangeIncrease, 1);
     }
 
     public void SetRange(int level)
     {
         rangeIncrease = 0.1f * level;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.gunRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.gunRange + rangeIncrease, settings.gunRange + rangeIncrease, 1);
     }
 
     public void UpgradeSpeed()

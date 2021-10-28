@@ -22,7 +22,7 @@ public class InteractWeapons : MonoBehaviour
     {
         if (Input.touchCount > 0 && !UISystem.GetComponent<WeaponSelection>().GetWeaponSelectionScreenStatus())
         {
-            if (UISystem.GetComponent<UpgradeSystem>().CheckOpened() || UISystem.GetComponent<Settings>().GetSettingsStatus() || UISystem.GetComponent<OfflineIncome>().GetOfflineMenuStatus())
+            if (UISystem.GetComponent<UpgradeSystem>().CheckOpened() || UISystem.GetComponent<Settings>().GetSettingsStatus() || UISystem.GetComponent<OfflineIncome>().GetOfflineMenuStatus() || UISystem.GetComponent<Tutorial>().GetStatus())
             {
                 return;
             }
@@ -54,6 +54,7 @@ public class InteractWeapons : MonoBehaviour
                             curSellingWeapon = touchHit.collider.gameObject;
                             curSellingSprite = curSellingWeapon.GetComponent<SpriteRenderer>().sprite;
                             curSellingWeapon.GetComponent<SpriteRenderer>().sprite = weaponSelling;
+                            curSellingWeapon.transform.Find("Radius").gameObject.SetActive(true);
                         }
                         else if (curSellingWeapon == touchHit.collider.gameObject)
                         {
@@ -64,9 +65,11 @@ public class InteractWeapons : MonoBehaviour
                         else
                         {
                             curSellingWeapon.GetComponent<SpriteRenderer>().sprite = curSellingSprite;
+                            curSellingWeapon.transform.Find("Radius").gameObject.SetActive(false);
                             curSellingWeapon = touchHit.collider.gameObject;
                             curSellingSprite = curSellingWeapon.GetComponent<SpriteRenderer>().sprite;
                             curSellingWeapon.GetComponent<SpriteRenderer>().sprite = weaponSelling;
+                            curSellingWeapon.transform.Find("Radius").gameObject.SetActive(true);
                         }
                     }
                 }
@@ -92,6 +95,7 @@ public class InteractWeapons : MonoBehaviour
         if (isSelling)
         {
             curSellingWeapon.GetComponent<SpriteRenderer>().sprite = curSellingSprite;
+            curSellingWeapon.transform.Find("Radius").gameObject.SetActive(false);
             isSelling = false;
             curSellingWeapon = null;
         }

@@ -5,6 +5,9 @@ using UnityEngine;
 public class Minigun : MonoBehaviour
 {
     private bool isReloading = false;
+    private float damageIncrease = 0;
+    private float rangeIncrease = 0;
+    private float speedIncrease = 0;
     private GameObject currentBullet;
     private GameObject target;
     private GameObject UISystem;
@@ -15,8 +18,12 @@ public class Minigun : MonoBehaviour
 
     private void Start()
     {
-        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.minigunRange;
         UISystem = GameObject.Find("UISystem");
+        damageIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[16];
+        rangeIncrease = 0.2f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[16];
+        speedIncrease = 0.02f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[16];
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.minigunRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.minigunRange + rangeIncrease, settings.minigunRange + rangeIncrease, 1);
     }
 
     private void FixedUpdate()
@@ -53,6 +60,40 @@ public class Minigun : MonoBehaviour
         StartCoroutine(Reload());
     }
 
+    public void UpgradeDPS()
+    {
+        damageIncrease += 0.1f;
+    }
+
+    public void SetDPS(int level)
+    {
+        damageIncrease = 0.1f * level;
+    }
+
+    public void UpgradeRange()
+    {
+        rangeIncrease += 0.2f;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.minigunRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.minigunRange + rangeIncrease, settings.minigunRange + rangeIncrease, 1);
+    }
+
+    public void SetRange(int level)
+    {
+        rangeIncrease = 0.2f * level;
+        transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.minigunRange + rangeIncrease;
+        transform.Find("Radius").localScale = new Vector3(settings.minigunRange + rangeIncrease, settings.minigunRange + rangeIncrease, 1);
+    }
+
+    public void UpgradeSpeed()
+    {
+        speedIncrease += 0.02f;
+    }
+
+    public void SetSpeed(int level)
+    {
+        speedIncrease = 0.02f * level;
+    }
+
     public void AddBallInRadius(GameObject ball)
     {
         ballsInRadius.Add(ball);
@@ -67,14 +108,14 @@ public class Minigun : MonoBehaviour
     {
         if (target)
         {
-            target.transform.localScale -= new Vector3(settings.minigunDamage / 100, settings.minigunDamage / 100, 0);
-            UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(16, settings.minigunDamage);
+            target.transform.localScale -= new Vector3((settings.minigunDamage + damageIncrease) / 100, (settings.minigunDamage + damageIncrease) / 100, 0);
+            UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(16, settings.minigunDamage + damageIncrease);
         }
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(settings.minigunReload);
+        yield return new WaitForSeconds(settings.minigunReload - speedIncrease);
         isReloading = false;
     }
 }

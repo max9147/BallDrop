@@ -5,6 +5,9 @@ using UnityEngine;
 public class Sniper : MonoBehaviour
 {
     private bool isReloading = false;
+    private float damageIncrease = 0;
+    private float speedIncrease = 0;
+    private float critChance = 0;
     private GameObject currentBullet;
     private GameObject target;
     private GameObject UISystem;
@@ -16,6 +19,9 @@ public class Sniper : MonoBehaviour
     private void Start()
     {
         UISystem = GameObject.Find("UISystem");
+        damageIncrease = UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[11];
+        speedIncrease = 0.2f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[11];
+        critChance = 0.05f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[11];
     }
 
     private void FixedUpdate()
@@ -52,6 +58,36 @@ public class Sniper : MonoBehaviour
         StartCoroutine(Reload());
     }
 
+    public void UpgradeDPS()
+    {
+        damageIncrease++;
+    }
+
+    public void SetDPS(int level)
+    {
+        damageIncrease = level;
+    }
+
+    public void UpgradeSpeed()
+    {
+        speedIncrease += 0.2f;
+    }
+
+    public void SetSpeed(int level)
+    {
+        speedIncrease = 0.2f * level;
+    }
+
+    public void UpgradeCrit()
+    {
+        critChance += 0.05f;
+    }
+
+    public void SetCrit(int level)
+    {
+        critChance = 0.05f * level;
+    }
+
     public void AddBallInRadius(GameObject ball)
     {
         ballsInRadius.Add(ball);
@@ -64,13 +100,22 @@ public class Sniper : MonoBehaviour
 
     public void DealDamage(GameObject damagedBall)
     {
-        damagedBall.transform.localScale -= new Vector3(settings.sniperDamage / 100, settings.sniperDamage / 100, 0);
-        UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(11, settings.sniperDamage);
+        float checkCrit = Random.Range(0, 1);
+        if (checkCrit < critChance)
+        {
+            damagedBall.transform.localScale -= new Vector3((settings.sniperDamage + damageIncrease) / 100 * 2, (settings.sniperDamage + damageIncrease) / 100 * 2, 0);
+            UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(11, (settings.sniperDamage + damageIncrease) * 2);
+        }
+        else
+        {
+            damagedBall.transform.localScale -= new Vector3((settings.sniperDamage + damageIncrease) / 100, (settings.sniperDamage + damageIncrease) / 100, 0);
+            UISystem.GetComponent<WeaponUpgrades>().IncreaseDamage(11, settings.sniperDamage + damageIncrease);
+        }
     }
 
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(settings.sniperReload);
+        yield return new WaitForSeconds(settings.sniperReload - speedIncrease);
         isReloading = false;
     }
 }

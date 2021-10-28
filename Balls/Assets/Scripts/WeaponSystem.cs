@@ -56,6 +56,10 @@ public class WeaponSystem : MonoBehaviour
             {
                 boughtWeapons[i] = true;
             }
+            else
+            {
+                boughtWeapons[i] = false;
+            }
         }
         return boughtWeapons;
     }
