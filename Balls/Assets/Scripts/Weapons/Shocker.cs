@@ -92,8 +92,7 @@ public class Shocker : MonoBehaviour
     {
         rangeIncrease = 0.2f * level;
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.shockerRange + rangeIncrease;
-        transform.Find("Radius").localScale = new Vector3(settings.shockerRange + rangeIncrease, settings.shockerRange + rangeIncrease, 1);
-        transform.Find("Shock").transform.localScale = new Vector3(0.6f + 0.15f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[12], 0.6f + 0.15f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[12], 1);
+        transform.Find("Radius").localScale = new Vector3(settings.shockerRange + rangeIncrease, settings.shockerRange + rangeIncrease, 1);        
     }
 
     public void AddBallInRadius(GameObject ball)

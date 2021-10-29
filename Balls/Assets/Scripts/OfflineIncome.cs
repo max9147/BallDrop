@@ -14,6 +14,7 @@ public class OfflineIncome : MonoBehaviour
     private TimeSpan offlineTime;
 
     public GameObject moneySystem;
+    public GameObject soundSystem;
     public GameObject offlineMenu;
     public TextMeshProUGUI offlineTimeText;
     public TextMeshProUGUI collectText;
@@ -64,6 +65,7 @@ public class OfflineIncome : MonoBehaviour
 
     public void SelectNormal()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayClick();
         moneySystem.GetComponent<MoneySystem>().AddMoney(offlineRevenue, false);
         GetComponent<PrestigeSystem>().AddTotalEarnings(offlineRevenue);
         offlineMenu.SetActive(false);
@@ -71,6 +73,7 @@ public class OfflineIncome : MonoBehaviour
 
     public void SelectDouble()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayClick();
         moneySystem.GetComponent<MoneySystem>().AddMoney(offlineRevenue * 2, false);
         GetComponent<PrestigeSystem>().AddTotalEarnings(offlineRevenue * 2);
         offlineMenu.SetActive(false);

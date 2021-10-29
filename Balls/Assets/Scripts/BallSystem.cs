@@ -99,7 +99,7 @@ public class BallSystem : MonoBehaviour
         float tryGold = Random.Range(0, 100);
         if (tryGold < goldenChance)
         {
-            spawnedBall = Instantiate(goldenBallPrefab, new Vector3(Random.Range(-1f, 1f) + levels[id].transform.position.x, 7f, 0f), Quaternion.identity);
+            spawnedBall = Instantiate(goldenBallPrefab, new Vector3(Random.Range(-1f, 1f) + levels[id].transform.position.x, 7f, 0f), Quaternion.identity, levels[id].transform);
         }
         else
         {

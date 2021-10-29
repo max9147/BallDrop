@@ -9,13 +9,13 @@ public class LevelUpgrades : MonoBehaviour
     private int[] upgrade1Levels = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int[] upgrade2Levels = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int[] upgrade3Levels = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    private int[] upgrade1MaxLevels = new int[] { 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9 };
+    private int[] upgrade1MaxLevels = new int[] { 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19 };
     private int[] upgrade2MaxLevels = new int[] { 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16 };
     private int[] upgrade3MaxLevels = new int[] { 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18 };
-    private double[] upgrade1Prices = new double[] { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
+    private double[] upgrade1Prices = new double[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     private double[] upgrade2Prices = new double[] { 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8 };
     private double[] upgrade3Prices = new double[] { 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15 };
-    private float[] upgrade1PriceIncrease = new float[] { 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17 };
+    private float[] upgrade1PriceIncrease = new float[] { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
     private float[] upgrade2PriceIncrease = new float[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 };
     private float[] upgrade3PriceIncrease = new float[] { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
 
@@ -33,10 +33,12 @@ public class LevelUpgrades : MonoBehaviour
     public TextMeshProUGUI[] upgrade3Descriptions;
     public GameObject ballSystem;
     public GameObject moneySystem;
+    public GameObject soundSystem;
     public GameObject[] finishes;
 
     public void BuyUpgrade1(int level)
     {
+        soundSystem.GetComponent<SoundSystem>().PlayCoin();
         upgrade1Levels[level]++;
         moneySystem.GetComponent<MoneySystem>().SpendMoney(upgrade1Prices[level]);
         upgrade1Prices[level] *= upgrade1PriceIncrease[level];
@@ -65,6 +67,7 @@ public class LevelUpgrades : MonoBehaviour
 
     public void BuyUpgrade2(int level)
     {
+        soundSystem.GetComponent<SoundSystem>().PlayCoin();
         upgrade2Levels[level]++;
         moneySystem.GetComponent<MoneySystem>().SpendMoney(upgrade2Prices[level]);
         upgrade2Prices[level] *= upgrade2PriceIncrease[level];
@@ -93,6 +96,7 @@ public class LevelUpgrades : MonoBehaviour
 
     public void BuyUpgrade3(int level)
     {
+        soundSystem.GetComponent<SoundSystem>().PlayCoin();
         upgrade3Levels[level]++;
         moneySystem.GetComponent<MoneySystem>().SpendMoney(upgrade3Prices[level]);
         upgrade3Prices[level] *= upgrade3PriceIncrease[level];
@@ -135,7 +139,7 @@ public class LevelUpgrades : MonoBehaviour
             upgrade1Sliders[i].value = 0;
             upgrade2Sliders[i].value = 0;
             upgrade3Sliders[i].value = 0;
-            upgrade1Prices[i] = 10;
+            upgrade1Prices[i] = 5;
             upgrade2Prices[i] = 8;
             upgrade3Prices[i] = 15;
             upgrade1Costs[i].text = upgrade1Prices[i].ToString();

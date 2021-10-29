@@ -8,6 +8,7 @@ public class Tutorial : MonoBehaviour
     public GameObject levelSystem;
     public GameObject tutorialMenu;
     public GameObject tutorial;
+    public GameObject soundSystem;
     public GameObject[] tutorialParts;
 
     private bool isPlaying = false;
@@ -39,6 +40,7 @@ public class Tutorial : MonoBehaviour
 
     public void StartTutorial()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayClick();
         waitTime = 0;
         tutorial.SetActive(true);
         tutorialMenu.SetActive(false);
@@ -46,6 +48,7 @@ public class Tutorial : MonoBehaviour
 
     public void NextStep()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayClick();
         waitTime = 0;
         curStep++;
         if (curStep == 3)
@@ -61,6 +64,7 @@ public class Tutorial : MonoBehaviour
 
     public void EndTutorial()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayClick();
         tutorial.SetActive(false);
         tutorialMenu.SetActive(false);
         isPlaying = false;

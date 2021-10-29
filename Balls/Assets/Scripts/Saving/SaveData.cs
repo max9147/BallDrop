@@ -34,8 +34,10 @@ public class SaveData
     public int[] levelDroppedCounts = new int[18];
     public double[] levelIncomeCounts = new double[18];
     public double[] weaponDamages = new double[18];
+    public bool musicStatus;
+    public bool effectsStatus;
 
-    public SaveData(MoneySystem moneySystem, PrestigeSystem prestigeSystem, PrestigeUpgrades prestigeUpgrades, WeaponSystem weaponSystem, BallSystem ballSystem, BallScoring ballScoring, LevelUpgrades levelUpgrades, WeaponUpgrades weaponUpgrades)
+    public SaveData(MoneySystem moneySystem, PrestigeSystem prestigeSystem, PrestigeUpgrades prestigeUpgrades, WeaponSystem weaponSystem, BallSystem ballSystem, BallScoring ballScoring, LevelUpgrades levelUpgrades, WeaponUpgrades weaponUpgrades, Settings settings)
     {
         money = moneySystem.GetMoneyAmount();
         prestigePointsCurrent = prestigeSystem.GetPrestigeCurrent();
@@ -65,5 +67,7 @@ public class SaveData
         levelDroppedCounts = ballSystem.GetComponent<BallSystem>().GetDroppedCounts();
         levelIncomeCounts = ballScoring.GetLevelIncomes();
         weaponDamages = weaponUpgrades.GetDamage();
+        musicStatus = settings.GetMusicStatus();
+        effectsStatus = settings.GetEffectsStatus();
     }
 }

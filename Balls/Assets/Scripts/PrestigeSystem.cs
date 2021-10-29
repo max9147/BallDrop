@@ -19,6 +19,7 @@ public class PrestigeSystem : MonoBehaviour
     public GameObject levelSystem;
     public GameObject moneySystem;
     public GameObject weaponSystem;
+    public GameObject soundSystem;
     public GameObject prestigeConfirmation;
     public GameObject[] prestigeUpgradeButtons;
     public TextMeshProUGUI bottomPrestigeCounter;
@@ -67,21 +68,25 @@ public class PrestigeSystem : MonoBehaviour
 
     public void PressPrestige()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayClick();
         prestigeConfirmation.SetActive(true);
     }
 
     public void ClosePrestige()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayClick();
         prestigeConfirmation.SetActive(false);
     }
 
     public void PressPrestigeNormal()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayClick();
         PrestigeReset(1);
     }
 
     public void PressPrestigeDouble()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayClick();
         PrestigeReset(2);
     }
 

@@ -18,7 +18,7 @@ public class Poisoned : MonoBehaviour
     {
         UISystem = GameObject.Find("UISystem");
         curPoisonPS = Instantiate(poisonPS, transform);
-        damageIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[8];
+        damageIncrease = UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[8];
         timeIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[8];
         damageBoost = UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[8];
         poisonTime = settings.poisonTime + timeIncrease;

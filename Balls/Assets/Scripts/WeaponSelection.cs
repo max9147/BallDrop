@@ -11,6 +11,7 @@ public class WeaponSelection : MonoBehaviour
     public Button[] weaponSelectionButtons;
     public GameObject weaponSelectionScreen;
     public GameObject weaponSystem;
+    public GameObject soundSystem;
     public Sprite weaponLock;
     public Sprite[] weaponSprites;
 
@@ -35,6 +36,7 @@ public class WeaponSelection : MonoBehaviour
 
     public void SelectWeapon(int id)
     {
+        soundSystem.GetComponent<SoundSystem>().PlayClick();
         weaponSystem.GetComponent<WeaponSystem>().AssignWeapon(id);        
         weaponSelectionButtons[id].interactable = false;
         weaponSelectionScreen.SetActive(false);

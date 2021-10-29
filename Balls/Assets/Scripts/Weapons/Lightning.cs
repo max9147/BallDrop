@@ -19,7 +19,7 @@ public class Lightning : MonoBehaviour
     private void Start()
     {
         UISystem = GameObject.Find("UISystem");
-        damageIncrease = 0.5f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[6];
+        damageIncrease = 0.7f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade1()[6];
         rangeIncrease = 0.1f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade2()[6];
         speedIncrease = 0.05f * UISystem.GetComponent<WeaponUpgrades>().GetUpgrade3()[6];
         transform.Find("BallCheck").GetComponent<CircleCollider2D>().radius = settings.lightningRange + rangeIncrease;
@@ -36,6 +36,7 @@ public class Lightning : MonoBehaviour
                 if (target.transform.localScale.x <= settings.ballMinHP / 100)
                 {
                     target = null;
+                    Destroy(curBolt);
                 }
             }
         }
@@ -60,12 +61,12 @@ public class Lightning : MonoBehaviour
 
     public void UpgradeDPS()
     {
-        damageIncrease += 0.5f;
+        damageIncrease += 0.7f;
     }
 
     public void SetDPS(int level)
     {
-        damageIncrease = 0.5f * level;
+        damageIncrease = 0.7f * level;
     }
 
     public void UpgradeRange()

@@ -15,6 +15,7 @@ public class PrestigeUpgrades : MonoBehaviour
     public Button[] upgradeButtons;
     public GameObject ballSystem;
     public GameObject moneySystem;
+    public GameObject soundSystem;
     public GameObject[] levelButtons;
     public RenderTexture[] levelRenders;
     public Slider[] progressSliders;
@@ -47,6 +48,7 @@ public class PrestigeUpgrades : MonoBehaviour
 
     public void BuyUpgrade1()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayCoin();
         UpgradeRefresh(0);
         GetComponent<WeaponSelection>().ClearWeaponSelection();
         levelButtons[upgradeLevels[0]].GetComponent<Button>().interactable = true;
@@ -55,6 +57,7 @@ public class PrestigeUpgrades : MonoBehaviour
 
     public void BuyUpgrade2()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayCoin();
         UpgradeRefresh(1);
         moneySystem.GetComponent<BallScoring>().UpgradeGlobalMul();
         if (upgradeLevels[1] == maxLevels[1])
@@ -69,6 +72,7 @@ public class PrestigeUpgrades : MonoBehaviour
 
     public void BuyUpgrade3()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayCoin();
         UpgradeRefresh(2);
         ballSystem.GetComponent<BallSystem>().UpgradeGlobalMul();
         if (upgradeLevels[2] == maxLevels[2])
@@ -83,6 +87,7 @@ public class PrestigeUpgrades : MonoBehaviour
 
     public void BuyUpgrade4()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayCoin();
         UpgradeRefresh(3);
         moneySystem.GetComponent<BallScoring>().UpgradeFinishMul();
         if (upgradeLevels[3] == maxLevels[3])
@@ -97,6 +102,7 @@ public class PrestigeUpgrades : MonoBehaviour
 
     public void BuyUpgrade5()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayCoin();
         UpgradeRefresh(4);
         GetComponent<OfflineIncome>().UpgradeMaxTime();
         if (upgradeLevels[4] == maxLevels[4])
@@ -111,6 +117,7 @@ public class PrestigeUpgrades : MonoBehaviour
 
     public void BuyUpgrade6()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayCoin();
         UpgradeRefresh(5);
         ballSystem.GetComponent<BallSystem>().UpgradeGoldenChance();
         if (upgradeLevels[5] == maxLevels[5])
@@ -125,6 +132,7 @@ public class PrestigeUpgrades : MonoBehaviour
 
     public void BuyUpgrade7()
     {
+        soundSystem.GetComponent<SoundSystem>().PlayCoin();
         UpgradeRefresh(6);
         moneySystem.GetComponent<MoneySystem>().UpgradeStartMoney();
         if (upgradeLevels[6] == maxLevels[6])

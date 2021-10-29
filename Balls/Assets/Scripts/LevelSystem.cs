@@ -11,11 +11,16 @@ public class LevelSystem : MonoBehaviour
     public GameObject selectionOutline;
     public GameObject weaponSystem;
     public GameObject UISystem;
+    public GameObject soundSystem;
     public GameObject[] levelButtons;
     public GameObject[] levels;
 
     public void ChangeLevel(int id)
     {
+        if (currentLevel != -1)
+        {
+            soundSystem.GetComponent<SoundSystem>().PlayClick();
+        }
         if (!weaponSystem.GetComponent<WeaponSystem>().GetLevelWeapon(id))
         {
             UISystem.GetComponent<UpgradeSystem>().CloseUpgradeMenu();

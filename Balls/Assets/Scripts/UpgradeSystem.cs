@@ -7,6 +7,7 @@ public class UpgradeSystem : MonoBehaviour
     private bool canOpen = false;
     private int curOpen = -1;
 
+    public GameObject soundSystem;
     public GameObject[] upgradeMenus;
     public GameObject[] weaponUpgradeTabs;
     public GameObject[] levelUpgradeTabs;
@@ -15,6 +16,7 @@ public class UpgradeSystem : MonoBehaviour
     {
         if (canOpen)
         {
+            soundSystem.GetComponent<SoundSystem>().PlayWhoosh();
             if (curOpen == id)
             {
                 CloseUpgradeMenu();

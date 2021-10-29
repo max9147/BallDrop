@@ -10,6 +10,7 @@ public class CheckFinish : MonoBehaviour
     private float prestigeMultiplier = 1f;
 
     public GameObject moneySystem;
+    public GameObject soundSystem;
 
     private void Start()
     {
@@ -78,6 +79,7 @@ public class CheckFinish : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ball"))
         {
+            soundSystem.GetComponent<SoundSystem>().PlayBallPop();
             switch (tag)
             {
                 case "RewardLow":
@@ -85,17 +87,17 @@ public class CheckFinish : MonoBehaviour
                     {
                         moneySystem.GetComponent<BallScoring>().ScoreBall(1d * defaultMultipliers[levelID] * prestigeMultiplier, collision.transform.parent.name);
                     }
-                    else
+                    else if (collision.CompareTag("GoldenBall"))
                     {
                         moneySystem.GetComponent<BallScoring>().ScoreBall(1d * defaultMultipliers[levelID] * prestigeMultiplier * 10, collision.transform.parent.name);
                     }
                     break;
-                case "RewardHigh":                    
+                case "RewardHigh":
                     if (collision.CompareTag("Ball"))
                     {
                         moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d * defaultMultipliers[levelID] * prestigeMultiplier, collision.transform.parent.name);
                     }
-                    else
+                    else if (collision.CompareTag("GoldenBall"))
                     {
                         moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d * defaultMultipliers[levelID] * prestigeMultiplier * 10, collision.transform.parent.name);
                     }

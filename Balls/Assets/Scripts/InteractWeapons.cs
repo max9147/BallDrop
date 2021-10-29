@@ -16,6 +16,7 @@ public class InteractWeapons : MonoBehaviour
     public Camera cam;
     public GameObject moneySystem;
     public GameObject UISystem;
+    public GameObject soundSystem;
     public Sprite weaponSelling;
 
     private void Update()
@@ -44,6 +45,7 @@ public class InteractWeapons : MonoBehaviour
                 {                 
                     if (touchHit.collider.gameObject.layer == LayerMask.NameToLayer("WeaponSpot"))
                     {
+                        soundSystem.GetComponent<SoundSystem>().PlayWeaponSet();
                         BuyWeapon(touchHit.collider.gameObject);
                     }
                     else if (touchHit.collider.gameObject.layer == LayerMask.NameToLayer("Weapon"))
@@ -58,6 +60,7 @@ public class InteractWeapons : MonoBehaviour
                         }
                         else if (curSellingWeapon == touchHit.collider.gameObject)
                         {
+                            soundSystem.GetComponent<SoundSystem>().PlayCoin();
                             SellWeapon(curSellingWeapon);                     
                             isSelling = false;
                             curSellingWeapon = null;
