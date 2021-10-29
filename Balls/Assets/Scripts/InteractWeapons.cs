@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class InteractWeapons : MonoBehaviour
 {
     private bool isSelling = false;
+    private float selectTime = 0f;
     private GameObject curSellingWeapon;
     private GameObject touchedObject;
     private RaycastHit2D touchHit;
@@ -21,6 +22,10 @@ public class InteractWeapons : MonoBehaviour
 
     private void Update()
     {
+        if (isSelling)
+        {
+            selectTime += Time.deltaTime;
+        }
         if (Input.touchCount > 0 && !UISystem.GetComponent<WeaponSelection>().GetWeaponSelectionScreenStatus())
         {
             if (UISystem.GetComponent<UpgradeSystem>().CheckOpened() || UISystem.GetComponent<Settings>().GetSettingsStatus() || UISystem.GetComponent<OfflineIncome>().GetOfflineMenuStatus() || UISystem.GetComponent<Tutorial>().GetStatus())
@@ -53,12 +58,13 @@ public class InteractWeapons : MonoBehaviour
                         if (!isSelling)
                         {
                             isSelling = true;
+                            selectTime = 0;
                             curSellingWeapon = touchHit.collider.gameObject;
                             curSellingSprite = curSellingWeapon.GetComponent<SpriteRenderer>().sprite;
                             curSellingWeapon.GetComponent<SpriteRenderer>().sprite = weaponSelling;
                             curSellingWeapon.transform.Find("Radius").gameObject.SetActive(true);
                         }
-                        else if (curSellingWeapon == touchHit.collider.gameObject)
+                        else if (curSellingWeapon == touchHit.collider.gameObject && selectTime > 0.5f)
                         {
                             soundSystem.GetComponent<SoundSystem>().PlayCoin();
                             SellWeapon(curSellingWeapon);                     
@@ -67,6 +73,7 @@ public class InteractWeapons : MonoBehaviour
                         }
                         else
                         {
+                            selectTime = 0;
                             curSellingWeapon.GetComponent<SpriteRenderer>().sprite = curSellingSprite;
                             curSellingWeapon.transform.Find("Radius").gameObject.SetActive(false);
                             curSellingWeapon = touchHit.collider.gameObject;
