@@ -15,6 +15,7 @@ public class PrestigeSystem : MonoBehaviour
     private double totalEarningsLeft;
     private GameObject[] toDestroy;
 
+    public GameObject adSystem;
     public GameObject ballSystem;
     public GameObject levelSystem;
     public GameObject moneySystem;
@@ -86,7 +87,11 @@ public class PrestigeSystem : MonoBehaviour
 
     public void PressPrestigeDouble()
     {
-        soundSystem.GetComponent<SoundSystem>().PlayClick();
+        adSystem.GetComponent<AdSystem>().ShowRewardedVideo(1);
+    }
+
+    public void AdCompleted()
+    {
         PrestigeReset(2);
     }
 

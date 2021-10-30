@@ -8,6 +8,7 @@ public class AdDouble : MonoBehaviour
     private double adTime = 0;
     private bool adActive = false;
 
+    public GameObject adSystem;
     public GameObject moneySystem;
     public GameObject adButton;
     public GameObject adCounter;
@@ -26,17 +27,22 @@ public class AdDouble : MonoBehaviour
         else if (adActive)
         {
             adTime -= Time.deltaTime;
-            adCircle.GetComponent<Image>().fillAmount = (float)((50d - adTime) / 50d);
+            adCircle.GetComponent<Image>().fillAmount = (float)((7200d - adTime) / 7200d);
         }
     }
 
     public void WatchAd()
     {
+        adSystem.GetComponent<AdSystem>().ShowRewardedVideo(0);
+    }
+
+    public void AdCompleted()
+    {
         moneySystem.GetComponent<BallScoring>().setAdMul(2);
         adActive = true;
         adButton.SetActive(false);
         adCounter.SetActive(true);
-        adTime = 50f;
+        adTime = 7200d;
     }
 
     public double GetAdTime()

@@ -13,6 +13,7 @@ public class OfflineIncome : MonoBehaviour
     private DateTime lastLogin;
     private TimeSpan offlineTime;
 
+    public GameObject adSystem;
     public GameObject moneySystem;
     public GameObject soundSystem;
     public GameObject offlineMenu;
@@ -74,6 +75,11 @@ public class OfflineIncome : MonoBehaviour
     public void SelectDouble()
     {
         soundSystem.GetComponent<SoundSystem>().PlayClick();
+        adSystem.GetComponent<AdSystem>().ShowRewardedVideo(2);
+    }
+
+    public void AdCompleted()
+    {
         moneySystem.GetComponent<MoneySystem>().AddMoney(offlineRevenue * 2, false);
         GetComponent<PrestigeSystem>().AddTotalEarnings(offlineRevenue * 2);
         offlineMenu.SetActive(false);
