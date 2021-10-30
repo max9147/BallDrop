@@ -36,8 +36,9 @@ public class SaveData
     public double[] weaponDamages = new double[18];
     public bool musicStatus;
     public bool effectsStatus;
+    public double adTime;
 
-    public SaveData(MoneySystem moneySystem, PrestigeSystem prestigeSystem, PrestigeUpgrades prestigeUpgrades, WeaponSystem weaponSystem, BallSystem ballSystem, BallScoring ballScoring, LevelUpgrades levelUpgrades, WeaponUpgrades weaponUpgrades, Settings settings)
+    public SaveData(MoneySystem moneySystem, PrestigeSystem prestigeSystem, PrestigeUpgrades prestigeUpgrades, WeaponSystem weaponSystem, BallSystem ballSystem, BallScoring ballScoring, LevelUpgrades levelUpgrades, WeaponUpgrades weaponUpgrades, Settings settings, AdDouble adDouble)
     {
         money = moneySystem.GetMoneyAmount();
         prestigePointsCurrent = prestigeSystem.GetPrestigeCurrent();
@@ -69,5 +70,6 @@ public class SaveData
         weaponDamages = weaponUpgrades.GetDamage();
         musicStatus = settings.GetMusicStatus();
         effectsStatus = settings.GetEffectsStatus();
+        adTime = adDouble.GetAdTime();
     }
 }

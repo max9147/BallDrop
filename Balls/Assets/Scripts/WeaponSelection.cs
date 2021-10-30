@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class WeaponSelection : MonoBehaviour
 {
-    private string[] weaponNames = new string[] { "Laser", "Gas", "Gun", "Flamethrower", "Hive", "Cannon", "Lightning", "Spikes", "Poison", "DarkMagic", "Saw", "Sniper", "Shocker", "Shotgun", "Grenades", "Pump", "Minigun", "Virus" };
+    private string[] weaponNames = new string[] { "Laser", "Gas", "Gun", "Flamethrower", "Hive", "Cannon", "Lightning", "Spikes", "Poison", "Dark Magic", "Saw", "Sniper", "Shocker", "Shotgun", "Grenades", "Pump", "Minigun", "Virus" };
 
     public Button[] weaponSelectionButtons;
     public GameObject weaponSelectionScreen;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,10 @@ public class AutoSave : MonoBehaviour
             UISystem.GetComponent<WeaponUpgrades>().SetUpgrade3(save.weaponUpgrades3);
             levelSystem.GetComponent<LevelSystem>().ChangeLevel(0);
             UISystem.GetComponent<Settings>().SetVolume(save.musicStatus, save.effectsStatus);
+            if (save.adTime - (DateTime.Now - DateTime.Parse(save.curDateTime)).TotalSeconds > 0)
+            {
+                UISystem.GetComponent<AdDouble>().SetAdTime(save.adTime - (DateTime.Now - DateTime.Parse(save.curDateTime)).TotalSeconds);
+            }
         }
         else
         {
@@ -56,7 +61,7 @@ public class AutoSave : MonoBehaviour
     IEnumerator AutoSaveDelay()
     {
         yield return new WaitForSeconds(1);
-        SaveGameSystem.SaveGame(moneySystem.GetComponent<MoneySystem>(), UISystem.GetComponent<PrestigeSystem>(), UISystem.GetComponent<PrestigeUpgrades>(), weaponSystem.GetComponent<WeaponSystem>(), ballSystem.GetComponent<BallSystem>(), moneySystem.GetComponent<BallScoring>(), UISystem.GetComponent<LevelUpgrades>(), UISystem.GetComponent<WeaponUpgrades>(), UISystem.GetComponent<Settings>());
+        SaveGameSystem.SaveGame(moneySystem.GetComponent<MoneySystem>(), UISystem.GetComponent<PrestigeSystem>(), UISystem.GetComponent<PrestigeUpgrades>(), weaponSystem.GetComponent<WeaponSystem>(), ballSystem.GetComponent<BallSystem>(), moneySystem.GetComponent<BallScoring>(), UISystem.GetComponent<LevelUpgrades>(), UISystem.GetComponent<WeaponUpgrades>(), UISystem.GetComponent<Settings>(), UISystem.GetComponent<AdDouble>());
         StartCoroutine(AutoSaveDelay());
     }
 }

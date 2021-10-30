@@ -34,16 +34,17 @@ public class Tutorial : MonoBehaviour
 
     public void AskTutorial()
     {
-        tutorialMenu.SetActive(true);
-        isPlaying = true;
+        tutorialMenu.SetActive(true);        
     }
 
     public void StartTutorial()
     {
         soundSystem.GetComponent<SoundSystem>().PlayClick();
         waitTime = 0;
+        isPlaying = true;
         tutorial.SetActive(true);
         tutorialMenu.SetActive(false);
+        tutorialParts[0].SetActive(true);
     }
 
     public void NextStep()
@@ -67,6 +68,8 @@ public class Tutorial : MonoBehaviour
         soundSystem.GetComponent<SoundSystem>().PlayClick();
         tutorial.SetActive(false);
         tutorialMenu.SetActive(false);
+        tutorialParts[2].SetActive(false);
+        curStep = 0;
         isPlaying = false;
         levelSystem.GetComponent<LevelSystem>().ChangeLevel(0);
     }

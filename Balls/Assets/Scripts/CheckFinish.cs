@@ -89,7 +89,7 @@ public class CheckFinish : MonoBehaviour
                     }
                     else if (collision.CompareTag("GoldenBall"))
                     {
-                        moneySystem.GetComponent<BallScoring>().ScoreBall(1d * defaultMultipliers[levelID] * prestigeMultiplier * 10, collision.transform.parent.name);
+                        moneySystem.GetComponent<BallScoring>().ScoreBall(1d * defaultMultipliers[levelID] * prestigeMultiplier * 5, collision.transform.parent.name);
                     }
                     break;
                 case "RewardHigh":
@@ -99,7 +99,7 @@ public class CheckFinish : MonoBehaviour
                     }
                     else if (collision.CompareTag("GoldenBall"))
                     {
-                        moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d * defaultMultipliers[levelID] * prestigeMultiplier * 10, collision.transform.parent.name);
+                        moneySystem.GetComponent<BallScoring>().ScoreBall(1.5d * defaultMultipliers[levelID] * prestigeMultiplier * 5, collision.transform.parent.name);
                     }
                     break;
                 default:

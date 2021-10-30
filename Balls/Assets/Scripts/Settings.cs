@@ -21,7 +21,7 @@ public class Settings : MonoBehaviour
     public Sprite effectsOff;
 
     private void Start()
-    {
+    {        
         if (!musicStatus)
         {
             mixer.SetFloat("MusicVolume", -80f);
@@ -38,7 +38,6 @@ public class Settings : MonoBehaviour
         settingsMenu.SetActive(true);
         settingsTabs[0].SetActive(true);
         settingsTabs[1].SetActive(false);
-        settingsTabs[2].SetActive(false);
     }
 
     public void CloseSettings()
@@ -110,18 +109,18 @@ public class Settings : MonoBehaviour
         }
     }
 
-    public void OpenLanguageTab()
-    {
+    public void ShowTutorial()
+    {        
         soundSystem.GetComponent<SoundSystem>().PlayClick();
-        settingsTabs[0].SetActive(false);
-        settingsTabs[1].SetActive(true);
+        settingsMenu.SetActive(false);
+        GetComponent<Tutorial>().StartTutorial();
     }
 
     public void OpenAuthorsTab()
     {
         soundSystem.GetComponent<SoundSystem>().PlayClick();
         settingsTabs[0].SetActive(false);
-        settingsTabs[2].SetActive(true);
+        settingsTabs[1].SetActive(true);
     }
     
     public void ReturnToMain()
@@ -129,6 +128,5 @@ public class Settings : MonoBehaviour
         soundSystem.GetComponent<SoundSystem>().PlayClick();
         settingsTabs[0].SetActive(true);
         settingsTabs[1].SetActive(false);
-        settingsTabs[2].SetActive(false);
     }
 }
