@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PrestigeSystem : MonoBehaviour
 {
-    private double prestigePointsCurrent = 0;
+    private double prestigePointsCurrent = 2;
     private double prestigePointsTotal = 0;
     private double prestigePointsGain = 0;
     private double prestigeValueBoost = 100;
@@ -30,6 +30,11 @@ public class PrestigeSystem : MonoBehaviour
     public TextMeshProUGUI prestigeDoubleText;
     public TextMeshProUGUI moneyLeftText;
     public TextMeshProUGUI prestigeValueBoostText;
+
+    private void Start()
+    {
+        RefreshButtonStatus();
+    }
 
     public void AddTotalEarnings(double amount)
     {
@@ -170,7 +175,7 @@ public class PrestigeSystem : MonoBehaviour
         GetComponent<WeaponUpgrades>().ResetUpgrades();
         prestigePointsCurrent += prestigePointsGain * mul;
         prestigePointsTotal += prestigePointsGain * mul;
-        prestigeValueBoost += prestigePointsGain * mul * 0.01f;
+        prestigeValueBoost = 100 + Math.Pow(prestigePointsTotal, 0.6) * 5;
         totalEarnings = 0;
         prestigePointsGain = 0;
         RefreshPrestigeStats();

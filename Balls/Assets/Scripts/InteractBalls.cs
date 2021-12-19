@@ -25,7 +25,7 @@ public class InteractBalls : MonoBehaviour
                 touchHit = Physics2D.Raycast(touchPos, Vector2.zero);
                 if (touchHit && touchHit.collider.gameObject.layer == LayerMask.NameToLayer("Ball"))
                 {
-                    touchHit.collider.transform.localScale -= new Vector3(0.005f, 0.005f, 0);
+                    touchHit.collider.transform.localScale -= new Vector3(0.01f, 0.01f, 0);
                 }
             }
         }

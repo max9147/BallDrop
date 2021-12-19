@@ -64,7 +64,7 @@ public class InteractWeapons : MonoBehaviour
                             curSellingWeapon.GetComponent<SpriteRenderer>().sprite = weaponSelling;
                             curSellingWeapon.transform.Find("Radius").gameObject.SetActive(true);
                         }
-                        else if (curSellingWeapon == touchHit.collider.gameObject && selectTime > 0.5f)
+                        else if (curSellingWeapon == touchHit.collider.gameObject && selectTime > 1f)
                         {
                             soundSystem.GetComponent<SoundSystem>().PlayCoin();
                             SellWeapon(curSellingWeapon);                     
