@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 
 public class AdSystem : MonoBehaviour, IUnityAdsListener
 {
@@ -53,12 +54,15 @@ public class AdSystem : MonoBehaviour, IUnityAdsListener
             {
                 case 0:
                     UISystem.GetComponent<AdDouble>().AdCompleted();
+                    Analytics.CustomEvent("AdDouble");
                     break;
                 case 1:
                     UISystem.GetComponent<PrestigeSystem>().AdCompleted();
+                    Analytics.CustomEvent("AdPrestige");
                     break;
                 case 2:
                     UISystem.GetComponent<OfflineIncome>().AdCompleted();
+                    Analytics.CustomEvent("AdOffline");
                     break;
                 default:
                     break;

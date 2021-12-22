@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 
 public class PrestigeSystem : MonoBehaviour
 {
@@ -143,6 +144,7 @@ public class PrestigeSystem : MonoBehaviour
 
     private void PrestigeReset(int mul)
     {
+        Analytics.CustomEvent("Prestige", new Dictionary<string, object> { { "prestigeAmount", prestigePointsGain.ToString() } });
         toDestroy = GameObject.FindGameObjectsWithTag("Ball");
         foreach (var item in toDestroy)
         {
