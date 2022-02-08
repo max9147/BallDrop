@@ -177,7 +177,7 @@ public class PrestigeSystem : MonoBehaviour
         GetComponent<WeaponUpgrades>().ResetUpgrades();
         prestigePointsCurrent += prestigePointsGain * mul;
         prestigePointsTotal += prestigePointsGain * mul;
-        prestigeValueBoost = 100 + Math.Pow(prestigePointsTotal, 0.6) * 5;
+        prestigeValueBoost = 100 + Math.Pow(prestigePointsTotal, 0.4) * 25;
         totalEarnings = 0;
         prestigePointsGain = 0;
         RefreshPrestigeStats();
