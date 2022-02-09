@@ -23,17 +23,22 @@ public class OfflineIncome : MonoBehaviour
 
     public string curDateTime;
     public double curIncome;
+    public bool haveSave = false;
 
     private void OnApplicationFocus(bool focus)
     {
         if (focus)
         {
-            CallOfflineProgress(curDateTime, curIncome);
+            if (haveSave)
+            {
+                CallOfflineProgress(curDateTime, curIncome);
+            }
         }
         else
         {
             curDateTime = DateTime.Now.ToString();
             curIncome = moneySystem.GetComponent<MoneySystem>().GetBuffer();
+            haveSave = true;
         }
     }
 
