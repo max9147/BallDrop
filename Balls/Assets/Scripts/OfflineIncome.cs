@@ -21,8 +21,24 @@ public class OfflineIncome : MonoBehaviour
     public TextMeshProUGUI collectText;
     public TextMeshProUGUI doubleCollectText;
 
+    public string curDateTime;
+    public double curIncome;
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+        {
+            CallOfflineProgress(curDateTime, curIncome);
+        }
+        else
+        {
+            curDateTime = DateTime.Now.ToString();
+            curIncome = moneySystem.GetComponent<MoneySystem>().GetBuffer();
+        }
+    }
+
     public void CallOfflineProgress(string lastSavedTime, double moneyPerSecond)
-    {        
+    {
         lastLogin = DateTime.Parse(lastSavedTime);
         offlineTime = DateTime.Now - lastLogin;
         if (offlineTime.TotalHours > maxOfflineTime)
