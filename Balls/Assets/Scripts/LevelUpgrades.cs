@@ -22,6 +22,9 @@ public class LevelUpgrades : MonoBehaviour
     public Button[] upgrade1Buttons;
     public Button[] upgrade2Buttons;
     public Button[] upgrade3Buttons;
+    public Button[] upgradeMax1Buttons;
+    public Button[] upgradeMax2Buttons;
+    public Button[] upgradeMax3Buttons;
     public Slider[] upgrade1Sliders;
     public Slider[] upgrade2Sliders;
     public Slider[] upgrade3Sliders;
@@ -35,6 +38,24 @@ public class LevelUpgrades : MonoBehaviour
     public GameObject moneySystem;
     public GameObject soundSystem;
     public GameObject[] finishes;
+
+    public void BuyMaxUpgrade1(int level)
+    {
+        double totalPrice = 0;
+        int avaliableLevels = 0;
+        for (int i = 0; i < upgrade1MaxLevels[level] - upgrade1Levels[level]; i++)
+        {
+            totalPrice += upgrade1Prices[level] * Mathf.Pow(upgrade1PriceIncrease[level], i);
+            if (moneySystem.GetComponent<MoneySystem>().GetMoneyAmount() >= totalPrice)
+            {
+                avaliableLevels++;
+            }
+        }
+        for (int j = 0; j < avaliableLevels; j++)
+        {
+            BuyUpgrade1(level);
+        }
+    }
 
     public void BuyUpgrade1(int level)
     {
@@ -65,6 +86,24 @@ public class LevelUpgrades : MonoBehaviour
         return upgrade1Levels;
     }
 
+    public void BuyMaxUpgrade2(int level)
+    {
+        double totalPrice = 0;
+        int avaliableLevels = 0;
+        for (int i = 0; i < upgrade2MaxLevels[level] - upgrade2Levels[level]; i++)
+        {
+            totalPrice += upgrade2Prices[level] * Mathf.Pow(upgrade2PriceIncrease[level], i);
+            if (moneySystem.GetComponent<MoneySystem>().GetMoneyAmount() >= totalPrice)
+            {
+                avaliableLevels++;
+            }
+        }
+        for (int j = 0; j < avaliableLevels; j++)
+        {
+            BuyUpgrade2(level);
+        }
+    }
+
     public void BuyUpgrade2(int level)
     {
         soundSystem.GetComponent<SoundSystem>().PlayCoin();
@@ -92,6 +131,24 @@ public class LevelUpgrades : MonoBehaviour
     public int[] GetUpgrade2()
     {
         return upgrade2Levels;
+    }
+
+    public void BuyMaxUpgrade3(int level)
+    {
+        double totalPrice = 0;
+        int avaliableLevels = 0;
+        for (int i = 0; i < upgrade3MaxLevels[level] - upgrade3Levels[level]; i++)
+        {
+            totalPrice += upgrade3Prices[level] * Mathf.Pow(upgrade3PriceIncrease[level], i);
+            if (moneySystem.GetComponent<MoneySystem>().GetMoneyAmount() >= totalPrice)
+            {
+                avaliableLevels++;
+            }
+        }
+        for (int j = 0; j < avaliableLevels; j++)
+        {
+            BuyUpgrade3(level);
+        }
     }
 
     public void BuyUpgrade3(int level)
@@ -145,9 +202,7 @@ public class LevelUpgrades : MonoBehaviour
             upgrade1Costs[i].text = upgrade1Prices[i].ToString();
             upgrade2Costs[i].text = upgrade2Prices[i].ToString();
             upgrade3Costs[i].text = upgrade3Prices[i].ToString();
-            upgrade1Buttons[i].interactable = true;
-            upgrade2Buttons[i].interactable = true;
-            upgrade3Buttons[i].interactable = false;            
+            RefreshUpgrades();         
             upgrade1Descriptions[i].text = "Base ball cost: (" + (upgrade1Levels[i] + 1) + " -> " + (upgrade1Levels[i] + 2) + ")";
             upgrade2Descriptions[i].text = "Time between ball drops: (" + (10 - upgrade2Levels[i] * 0.5f) + "s -> " + (10 - (upgrade2Levels[i] + 1) * 0.5f) + "s)";
             upgrade3Descriptions[i].text = "Increase finish value: (" + (1 + upgrade3Levels[i] * 0.5f) + "x -> " + (1 + (upgrade3Levels[i] + 1) * 0.5f) + "x)";
@@ -176,6 +231,7 @@ public class LevelUpgrades : MonoBehaviour
         if (upgrade1Levels[level] >= upgrade1MaxLevels[level])
         {
             upgrade1Buttons[level].interactable = false;
+            upgradeMax1Buttons[level].interactable = false;
             upgrade1Costs[level].text = "Maxed";
             upgrade1Descriptions[level].text = "Base ball cost";
         }
@@ -205,10 +261,12 @@ public class LevelUpgrades : MonoBehaviour
             if (moneySystem.GetComponent<MoneySystem>().GetMoneyAmount() >= upgrade1Prices[level])
             {
                 upgrade1Buttons[level].interactable = true;
+                upgradeMax1Buttons[level].interactable = true;
             }
             else
             {
                 upgrade1Buttons[level].interactable = false;
+                upgradeMax1Buttons[level].interactable = false;
             }
         }
     }
@@ -219,6 +277,7 @@ public class LevelUpgrades : MonoBehaviour
         if (upgrade2Levels[level] >= upgrade2MaxLevels[level])
         {
             upgrade2Buttons[level].interactable = false;
+            upgradeMax2Buttons[level].interactable = false;
             upgrade2Costs[level].text = "Maxed";
             upgrade2Descriptions[level].text = "Time between ball drops";
         }
@@ -248,10 +307,12 @@ public class LevelUpgrades : MonoBehaviour
             if (moneySystem.GetComponent<MoneySystem>().GetMoneyAmount() >= upgrade2Prices[level])
             {
                 upgrade2Buttons[level].interactable = true;
+                upgradeMax2Buttons[level].interactable = true;
             }
             else
             {
                 upgrade2Buttons[level].interactable = false;
+                upgradeMax2Buttons[level].interactable = false;
             }
         }
     }
@@ -262,6 +323,7 @@ public class LevelUpgrades : MonoBehaviour
         if (upgrade3Levels[level] >= upgrade3MaxLevels[level])
         {
             upgrade3Buttons[level].interactable = false;
+            upgradeMax3Buttons[level].interactable = false;
             upgrade3Costs[level].text = "Maxed";
             upgrade3Descriptions[level].text = "Increase finish value";
         }
@@ -291,10 +353,12 @@ public class LevelUpgrades : MonoBehaviour
             if (moneySystem.GetComponent<MoneySystem>().GetMoneyAmount() >= upgrade3Prices[level])
             {
                 upgrade3Buttons[level].interactable = true;
+                upgradeMax3Buttons[level].interactable = true;
             }
             else
             {
                 upgrade3Buttons[level].interactable = false;
+                upgradeMax3Buttons[level].interactable = false;
             }
         }
     }

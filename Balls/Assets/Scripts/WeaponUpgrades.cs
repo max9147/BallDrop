@@ -23,6 +23,9 @@ public class WeaponUpgrades : MonoBehaviour
     public Button[] upgrade1Buttons;
     public Button[] upgrade2Buttons;
     public Button[] upgrade3Buttons;
+    public Button[] upgradeMax1Buttons;
+    public Button[] upgradeMax2Buttons;
+    public Button[] upgradeMax3Buttons;
     public Slider[] upgrade1Sliders;
     public Slider[] upgrade2Sliders;
     public Slider[] upgrade3Sliders;
@@ -52,6 +55,24 @@ public class WeaponUpgrades : MonoBehaviour
         {
             weaponDamages[i] = savedDamage[i];
             weaponDamageTexts[i].text = "Total damage dealt: " + weaponDamages[i].ToString("F0");
+        }
+    }
+
+    public void BuyMaxUpgrade1(int weapon)
+    {
+        double totalPrice = 0;
+        int avaliableLevels = 0;
+        for (int i = 0; i < upgrade1MaxLevels[weapon] - upgrade1Levels[weapon]; i++)
+        {
+            totalPrice += upgrade1Prices[weapon] * Mathf.Pow(upgrade1PriceIncrease[weapon], i);
+            if (moneySystem.GetComponent<MoneySystem>().GetMoneyAmount() >= totalPrice)
+            {
+                avaliableLevels++;
+            }
+        }
+        for (int j = 0; j < avaliableLevels; j++)
+        {
+            BuyUpgrade1(weapon);
         }
     }
 
@@ -456,6 +477,24 @@ public class WeaponUpgrades : MonoBehaviour
         return upgrade1Levels;
     }
 
+    public void BuyMaxUpgrade2(int weapon)
+    {
+        double totalPrice = 0;
+        int avaliableLevels = 0;
+        for (int i = 0; i < upgrade2MaxLevels[weapon] - upgrade2Levels[weapon]; i++)
+        {
+            totalPrice += upgrade2Prices[weapon] * Mathf.Pow(upgrade2PriceIncrease[weapon], i);
+            if (moneySystem.GetComponent<MoneySystem>().GetMoneyAmount() >= totalPrice)
+            {
+                avaliableLevels++;
+            }
+        }
+        for (int j = 0; j < avaliableLevels; j++)
+        {
+            BuyUpgrade2(weapon);
+        }
+    }
+
     public void BuyUpgrade2(int weapon)
     {
         soundSystem.GetComponent<SoundSystem>().PlayCoin();
@@ -843,6 +882,24 @@ public class WeaponUpgrades : MonoBehaviour
         return upgrade2Levels;
     }
 
+    public void BuyMaxUpgrade3(int weapon)
+    {
+        double totalPrice = 0;
+        int avaliableLevels = 0;
+        for (int i = 0; i < upgrade3MaxLevels[weapon] - upgrade3Levels[weapon]; i++)
+        {
+            totalPrice += upgrade3Prices[weapon] * Mathf.Pow(upgrade3PriceIncrease[weapon], i);
+            if (moneySystem.GetComponent<MoneySystem>().GetMoneyAmount() >= totalPrice)
+            {
+                avaliableLevels++;
+            }
+        }
+        for (int j = 0; j < avaliableLevels; j++)
+        {
+            BuyUpgrade3(weapon);
+        }
+    }
+
     public void BuyUpgrade3(int weapon)
     {
         soundSystem.GetComponent<SoundSystem>().PlayCoin();
@@ -1212,9 +1269,7 @@ public class WeaponUpgrades : MonoBehaviour
             upgrade1Costs[i].text = upgrade1Prices[i].ToString();
             upgrade2Costs[i].text = upgrade2Prices[i].ToString();
             upgrade3Costs[i].text = upgrade3Prices[i].ToString();
-            upgrade1Buttons[i].interactable = true;
-            upgrade2Buttons[i].interactable = true;
-            upgrade3Buttons[i].interactable = false;
+            RefreshUpgrades();
             weaponDamages[i] = 0;
             weaponDamageTexts[i].text = "Total damage dealt: " + weaponDamages[i].ToString("F0");
         }
@@ -1254,6 +1309,7 @@ public class WeaponUpgrades : MonoBehaviour
         if (upgrade1Levels[weapon] >= upgrade1MaxLevels[weapon])
         {
             upgrade1Buttons[weapon].interactable = false;
+            upgradeMax1Buttons[weapon].interactable = false;
             upgrade1Costs[weapon].text = "Maxed";
         }
         else
@@ -1281,10 +1337,12 @@ public class WeaponUpgrades : MonoBehaviour
             if (moneySystem.GetComponent<MoneySystem>().GetMoneyAmount() >= upgrade1Prices[weapon])
             {
                 upgrade1Buttons[weapon].interactable = true;
+                upgradeMax1Buttons[weapon].interactable = true;
             }
             else
             {
                 upgrade1Buttons[weapon].interactable = false;
+                upgradeMax1Buttons[weapon].interactable = false;
             }
         }
     }
@@ -1295,6 +1353,7 @@ public class WeaponUpgrades : MonoBehaviour
         if (upgrade2Levels[weapon] >= upgrade2MaxLevels[weapon])
         {
             upgrade2Buttons[weapon].interactable = false;
+            upgradeMax2Buttons[weapon].interactable = false;
             upgrade2Costs[weapon].text = "Maxed";
         }
         else
@@ -1322,10 +1381,12 @@ public class WeaponUpgrades : MonoBehaviour
             if (moneySystem.GetComponent<MoneySystem>().GetMoneyAmount() >= upgrade2Prices[weapon])
             {
                 upgrade2Buttons[weapon].interactable = true;
+                upgradeMax2Buttons[weapon].interactable = true;
             }
             else
             {
                 upgrade2Buttons[weapon].interactable = false;
+                upgradeMax2Buttons[weapon].interactable = false;
             }
         }
     }
@@ -1336,6 +1397,7 @@ public class WeaponUpgrades : MonoBehaviour
         if (upgrade3Levels[weapon] >= upgrade3MaxLevels[weapon])
         {
             upgrade3Buttons[weapon].interactable = false;
+            upgradeMax3Buttons[weapon].interactable = false;
             upgrade3Costs[weapon].text = "Maxed";
         }
         else
@@ -1363,10 +1425,12 @@ public class WeaponUpgrades : MonoBehaviour
             if (moneySystem.GetComponent<MoneySystem>().GetMoneyAmount() >= upgrade3Prices[weapon])
             {
                 upgrade3Buttons[weapon].interactable = true;
+                upgradeMax3Buttons[weapon].interactable = true;
             }
             else
             {
                 upgrade3Buttons[weapon].interactable = false;
+                upgradeMax3Buttons[weapon].interactable = false;
             }
         }
     }
