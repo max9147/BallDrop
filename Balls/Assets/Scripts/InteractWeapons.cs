@@ -40,7 +40,7 @@ public class InteractWeapons : MonoBehaviour
                 if (touchHit)
                 {
                     touchedObject = touchHit.collider.gameObject;
-                }                
+                }
             }
             if (touch.phase == TouchPhase.Ended)
             {
@@ -49,8 +49,7 @@ public class InteractWeapons : MonoBehaviour
                 if (touchHit && touchHit.collider.gameObject == touchedObject)
                 {                 
                     if (touchHit.collider.gameObject.layer == LayerMask.NameToLayer("WeaponSpot"))
-                    {
-                        soundSystem.GetComponent<SoundSystem>().PlayWeaponSet();
+                    {          
                         BuyWeapon(touchHit.collider.gameObject);
                     }
                     else if (touchHit.collider.gameObject.layer == LayerMask.NameToLayer("Weapon"))
@@ -64,11 +63,9 @@ public class InteractWeapons : MonoBehaviour
                             curSellingWeapon.GetComponent<SpriteRenderer>().sprite = weaponSelling;
                             curSellingWeapon.transform.Find("Radius").gameObject.SetActive(true);
                         }
-                        else if (curSellingWeapon == touchHit.collider.gameObject && selectTime > 1f)
+                        else if (curSellingWeapon == touchHit.collider.gameObject && selectTime > 0.5f)
                         {
-                            soundSystem.GetComponent<SoundSystem>().PlayCoin();
-                            SellWeapon(curSellingWeapon);                     
-                            isSelling = false;
+                            SellWeapon(curSellingWeapon);
                             curSellingWeapon = null;
                         }
                         else
@@ -95,12 +92,13 @@ public class InteractWeapons : MonoBehaviour
     {
         if (GetComponent<WeaponSystem>().GetWeaponAvailability())
         {
+            soundSystem.GetComponent<SoundSystem>().PlayWeaponSet();
             moneySystem.GetComponent<MoneySystem>().SpendMoney(GetComponent<WeaponSystem>().GetWeaponCost());
             GetComponent<WeaponSystem>().SpawnWeapon(weaponSpot);
         }
     }
 
-    private void CancelSelection()
+    public void CancelSelection()
     {
         if (isSelling)
         {
@@ -113,6 +111,8 @@ public class InteractWeapons : MonoBehaviour
 
     private void SellWeapon(GameObject weapon)
     {
+        soundSystem.GetComponent<SoundSystem>().PlayCoin();
+        isSelling = false;
         weapon.transform.Find("WeaponUnused").gameObject.SetActive(true);
         weapon.transform.Find("WeaponUnused").parent = weapon.transform.parent;
         Destroy(weapon);

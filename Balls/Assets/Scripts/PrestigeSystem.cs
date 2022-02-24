@@ -155,6 +155,7 @@ public class PrestigeSystem : MonoBehaviour
         {
             Destroy(item);
         }
+        weaponSystem.GetComponent<InteractWeapons>().CancelSelection();
         toDestroy = FindObjectsOfType<GameObject>();
         foreach (var item in toDestroy)
         {

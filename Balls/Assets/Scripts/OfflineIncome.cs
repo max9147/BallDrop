@@ -46,6 +46,10 @@ public class OfflineIncome : MonoBehaviour
     {
         lastLogin = DateTime.Parse(lastSavedTime);
         offlineTime = DateTime.Now - lastLogin;
+        if (offlineTime.TotalSeconds < 20)
+        {
+            return;
+        }
         if (offlineTime.TotalHours > maxOfflineTime)
         {
             offlineTime = TimeSpan.FromHours(maxOfflineTime);
