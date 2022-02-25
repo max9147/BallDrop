@@ -27,8 +27,8 @@ public class InteractWeapons : MonoBehaviour
         if (sellProcessing)
         {
             sellTime += Time.deltaTime;
-            curSellingWeapon.transform.Find("Radius").localScale = curSellingRadius * (1 - sellTime);
-            if (sellTime > 1)
+            curSellingWeapon.transform.Find("Radius").localScale = curSellingRadius * (1 - (1.25f * sellTime));
+            if (sellTime > 0.8f)
             {
                 SellWeapon(curSellingWeapon);
             }
