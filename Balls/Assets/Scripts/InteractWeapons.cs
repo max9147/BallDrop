@@ -6,13 +6,15 @@ using UnityEngine.EventSystems;
 public class InteractWeapons : MonoBehaviour
 {
     private bool isSelling = false;
-    private float selectTime = 0f;
+    private bool sellProcessing = false;
+    private float sellTime = 0f;
     private GameObject curSellingWeapon;
     private GameObject touchedObject;
     private RaycastHit2D touchHit;
     private Sprite curSellingSprite;
     private Touch touch;
     private Vector3 touchPos;
+    private Vector3 curSellingRadius;
 
     public Camera cam;
     public GameObject moneySystem;
@@ -22,10 +24,16 @@ public class InteractWeapons : MonoBehaviour
 
     private void Update()
     {
-        if (isSelling)
+        if (sellProcessing)
         {
-            selectTime += Time.deltaTime;
+            sellTime += Time.deltaTime;
+            curSellingWeapon.transform.Find("Radius").localScale = curSellingRadius * (1 - sellTime);
+            if (sellTime > 1)
+            {
+                SellWeapon(curSellingWeapon);
+            }
         }
+
         if (Input.touchCount > 0 && !UISystem.GetComponent<WeaponSelection>().GetWeaponSelectionScreenStatus())
         {
             if (UISystem.GetComponent<UpgradeSystem>().CheckOpened() || UISystem.GetComponent<Settings>().GetSettingsStatus() || UISystem.GetComponent<OfflineIncome>().GetOfflineMenuStatus() || UISystem.GetComponent<Tutorial>().GetStatus())
@@ -36,54 +44,61 @@ public class InteractWeapons : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 touchPos = cam.ScreenToWorldPoint(touch.position);
-                touchHit = Physics2D.Raycast(touchPos, Vector2.zero);
+                touchHit = Physics2D.Raycast(touchPos, Vector2.zero);                
                 if (touchHit)
                 {
                     touchedObject = touchHit.collider.gameObject;
                 }
-            }
-            if (touch.phase == TouchPhase.Ended)
-            {
-                touchPos = cam.ScreenToWorldPoint(touch.position);
-                touchHit = Physics2D.Raycast(touchPos, Vector2.zero);
-                if (touchHit && touchHit.collider.gameObject == touchedObject)
-                {                 
-                    if (touchHit.collider.gameObject.layer == LayerMask.NameToLayer("WeaponSpot"))
-                    {          
-                        BuyWeapon(touchHit.collider.gameObject);
-                    }
-                    else if (touchHit.collider.gameObject.layer == LayerMask.NameToLayer("Weapon"))
+                else
+                {
+                    CancelSelection();
+                    return;
+                }
+                if (touchedObject.layer == LayerMask.NameToLayer("WeaponSpot"))
+                {
+                    BuyWeapon(touchedObject);
+                }
+                else if (touchedObject.layer == LayerMask.NameToLayer("Weapon"))
+                {                    
+                    if (isSelling)
                     {
-                        if (!isSelling)
+                        if (touchedObject != curSellingWeapon)
                         {
-                            isSelling = true;
-                            selectTime = 0;
-                            curSellingWeapon = touchHit.collider.gameObject;
-                            curSellingSprite = curSellingWeapon.GetComponent<SpriteRenderer>().sprite;
-                            curSellingWeapon.GetComponent<SpriteRenderer>().sprite = weaponSelling;
-                            curSellingWeapon.transform.Find("Radius").gameObject.SetActive(true);
-                        }
-                        else if (curSellingWeapon == touchHit.collider.gameObject && selectTime > 0.5f)
-                        {
-                            SellWeapon(curSellingWeapon);
-                            curSellingWeapon = null;
-                        }
-                        else
-                        {
-                            selectTime = 0;
+                            sellTime = 0;
                             curSellingWeapon.GetComponent<SpriteRenderer>().sprite = curSellingSprite;
                             curSellingWeapon.transform.Find("Radius").gameObject.SetActive(false);
                             curSellingWeapon = touchHit.collider.gameObject;
                             curSellingSprite = curSellingWeapon.GetComponent<SpriteRenderer>().sprite;
+                            curSellingRadius = curSellingWeapon.transform.Find("Radius").localScale;
                             curSellingWeapon.GetComponent<SpriteRenderer>().sprite = weaponSelling;
                             curSellingWeapon.transform.Find("Radius").gameObject.SetActive(true);
                         }
+                        else
+                        {
+                            sellProcessing = true;
+                        }
+                    }
+                    else
+                    {
+                        isSelling = true;
+                        sellTime = 0;
+                        curSellingWeapon = touchHit.collider.gameObject;
+                        curSellingSprite = curSellingWeapon.GetComponent<SpriteRenderer>().sprite;
+                        curSellingRadius = curSellingWeapon.transform.Find("Radius").localScale;
+                        curSellingWeapon.GetComponent<SpriteRenderer>().sprite = weaponSelling;
+                        curSellingWeapon.transform.Find("Radius").gameObject.SetActive(true);
                     }
                 }
                 else
                 {
                     CancelSelection();
                 }
+            }
+            if (touch.phase == TouchPhase.Ended)
+            {
+                sellProcessing = false;
+                sellTime = 0;
+                curSellingWeapon.transform.Find("Radius").localScale = curSellingRadius;
             }
         }
     }
@@ -103,6 +118,7 @@ public class InteractWeapons : MonoBehaviour
         if (isSelling)
         {
             curSellingWeapon.GetComponent<SpriteRenderer>().sprite = curSellingSprite;
+            curSellingWeapon.transform.Find("Radius").localScale = curSellingRadius;
             curSellingWeapon.transform.Find("Radius").gameObject.SetActive(false);
             isSelling = false;
             curSellingWeapon = null;
@@ -113,10 +129,13 @@ public class InteractWeapons : MonoBehaviour
     {
         soundSystem.GetComponent<SoundSystem>().PlayCoin();
         isSelling = false;
+        sellProcessing = false;
+        sellTime = 0;
         weapon.transform.Find("WeaponUnused").gameObject.SetActive(true);
         weapon.transform.Find("WeaponUnused").parent = weapon.transform.parent;
         Destroy(weapon);
         moneySystem.GetComponent<MoneySystem>().AddMoney(GetComponent<WeaponSystem>().GetWeaponCost() / 1.5f / 2f, false);
         GetComponent<WeaponSystem>().SellWeapon();
+        curSellingWeapon = null;
     }
 }
