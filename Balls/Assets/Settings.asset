@@ -36,7 +36,7 @@ MonoBehaviour:
   spikesReload: 2
   spikesCount: 8
   poisonTime: 4
-  poisonDPS: 3.3
+  poisonDPS: 4.5
   darkMagicSpawnTime: 6
   darkMagicLifeTime: 4
   darkMagicDPS: 4

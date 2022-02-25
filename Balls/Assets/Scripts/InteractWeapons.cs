@@ -98,7 +98,10 @@ public class InteractWeapons : MonoBehaviour
             {
                 sellProcessing = false;
                 sellTime = 0;
-                curSellingWeapon.transform.Find("Radius").localScale = curSellingRadius;
+                if (curSellingWeapon)
+                {
+                    curSellingWeapon.transform.Find("Radius").localScale = curSellingRadius;
+                }                
             }
         }
     }

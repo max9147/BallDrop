@@ -11,6 +11,7 @@ public class CheckFinish : MonoBehaviour
 
     public GameObject moneySystem;
     public GameObject soundSystem;
+    public ParticleSystem ballPopPS;
 
     private void Start()
     {
@@ -80,6 +81,7 @@ public class CheckFinish : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ball"))
         {
             soundSystem.GetComponent<SoundSystem>().PlayBallPop();
+            Instantiate(ballPopPS,collision.transform.position,Quaternion.identity);
             switch (tag)
             {
                 case "RewardLow":
