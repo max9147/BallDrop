@@ -17,7 +17,7 @@ public class TempStuff : MonoBehaviour
     public void DeleteSave()
     {
         Time.timeScale = 0;
-        File.Delete(Path.Combine(Application.persistentDataPath, "data.save"));
+        File.Delete(Path.Combine(Application.persistentDataPath, "savegame.save"));
         PlayerPrefs.DeleteAll();
         Application.Quit();
     }
