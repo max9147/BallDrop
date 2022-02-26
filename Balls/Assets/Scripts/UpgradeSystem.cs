@@ -7,14 +7,20 @@ public class UpgradeSystem : MonoBehaviour
     private bool canOpen = false;
     private int curOpen = -1;
 
+    public AnimationClip openClip;
+    public AnimationClip closeClip;
+
     public GameObject adSystem;
     public GameObject soundSystem;
+    public GameObject shopContainer;
     public GameObject[] upgradeMenus;
     public GameObject[] weaponUpgradeTabs;
     public GameObject[] levelUpgradeTabs;
 
     public void OpenUpgradeMenu(int id)
     {
+        shopContainer.GetComponent<Animation>().clip = openClip;
+        shopContainer.GetComponent<Animation>().Play();
         if (canOpen)
         {
             if (adSystem.GetComponent<AdSystem>().GetPassiveAdStatus())
@@ -40,6 +46,14 @@ public class UpgradeSystem : MonoBehaviour
 
     public void CloseUpgradeMenu()
     {
+        shopContainer.GetComponent<Animation>().clip = closeClip;
+        shopContainer.GetComponent<Animation>().Play();
+        StartCoroutine(CloseWait());
+    }
+
+    private IEnumerator CloseWait()
+    {
+        yield return new WaitForSeconds(0.1f);
         curOpen = -1;
         foreach (var item in upgradeMenus)
         {

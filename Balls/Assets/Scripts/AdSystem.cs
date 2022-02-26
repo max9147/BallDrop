@@ -46,7 +46,8 @@ public class AdSystem : MonoBehaviour, IUnityAdsListener
 
     public void ShowAdScreen()
     {
-        bonusID = -1;
+        bonusID = 3;
+        Analytics.CustomEvent("AdPassive");
         Advertisement.Load(adScreen);
         Advertisement.Show(adScreen);
     }

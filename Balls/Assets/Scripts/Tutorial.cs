@@ -9,6 +9,7 @@ public class Tutorial : MonoBehaviour
     public GameObject tutorialMenu;
     public GameObject tutorial;
     public GameObject soundSystem;
+    public GameObject weaponSystem;
     public GameObject[] tutorialParts;
 
     private bool isPlaying = false;
@@ -25,7 +26,7 @@ public class Tutorial : MonoBehaviour
         if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began && isPlaying && waitTime > 1f && !tutorialMenu.activeInHierarchy)
+            if (touch.phase == TouchPhase.Began && isPlaying && waitTime > 0.5f && !tutorialMenu.activeInHierarchy)
             {
                 NextStep();
             }
@@ -71,7 +72,10 @@ public class Tutorial : MonoBehaviour
         tutorialParts[2].SetActive(false);
         curStep = 0;
         isPlaying = false;
-        levelSystem.GetComponent<LevelSystem>().ChangeLevel(0);
+        if (!weaponSystem.GetComponent<WeaponSystem>().GetLevelWeapon(0))
+        {
+            levelSystem.GetComponent<LevelSystem>().ChangeLevel(0);
+        }
     }
 
     public bool GetStatus()
