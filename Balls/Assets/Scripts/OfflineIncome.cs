@@ -46,7 +46,7 @@ public class OfflineIncome : MonoBehaviour
     {
         lastLogin = DateTime.Parse(lastSavedTime);
         offlineTime = DateTime.Now - lastLogin;
-        if (offlineTime.TotalSeconds < 20)
+        if (offlineTime.TotalSeconds < 120)
         {
             return;
         }
@@ -54,7 +54,7 @@ public class OfflineIncome : MonoBehaviour
         {
             offlineTime = TimeSpan.FromHours(maxOfflineTime);
         }
-        offlineRevenue = Math.Floor(moneyPerSecond * offlineTime.TotalSeconds * 0.2d);
+        offlineRevenue = Math.Floor(moneyPerSecond * offlineTime.TotalSeconds * 0.1d);
         if (offlineRevenue > 0)
         {
             offlineMenu.SetActive(true);

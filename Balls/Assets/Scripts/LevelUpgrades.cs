@@ -39,6 +39,22 @@ public class LevelUpgrades : MonoBehaviour
     public GameObject soundSystem;
     public GameObject[] finishes;
 
+    public void BuyMaxAll(int level)
+    {
+        if (upgradeMax1Buttons[level].interactable)
+        {
+            BuyMaxUpgrade1(level);
+        }
+        if (upgradeMax2Buttons[level].interactable)
+        {
+            BuyMaxUpgrade2(level);
+        }
+        if (upgradeMax3Buttons[level].interactable)
+        {
+            BuyMaxUpgrade3(level);
+        }
+    }
+
     public void BuyMaxUpgrade1(int level)
     {
         double totalPrice = 0;

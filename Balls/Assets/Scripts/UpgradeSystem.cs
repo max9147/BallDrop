@@ -19,10 +19,10 @@ public class UpgradeSystem : MonoBehaviour
 
     public void OpenUpgradeMenu(int id)
     {
-        shopContainer.GetComponent<Animation>().clip = openClip;
-        shopContainer.GetComponent<Animation>().Play();
-        if (canOpen)
+        if (canOpen || id == 2)
         {
+            shopContainer.GetComponent<Animation>().clip = openClip;
+            shopContainer.GetComponent<Animation>().Play();
             if (adSystem.GetComponent<AdSystem>().GetPassiveAdStatus())
             {
                 adSystem.GetComponent<AdSystem>().ShowAdScreen();
@@ -94,5 +94,10 @@ public class UpgradeSystem : MonoBehaviour
         {
             return true;
         }
+    }
+
+    public int GetCurOpen()
+    {
+        return curOpen;
     }
 }

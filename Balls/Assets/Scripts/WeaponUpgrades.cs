@@ -58,6 +58,22 @@ public class WeaponUpgrades : MonoBehaviour
         }
     }
 
+    public void BuyMaxAll(int weapon)
+    {
+        if (upgradeMax1Buttons[weapon].interactable)
+        {
+            BuyMaxUpgrade1(weapon);
+        }
+        if (upgradeMax2Buttons[weapon].interactable)
+        {
+            BuyMaxUpgrade2(weapon);
+        }
+        if (upgradeMax3Buttons[weapon].interactable)
+        {
+            BuyMaxUpgrade3(weapon);
+        }
+    }
+
     public void BuyMaxUpgrade1(int weapon)
     {
         double totalPrice = 0;

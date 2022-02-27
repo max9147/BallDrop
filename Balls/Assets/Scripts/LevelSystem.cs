@@ -28,7 +28,7 @@ public class LevelSystem : MonoBehaviour
 
     private void ExecuteChange(int id)
     {
-        if (!weaponSystem.GetComponent<WeaponSystem>().GetLevelWeapon(id))
+        if (!weaponSystem.GetComponent<WeaponSystem>().GetLevelWeapon(id) && UISystem.GetComponent<UpgradeSystem>().GetCurOpen() != 2)
         {
             UISystem.GetComponent<UpgradeSystem>().CloseUpgradeMenu();
         }
