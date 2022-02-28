@@ -59,19 +59,18 @@ public class AdSystem : MonoBehaviour, IUnityAdsListener
 
     public void OnUnityAdsDidError(string message)
     {
-        Time.timeScale = 1;
+
     }
 
     public void OnUnityAdsDidStart(string placementId)
     {
-        Time.timeScale = 0;
+
     }
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
-        noAdTime = 0;
         passiveAdReady = false;
-        Time.timeScale = 1;
+        noAdTime = 0;
         if (showResult == ShowResult.Finished)
         {
             switch (bonusID)
@@ -91,14 +90,6 @@ public class AdSystem : MonoBehaviour, IUnityAdsListener
                 default:
                     break;
             }
-        }
-        else if (showResult == ShowResult.Skipped)
-        {
-            Debug.Log("Skipped");
-        }
-        else if (showResult == ShowResult.Failed)
-        {
-            Debug.Log("Failed");
         }
     }
 
