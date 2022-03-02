@@ -100,7 +100,14 @@ public class OfflineIncome : MonoBehaviour
     public void SelectDouble()
     {
         soundSystem.GetComponent<SoundSystem>().PlayClick();
-        adSystem.GetComponent<AdSystem>().ShowRewardedVideo(2);
+        if (GetComponent<IAP>().GetVIPStatus())
+        {
+            GetComponent<OfflineIncome>().AdCompleted();
+        }
+        else
+        {
+            adSystem.GetComponent<AdSystem>().ShowRewardedVideo(2);
+        }
     }
 
     public void AdCompleted()

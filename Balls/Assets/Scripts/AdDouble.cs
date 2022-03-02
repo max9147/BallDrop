@@ -7,6 +7,7 @@ public class AdDouble : MonoBehaviour
 {
     private double adTime = 0;
     private bool adActive = false;
+    private bool isVIP = false;
 
     public GameObject adSystem;
     public GameObject moneySystem;
@@ -14,8 +15,29 @@ public class AdDouble : MonoBehaviour
     public GameObject adCounter;
     public GameObject adCircle;
 
+    private void Start()
+    {
+        SetVIP();
+    }
+
+    public void SetVIP()
+    {
+        if (GetComponent<IAP>().GetVIPStatus())
+        {
+            isVIP = true;
+            moneySystem.GetComponent<BallScoring>().setAdMul(2);
+            adButton.SetActive(false);
+            adCounter.SetActive(true);
+            adCircle.GetComponent<Image>().fillAmount = 0;
+        }
+    }
+
     private void FixedUpdate()
     {
+        if (isVIP)
+        {            
+            return;
+        }
         if (adTime <= 0 && adActive)
         {
             moneySystem.GetComponent<BallScoring>().setAdMul(1);

@@ -93,7 +93,15 @@ public class PrestigeSystem : MonoBehaviour
 
     public void PressPrestigeDouble()
     {
-        adSystem.GetComponent<AdSystem>().ShowRewardedVideo(1);
+        soundSystem.GetComponent<SoundSystem>().PlayClick();
+        if (GetComponent<IAP>().GetVIPStatus())
+        {
+            GetComponent<PrestigeSystem>().AdCompleted();
+        }
+        else
+        {
+            adSystem.GetComponent<AdSystem>().ShowRewardedVideo(1);
+        }
     }
 
     public void AdCompleted()

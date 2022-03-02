@@ -23,10 +23,6 @@ public class UpgradeSystem : MonoBehaviour
         {
             shopContainer.GetComponent<Animation>().clip = openClip;
             shopContainer.GetComponent<Animation>().Play();
-            if (adSystem.GetComponent<AdSystem>().GetPassiveAdStatus())
-            {
-                adSystem.GetComponent<AdSystem>().ShowAdScreen();
-            }
             soundSystem.GetComponent<SoundSystem>().PlayWhoosh();
             if (curOpen == id)
             {

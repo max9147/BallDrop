@@ -11,14 +11,9 @@ public class AdSystem : MonoBehaviour, IUnityAdsListener
 
     private int bonusID;
 
-    private float noAdTime = 0;
-
-    private bool passiveAdReady = false;
-
     private string gameId = "4429195";
 
     private string rewardedVideo = "Rewarded_Android";
-    private string adScreen = "Interstitial_Android";
 
     public GameObject UISystem;
 
@@ -28,28 +23,11 @@ public class AdSystem : MonoBehaviour, IUnityAdsListener
         Advertisement.Initialize(gameId, testMode);
     }
 
-    private void Update()
-    {
-        noAdTime += Time.deltaTime;
-        if (noAdTime > 300)
-        {
-            passiveAdReady = true;
-        }
-    }
-
     public void ShowRewardedVideo(int id)
     {
         bonusID = id;
         Advertisement.Load(rewardedVideo);
         Advertisement.Show(rewardedVideo);
-    }
-
-    public void ShowAdScreen()
-    {
-        bonusID = 3;
-        Analytics.CustomEvent("AdPassive");
-        Advertisement.Load(adScreen);
-        Advertisement.Show(adScreen);
     }
 
     public void OnUnityAdsReady(string placementId)
@@ -69,8 +47,6 @@ public class AdSystem : MonoBehaviour, IUnityAdsListener
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
-        passiveAdReady = false;
-        noAdTime = 0;
         if (showResult == ShowResult.Finished)
         {
             switch (bonusID)
@@ -91,10 +67,5 @@ public class AdSystem : MonoBehaviour, IUnityAdsListener
                     break;
             }
         }
-    }
-
-    public bool GetPassiveAdStatus()
-    {
-        return passiveAdReady;
     }
 }
